@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2D8F28D2AA6013F0014134D /* KickboardPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */; };
 		EBCBE9242AA5F3FA00F93761 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCBE9232AA5F3FA00F93761 /* UserDefaultsManager.swift */; };
 		EBD156E62AA5AC9D00FD0F43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD156E52AA5AC9D00FD0F43 /* AppDelegate.swift */; };
 		EBD156E82AA5AC9D00FD0F43 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD156E72AA5AC9D00FD0F43 /* SceneDelegate.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KickboardPage.storyboard; sourceTree = "<group>"; };
 		EBCBE9232AA5F3FA00F93761 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		EBD156E22AA5AC9D00FD0F43 /* BoongBoong-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BoongBoong-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD156E52AA5AC9D00FD0F43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				EBD157242AA5E4AD00FD0F43 /* TableViewCell */,
 				EBD156EB2AA5AC9D00FD0F43 /* SignInPage.storyboard */,
 				EBD157122AA5D38E00FD0F43 /* SignUpPage.storyboard */,
+				D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				EBD156F22AA5AC9E00FD0F43 /* LaunchScreen.storyboard in Resources */,
 				EBD156EF2AA5AC9E00FD0F43 /* Assets.xcassets in Resources */,
 				EBD156ED2AA5AC9D00FD0F43 /* SignInPage.storyboard in Resources */,
+				D2D8F28D2AA6013F0014134D /* KickboardPage.storyboard in Resources */,
 				EBD157132AA5D38E00FD0F43 /* SignUpPage.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,8 +407,9 @@
 				INFOPLIST_FILE = "BoongBoong-Project/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = SignInPage;
+				INFOPLIST_KEY_UIMainStoryboardFile = KickboardPage;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -433,8 +438,9 @@
 				INFOPLIST_FILE = "BoongBoong-Project/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = SignInPage;
+				INFOPLIST_KEY_UIMainStoryboardFile = KickboardPage;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
