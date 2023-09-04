@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D2D8F28D2AA6013F0014134D /* KickboardPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */; };
+		EB5A65C02AA6561A00AE58BC /* MainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB5A65BF2AA6561A00AE58BC /* MainPage.storyboard */; };
+		EB5A65C22AA659F700AE58BC /* ContainerViewPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB5A65C12AA659F700AE58BC /* ContainerViewPage.storyboard */; };
 		EBCBE9242AA5F3FA00F93761 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCBE9232AA5F3FA00F93761 /* UserDefaultsManager.swift */; };
 		EBD156E62AA5AC9D00FD0F43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD156E52AA5AC9D00FD0F43 /* AppDelegate.swift */; };
 		EBD156E82AA5AC9D00FD0F43 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD156E72AA5AC9D00FD0F43 /* SceneDelegate.swift */; };
@@ -17,7 +19,6 @@
 		EBD156F22AA5AC9E00FD0F43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBD156F02AA5AC9E00FD0F43 /* LaunchScreen.storyboard */; };
 		EBD157052AA5C07C00FD0F43 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = EBD157042AA5C07C00FD0F43 /* SnapKit */; };
 		EBD157082AA5C08E00FD0F43 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = EBD157072AA5C08E00FD0F43 /* Then */; };
-		EBD1570B2AA5C11100FD0F43 /* KakaoMapsSDK_SPM in Frameworks */ = {isa = PBXBuildFile; productRef = EBD1570A2AA5C11100FD0F43 /* KakaoMapsSDK_SPM */; };
 		EBD1570D2AA5C60100FD0F43 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1570C2AA5C60100FD0F43 /* SignInViewController.swift */; };
 		EBD1570F2AA5C64700FD0F43 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1570E2AA5C64700FD0F43 /* Extensions.swift */; };
 		EBD157132AA5D38E00FD0F43 /* SignUpPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBD157122AA5D38E00FD0F43 /* SignUpPage.storyboard */; };
@@ -33,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KickboardPage.storyboard; sourceTree = "<group>"; };
+		EB5A65BF2AA6561A00AE58BC /* MainPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainPage.storyboard; sourceTree = "<group>"; };
+		EB5A65C12AA659F700AE58BC /* ContainerViewPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContainerViewPage.storyboard; sourceTree = "<group>"; };
 		EBCBE9232AA5F3FA00F93761 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		EBD156E22AA5AC9D00FD0F43 /* BoongBoong-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BoongBoong-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD156E52AA5AC9D00FD0F43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,7 +64,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBD157082AA5C08E00FD0F43 /* Then in Frameworks */,
-				EBD1570B2AA5C11100FD0F43 /* KakaoMapsSDK_SPM in Frameworks */,
 				EBD157052AA5C07C00FD0F43 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,6 +125,8 @@
 				EBD156EB2AA5AC9D00FD0F43 /* SignInPage.storyboard */,
 				EBD157122AA5D38E00FD0F43 /* SignUpPage.storyboard */,
 				D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */,
+				EB5A65BF2AA6561A00AE58BC /* MainPage.storyboard */,
+				EB5A65C12AA659F700AE58BC /* ContainerViewPage.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -179,7 +183,6 @@
 			packageProductDependencies = (
 				EBD157042AA5C07C00FD0F43 /* SnapKit */,
 				EBD157072AA5C08E00FD0F43 /* Then */,
-				EBD1570A2AA5C11100FD0F43 /* KakaoMapsSDK_SPM */,
 			);
 			productName = "BoongBoong-ProJect";
 			productReference = EBD156E22AA5AC9D00FD0F43 /* BoongBoong-Project.app */;
@@ -212,7 +215,6 @@
 			packageReferences = (
 				EBD157032AA5C07C00FD0F43 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				EBD157062AA5C08E00FD0F43 /* XCRemoteSwiftPackageReference "Then" */,
-				EBD157092AA5C11100FD0F43 /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */,
 			);
 			productRefGroup = EBD156E32AA5AC9D00FD0F43 /* Products */;
 			projectDirPath = "";
@@ -228,11 +230,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB5A65C02AA6561A00AE58BC /* MainPage.storyboard in Resources */,
 				EBD156F22AA5AC9E00FD0F43 /* LaunchScreen.storyboard in Resources */,
 				EBD156EF2AA5AC9E00FD0F43 /* Assets.xcassets in Resources */,
 				EBD156ED2AA5AC9D00FD0F43 /* SignInPage.storyboard in Resources */,
 				D2D8F28D2AA6013F0014134D /* KickboardPage.storyboard in Resources */,
 				EBD157132AA5D38E00FD0F43 /* SignUpPage.storyboard in Resources */,
+				EB5A65C22AA659F700AE58BC /* ContainerViewPage.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,14 +502,6 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		EBD157092AA5C11100FD0F43 /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kakao-mapsSDK/KakaoMapsSDK-SPM";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -518,11 +514,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EBD157062AA5C08E00FD0F43 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
-		};
-		EBD1570A2AA5C11100FD0F43 /* KakaoMapsSDK_SPM */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EBD157092AA5C11100FD0F43 /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */;
-			productName = KakaoMapsSDK_SPM;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

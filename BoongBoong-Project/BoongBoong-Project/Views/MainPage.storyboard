@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main Page View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="MainPageViewController" customModule="BoongBoong_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0aC-h9-npE">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ylB-Lr-9o8">
+                                <rect key="frame" x="0.0" y="79" width="393" height="57"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="b23-E9-bEo"/>
+                                </connections>
+                            </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61D-4K-FZZ">
+                                <rect key="frame" x="332" y="90" width="51" height="35"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="line.3.horizontal" catalog="system"/>
+                                <connections>
+                                    <segue destination="QQe-uK-d6C" kind="presentation" modalPresentationStyle="fullScreen" id="0P3-c0-Cfw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="61D-4K-FZZ" secondAttribute="trailing" constant="10" id="EgF-a1-B96"/>
+                            <constraint firstItem="61D-4K-FZZ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="31" id="Fx2-i3-eHx"/>
+                            <constraint firstItem="ylB-Lr-9o8" firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" id="JNQ-TZ-KGn"/>
+                            <constraint firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" id="OEU-gF-gNL"/>
+                            <constraint firstItem="0aC-h9-npE" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="b4A-fs-rC4"/>
+                            <constraint firstAttribute="bottom" secondItem="0aC-h9-npE" secondAttribute="bottom" id="hCm-GC-MsF"/>
+                            <constraint firstItem="0aC-h9-npE" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="hXP-1c-ea5"/>
+                            <constraint firstItem="ylB-Lr-9o8" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="lPo-bZ-q1q"/>
+                            <constraint firstItem="61D-4K-FZZ" firstAttribute="centerY" secondItem="ylB-Lr-9o8" secondAttribute="centerY" id="lWC-IM-zca"/>
+                            <constraint firstItem="ylB-Lr-9o8" firstAttribute="leading" secondItem="0aC-h9-npE" secondAttribute="leading" id="z2S-4V-dB2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="homeMap" destination="0aC-h9-npE" id="VoS-i0-hc8"/>
+                        <outlet property="mapSearchBar" destination="ylB-Lr-9o8" id="obG-Sj-9YR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="5"/>
+        </scene>
+        <!--ContainerViewPage-->
+        <scene sceneID="lyS-LZ-4Gr">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="ContainerViewPage" storyboardName="ContainerViewPage" referencedIdentifier="ContainerViewPage" id="QQe-uK-d6C" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="4tE-Tp-Hj3"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8CW-mU-Ua2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="955" y="38"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="line.3.horizontal" catalog="system" width="128" height="65"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
