@@ -98,7 +98,7 @@
         <!--View Controller-->
         <scene sceneID="NAK-gH-286">
             <objects>
-                <viewController id="dkq-gi-rqE" sceneMemberID="viewController">
+                <viewController restorationIdentifier="AddKickboard" storyboardIdentifier="AddKickboard" id="dkq-gi-rqE" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Knu-IN-sFy">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -217,7 +217,7 @@
         <!--My BoongBoong-->
         <scene sceneID="OsF-VZ-GTX">
             <objects>
-                <viewController id="5RB-dc-Mdv" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MyBoongBoong" storyboardIdentifier="MyBoongBoong" id="5RB-dc-Mdv" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JZB-R3-hXk">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
