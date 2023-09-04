@@ -5,9 +5,9 @@
 //  Created by Insu on 2023/09/04.
 //
 
-import Foundation
+import UIKit
 
-struct User {
+struct User: Codable {
     var email: String
     var password: String
     var name: String
@@ -18,8 +18,9 @@ struct User {
     var registeredKickboards: Kickboard
 }
 
-struct Kickboard {
+struct Kickboard: Codable {
     var id: UUID
+    var registerDay: Date
     var boongboongImage: String
     var boongboongName: String
     var latitude: Double
@@ -27,10 +28,15 @@ struct Kickboard {
     var isBeingUsed: Bool
 }
 
-struct RideHistory {
+struct RideHistory: Codable {
     var kickboardID: UUID
     var startTime: Date
     var endTime: Date
-    var startPosition: (Double, Double)
-    var endPosition: (Double, Double)
+    var startPosition: Position
+    var endPosition: Position
+}
+
+struct Position: Codable {
+    var latitude: Double
+    var longitude: Double
 }

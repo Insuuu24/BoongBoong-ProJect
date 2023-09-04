@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EMf-P2-rTl">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,14 +24,14 @@
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ylB-Lr-9o8">
-                                <rect key="frame" x="0.0" y="79" width="393" height="57"/>
+                                <rect key="frame" x="0.0" y="123" width="393" height="57"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="b23-E9-bEo"/>
                                 </connections>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61D-4K-FZZ">
-                                <rect key="frame" x="332" y="90" width="51" height="35"/>
+                                <rect key="frame" x="332" y="134" width="51" height="35"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="line.3.horizontal" catalog="system"/>
@@ -38,30 +39,78 @@
                                     <segue destination="QQe-uK-d6C" kind="presentation" modalPresentationStyle="fullScreen" id="0P3-c0-Cfw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtE-2c-3J6">
+                                <rect key="frame" x="16" y="763" width="361" height="40"/>
+                                <color key="backgroundColor" name="mainColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="5eA-a5-Fec"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="00 : 00">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="returnKickboardButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zhM-oG-UGq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhx-sG-cmx">
+                                <rect key="frame" x="16" y="763" width="361" height="40"/>
+                                <color key="backgroundColor" name="mainColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HdI-Qk-ZH6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="킥보드 등록하기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="addKickboardButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HTY-Pj-Xck"/>
+                                    <segue destination="Lq0-EM-gI5" kind="presentation" id="9MU-54-mN4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="61D-4K-FZZ" secondAttribute="trailing" constant="10" id="EgF-a1-B96"/>
+                            <constraint firstItem="mtE-2c-3J6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="EhO-p9-Nca"/>
                             <constraint firstItem="61D-4K-FZZ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="31" id="Fx2-i3-eHx"/>
                             <constraint firstItem="ylB-Lr-9o8" firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" id="JNQ-TZ-KGn"/>
                             <constraint firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" id="OEU-gF-gNL"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mtE-2c-3J6" secondAttribute="trailing" constant="16" id="PLJ-QU-ijN"/>
                             <constraint firstItem="0aC-h9-npE" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="b4A-fs-rC4"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="fhx-sG-cmx" secondAttribute="bottom" constant="15" id="cvi-mV-6kZ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="mtE-2c-3J6" secondAttribute="bottom" constant="15" id="dSV-BX-JCy"/>
                             <constraint firstAttribute="bottom" secondItem="0aC-h9-npE" secondAttribute="bottom" id="hCm-GC-MsF"/>
                             <constraint firstItem="0aC-h9-npE" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="hXP-1c-ea5"/>
                             <constraint firstItem="ylB-Lr-9o8" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="lPo-bZ-q1q"/>
                             <constraint firstItem="61D-4K-FZZ" firstAttribute="centerY" secondItem="ylB-Lr-9o8" secondAttribute="centerY" id="lWC-IM-zca"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fhx-sG-cmx" secondAttribute="trailing" constant="16" id="lvM-zj-hRc"/>
+                            <constraint firstItem="fhx-sG-cmx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="r3l-yl-PoT"/>
                             <constraint firstItem="ylB-Lr-9o8" firstAttribute="leading" secondItem="0aC-h9-npE" secondAttribute="leading" id="z2S-4V-dB2"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="RWG-YZ-giU"/>
                     <connections>
+                        <outlet property="addKickboardButton" destination="fhx-sG-cmx" id="Ib9-lj-SJE"/>
                         <outlet property="homeMap" destination="0aC-h9-npE" id="VoS-i0-hc8"/>
                         <outlet property="mapSearchBar" destination="ylB-Lr-9o8" id="obG-Sj-9YR"/>
+                        <outlet property="returnKickboardButton" destination="mtE-2c-3J6" id="YUK-y8-cei"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="5"/>
+            <point key="canvasLocation" x="1063.3587786259541" y="4.9295774647887329"/>
+        </scene>
+        <!--AddKickboard-->
+        <scene sceneID="hRm-nm-JQX">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="AddKickboard" storyboardName="KickboardPage" referencedIdentifier="AddKickboard" id="Lq0-EM-gI5" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Klf-5Q-uBb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1063" y="406"/>
         </scene>
         <!--ContainerViewPage-->
         <scene sceneID="lyS-LZ-4Gr">
@@ -71,11 +120,32 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8CW-mU-Ua2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="955" y="38"/>
+            <point key="canvasLocation" x="1824" y="5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xvx-va-JuU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EMf-P2-rTl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PbM-d6-4aS">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="gdx-h9-sJH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JA1-jf-keH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.64122137404578" y="4.9295774647887329"/>
         </scene>
     </scenes>
     <resources>
         <image name="line.3.horizontal" catalog="system" width="128" height="65"/>
+        <namedColor name="mainColor">
+            <color red="0.56499999761581421" green="0.2669999897480011" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
