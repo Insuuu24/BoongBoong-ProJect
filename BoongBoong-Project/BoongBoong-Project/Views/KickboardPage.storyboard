@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -163,10 +164,20 @@
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2j-Ma-iZQ">
                                                 <rect key="frame" x="0.0" y="18" width="361" height="278"/>
+                                                <subviews>
+                                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xi6-xZ-2lN">
+                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="278"/>
+                                                        <standardMapConfiguration key="preferredConfiguration"/>
+                                                    </mapView>
+                                                </subviews>
                                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="278" id="1sL-wU-LSj"/>
+                                                    <constraint firstAttribute="trailing" secondItem="xi6-xZ-2lN" secondAttribute="trailing" id="ElL-z4-fQK"/>
+                                                    <constraint firstAttribute="bottom" secondItem="xi6-xZ-2lN" secondAttribute="bottom" id="KxZ-u3-hqp"/>
                                                     <constraint firstAttribute="width" constant="361" id="Ogb-Bi-dWV"/>
+                                                    <constraint firstItem="xi6-xZ-2lN" firstAttribute="leading" secondItem="Y2j-Ma-iZQ" secondAttribute="leading" id="dWm-JP-ffK"/>
+                                                    <constraint firstItem="xi6-xZ-2lN" firstAttribute="top" secondItem="Y2j-Ma-iZQ" secondAttribute="top" id="rj3-9r-cda"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -282,10 +293,20 @@
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CBg-bb-PXV">
                                                 <rect key="frame" x="0.0" y="18" width="361" height="278"/>
+                                                <subviews>
+                                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iS4-j9-oSR">
+                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="278"/>
+                                                        <standardMapConfiguration key="preferredConfiguration"/>
+                                                    </mapView>
+                                                </subviews>
                                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="iS4-j9-oSR" secondAttribute="bottom" id="GZv-0N-Kn0"/>
+                                                    <constraint firstItem="iS4-j9-oSR" firstAttribute="leading" secondItem="CBg-bb-PXV" secondAttribute="leading" id="UAu-hZ-y0f"/>
                                                     <constraint firstAttribute="height" constant="278" id="fGD-Ci-XzC"/>
                                                     <constraint firstAttribute="width" constant="361" id="iSa-2r-X74"/>
+                                                    <constraint firstAttribute="trailing" secondItem="iS4-j9-oSR" secondAttribute="trailing" id="s9B-Ox-iNy"/>
+                                                    <constraint firstItem="iS4-j9-oSR" firstAttribute="top" secondItem="CBg-bb-PXV" secondAttribute="top" id="wgo-6m-Fph"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
