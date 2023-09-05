@@ -210,6 +210,9 @@
                                 <state key="normal" title="킥보드 등록하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="registerButtonTapped:" destination="dkq-gi-rqE" eventType="touchUpInside" id="YCm-fY-xMS"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="킥보드 등록하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUP-oY-154">
                                 <rect key="frame" x="146" y="15.000000000000002" width="115" height="21.666666666666671"/>
@@ -236,7 +239,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="5wP-ay-0qX"/>
                     <connections>
+                        <outlet property="kickboardImageButton" destination="uBh-8W-rDF" id="sx7-gi-B7b"/>
                         <outlet property="kickboardMapView" destination="xi6-xZ-2lN" id="Ayb-bG-zID"/>
+                        <outlet property="kickboardName" destination="q3t-LB-Hcj" id="89s-pP-kLw"/>
+                        <outlet property="registerButton" destination="vbI-Iu-gS8" id="IIy-S8-eWQ"/>
+                        <outlet property="registerDate" destination="dGK-5K-U5Q" id="6Td-5w-mAo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cVD-Ca-M1H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

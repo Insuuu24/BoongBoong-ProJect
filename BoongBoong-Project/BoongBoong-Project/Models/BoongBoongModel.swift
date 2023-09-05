@@ -15,12 +15,12 @@ struct User: Codable {
     var profileImage: String
     var isUsingKickboard: Bool
     var rideHistory: [RideHistory]
-    var registeredKickboards: Kickboard
+    var registeredKickboard: Kickboard
 }
 
 struct Kickboard: Codable {
     var id: UUID
-    var registerDay: Date
+    var registerDate: Date
     var boongboongImage: String
     var boongboongName: String
     var latitude: Double
