@@ -96,10 +96,10 @@
             </objects>
             <point key="canvasLocation" x="534" y="667"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Kick Board View Controller-->
         <scene sceneID="NAK-gH-286">
             <objects>
-                <viewController restorationIdentifier="AddKickboard" storyboardIdentifier="AddKickboard" id="dkq-gi-rqE" sceneMemberID="viewController">
+                <viewController restorationIdentifier="AddKickboard" storyboardIdentifier="AddKickboard" id="dkq-gi-rqE" customClass="AddKickBoardViewController" customModule="BoongBoong_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Knu-IN-sFy">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -169,6 +169,19 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="278"/>
                                                         <standardMapConfiguration key="preferredConfiguration"/>
                                                     </mapView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smI-bi-ZdS">
+                                                        <rect key="frame" x="323" y="228" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="X1e-Gb-1Gp"/>
+                                                            <constraint firstAttribute="width" constant="30" id="l4J-ui-b9R"/>
+                                                        </constraints>
+                                                        <color key="tintColor" red="0.5176470876" green="0.2823529541" blue="0.92549020049999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="dot.circle.viewfinder" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="regionButtonTapped:" destination="dkq-gi-rqE" eventType="touchUpInside" id="84O-j3-EOL"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                 <constraints>
@@ -176,7 +189,9 @@
                                                     <constraint firstAttribute="trailing" secondItem="xi6-xZ-2lN" secondAttribute="trailing" id="ElL-z4-fQK"/>
                                                     <constraint firstAttribute="bottom" secondItem="xi6-xZ-2lN" secondAttribute="bottom" id="KxZ-u3-hqp"/>
                                                     <constraint firstAttribute="width" constant="361" id="Ogb-Bi-dWV"/>
+                                                    <constraint firstAttribute="bottom" secondItem="smI-bi-ZdS" secondAttribute="bottom" constant="20" id="apg-Ht-8Pv"/>
                                                     <constraint firstItem="xi6-xZ-2lN" firstAttribute="leading" secondItem="Y2j-Ma-iZQ" secondAttribute="leading" id="dWm-JP-ffK"/>
+                                                    <constraint firstAttribute="trailing" secondItem="smI-bi-ZdS" secondAttribute="trailing" constant="8" id="oWf-xA-Umf"/>
                                                     <constraint firstItem="xi6-xZ-2lN" firstAttribute="top" secondItem="Y2j-Ma-iZQ" secondAttribute="top" id="rj3-9r-cda"/>
                                                 </constraints>
                                             </view>
@@ -195,6 +210,9 @@
                                 <state key="normal" title="킥보드 등록하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="registerButtonTapped:" destination="dkq-gi-rqE" eventType="touchUpInside" id="YCm-fY-xMS"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="킥보드 등록하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUP-oY-154">
                                 <rect key="frame" x="146" y="15.000000000000002" width="115" height="21.666666666666671"/>
@@ -220,6 +238,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5wP-ay-0qX"/>
+                    <connections>
+                        <outlet property="kickboardImageButton" destination="uBh-8W-rDF" id="sx7-gi-B7b"/>
+                        <outlet property="kickboardMapView" destination="xi6-xZ-2lN" id="Ayb-bG-zID"/>
+                        <outlet property="kickboardName" destination="q3t-LB-Hcj" id="89s-pP-kLw"/>
+                        <outlet property="registerButton" destination="vbI-Iu-gS8" id="IIy-S8-eWQ"/>
+                        <outlet property="registerDate" destination="dGK-5K-U5Q" id="6Td-5w-mAo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cVD-Ca-M1H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -351,6 +376,7 @@
     </scenes>
     <resources>
         <image name="boongBoongLogo" width="79.5" height="70"/>
+        <image name="dot.circle.viewfinder" catalog="system" width="128" height="115"/>
         <image name="square.and.pencil" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
