@@ -36,7 +36,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="line.3.horizontal" catalog="system"/>
                                 <connections>
-                                    <segue destination="QQe-uK-d6C" kind="presentation" modalPresentationStyle="fullScreen" id="0P3-c0-Cfw"/>
+                                    <segue destination="GGB-1Y-HIn" kind="show" id="wXU-r5-mGE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtE-2c-3J6">
@@ -112,15 +112,35 @@
             </objects>
             <point key="canvasLocation" x="1063" y="406"/>
         </scene>
-        <!--ContainerViewPage-->
+        <!--SideMenuPage-->
         <scene sceneID="lyS-LZ-4Gr">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="ContainerViewPage" storyboardName="ContainerViewPage" referencedIdentifier="ContainerViewPage" id="QQe-uK-d6C" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="SideMenuPage" storyboardName="SideMenuPage" referencedIdentifier="SideMenuPage" id="QQe-uK-d6C" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="4tE-Tp-Hj3"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8CW-mU-Ua2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1824" y="5"/>
+            <point key="canvasLocation" x="2641" y="5"/>
+        </scene>
+        <!--Side Menu Nav-->
+        <scene sceneID="HWt-WF-nEn">
+            <objects>
+                <navigationController storyboardIdentifier="SideMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GGB-1Y-HIn" customClass="SideMenuNav" customModule="BoongBoong_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="EUG-eV-gG7"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hxd-Vt-7bo">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="QQe-uK-d6C" kind="relationship" relationship="rootViewController" id="ugb-bL-Fqo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZLE-Df-WYz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1924" y="5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xvx-va-JuU">

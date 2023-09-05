@@ -8,8 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		D2D8F28D2AA6013F0014134D /* KickboardPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */; };
+		EB1151612AA6D72600FB875E /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = EB1151602AA6D72600FB875E /* SideMenu */; };
+		EB1151642AA6E50D00FB875E /* SideMenuNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1151632AA6E50D00FB875E /* SideMenuNav.swift */; };
+		EB1151662AA6F8CA00FB875E /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1151652AA6F8CA00FB875E /* SideMenuModel.swift */; };
+		EB1151682AA6F8FC00FB875E /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1151672AA6F8FC00FB875E /* SideMenuCell.swift */; };
+		EB11516A2AA70D8F00FB875E /* MyInfoPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB1151692AA70D8F00FB875E /* MyInfoPage.storyboard */; };
 		EB5A65C02AA6561A00AE58BC /* MainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB5A65BF2AA6561A00AE58BC /* MainPage.storyboard */; };
-		EB5A65C22AA659F700AE58BC /* ContainerViewPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB5A65C12AA659F700AE58BC /* ContainerViewPage.storyboard */; };
+		EB5A65C22AA659F700AE58BC /* SideMenuPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB5A65C12AA659F700AE58BC /* SideMenuPage.storyboard */; };
 		EBCBE9242AA5F3FA00F93761 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCBE9232AA5F3FA00F93761 /* UserDefaultsManager.swift */; };
 		EBD156E62AA5AC9D00FD0F43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD156E52AA5AC9D00FD0F43 /* AppDelegate.swift */; };
 		EBD156E82AA5AC9D00FD0F43 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD156E72AA5AC9D00FD0F43 /* SceneDelegate.swift */; };
@@ -23,19 +28,23 @@
 		EBD1570F2AA5C64700FD0F43 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1570E2AA5C64700FD0F43 /* Extensions.swift */; };
 		EBD157132AA5D38E00FD0F43 /* SignUpPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBD157122AA5D38E00FD0F43 /* SignUpPage.storyboard */; };
 		EBD157152AA5D3C600FD0F43 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD157142AA5D3C600FD0F43 /* SignUpViewController.swift */; };
-		EBD157172AA5DBD900FD0F43 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD157162AA5DBD900FD0F43 /* ContainerViewController.swift */; };
+		EBD157172AA5DBD900FD0F43 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD157162AA5DBD900FD0F43 /* SideMenuViewController.swift */; };
 		EBD157192AA5DC3E00FD0F43 /* UsageRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD157182AA5DC3E00FD0F43 /* UsageRecordViewController.swift */; };
 		EBD1571B2AA5DC5C00FD0F43 /* MyBoongBoongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1571A2AA5DC5C00FD0F43 /* MyBoongBoongViewController.swift */; };
 		EBD1571D2AA5DE4F00FD0F43 /* AddKickBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1571C2AA5DE4F00FD0F43 /* AddKickBoardViewController.swift */; };
-		EBD1571F2AA5DE5C00FD0F43 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1571E2AA5DE5C00FD0F43 /* MyPageViewController.swift */; };
+		EBD1571F2AA5DE5C00FD0F43 /* MyInfoPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1571E2AA5DE5C00FD0F43 /* MyInfoPageViewController.swift */; };
 		EBD157232AA5E09200FD0F43 /* BoongBoongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD157222AA5E09200FD0F43 /* BoongBoongModel.swift */; };
 		EBD157262AA5E4EA00FD0F43 /* UsageRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD157252AA5E4EA00FD0F43 /* UsageRecordCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KickboardPage.storyboard; sourceTree = "<group>"; };
+		EB1151632AA6E50D00FB875E /* SideMenuNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuNav.swift; sourceTree = "<group>"; };
+		EB1151652AA6F8CA00FB875E /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
+		EB1151672AA6F8FC00FB875E /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+		EB1151692AA70D8F00FB875E /* MyInfoPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyInfoPage.storyboard; sourceTree = "<group>"; };
 		EB5A65BF2AA6561A00AE58BC /* MainPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainPage.storyboard; sourceTree = "<group>"; };
-		EB5A65C12AA659F700AE58BC /* ContainerViewPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContainerViewPage.storyboard; sourceTree = "<group>"; };
+		EB5A65C12AA659F700AE58BC /* SideMenuPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenuPage.storyboard; sourceTree = "<group>"; };
 		EBCBE9232AA5F3FA00F93761 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		EBD156E22AA5AC9D00FD0F43 /* BoongBoong-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BoongBoong-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD156E52AA5AC9D00FD0F43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,11 +58,11 @@
 		EBD1570E2AA5C64700FD0F43 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EBD157122AA5D38E00FD0F43 /* SignUpPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUpPage.storyboard; sourceTree = "<group>"; };
 		EBD157142AA5D3C600FD0F43 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		EBD157162AA5DBD900FD0F43 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		EBD157162AA5DBD900FD0F43 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		EBD157182AA5DC3E00FD0F43 /* UsageRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageRecordViewController.swift; sourceTree = "<group>"; };
 		EBD1571A2AA5DC5C00FD0F43 /* MyBoongBoongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBoongBoongViewController.swift; sourceTree = "<group>"; };
 		EBD1571C2AA5DE4F00FD0F43 /* AddKickBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddKickBoardViewController.swift; sourceTree = "<group>"; };
-		EBD1571E2AA5DE5C00FD0F43 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		EBD1571E2AA5DE5C00FD0F43 /* MyInfoPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoPageViewController.swift; sourceTree = "<group>"; };
 		EBD157222AA5E09200FD0F43 /* BoongBoongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoongBoongModel.swift; sourceTree = "<group>"; };
 		EBD157252AA5E4EA00FD0F43 /* UsageRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageRecordCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBD157082AA5C08E00FD0F43 /* Then in Frameworks */,
+				EB1151612AA6D72600FB875E /* SideMenu in Frameworks */,
 				EBD157052AA5C07C00FD0F43 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +81,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB1151622AA6E4D200FB875E /* SideMenuVC */ = {
+			isa = PBXGroup;
+			children = (
+				EB1151632AA6E50D00FB875E /* SideMenuNav.swift */,
+				EBD157162AA5DBD900FD0F43 /* SideMenuViewController.swift */,
+				EBD157182AA5DC3E00FD0F43 /* UsageRecordViewController.swift */,
+				EBD1571A2AA5DC5C00FD0F43 /* MyBoongBoongViewController.swift */,
+			);
+			path = SideMenuVC;
+			sourceTree = "<group>";
+		};
+		EB11516B2AA7103200FB875E /* UserVC */ = {
+			isa = PBXGroup;
+			children = (
+				EBD1570C2AA5C60100FD0F43 /* SignInViewController.swift */,
+				EBD157142AA5D3C600FD0F43 /* SignUpViewController.swift */,
+			);
+			path = UserVC;
+			sourceTree = "<group>";
+		};
 		EBCBE9222AA5F3BE00F93761 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				EBD157222AA5E09200FD0F43 /* BoongBoongModel.swift */,
+				EB1151652AA6F8CA00FB875E /* SideMenuModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -126,7 +157,8 @@
 				EBD157122AA5D38E00FD0F43 /* SignUpPage.storyboard */,
 				D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */,
 				EB5A65BF2AA6561A00AE58BC /* MainPage.storyboard */,
-				EB5A65C12AA659F700AE58BC /* ContainerViewPage.storyboard */,
+				EB5A65C12AA659F700AE58BC /* SideMenuPage.storyboard */,
+				EB1151692AA70D8F00FB875E /* MyInfoPage.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -134,14 +166,11 @@
 		EBD156FB2AA5AE4E00FD0F43 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				EBD1570C2AA5C60100FD0F43 /* SignInViewController.swift */,
-				EBD157142AA5D3C600FD0F43 /* SignUpViewController.swift */,
+				EB11516B2AA7103200FB875E /* UserVC */,
+				EB1151622AA6E4D200FB875E /* SideMenuVC */,
 				EBD156E92AA5AC9D00FD0F43 /* MainPageViewController.swift */,
-				EBD157162AA5DBD900FD0F43 /* ContainerViewController.swift */,
-				EBD157182AA5DC3E00FD0F43 /* UsageRecordViewController.swift */,
-				EBD1571A2AA5DC5C00FD0F43 /* MyBoongBoongViewController.swift */,
 				EBD1571C2AA5DE4F00FD0F43 /* AddKickBoardViewController.swift */,
-				EBD1571E2AA5DE5C00FD0F43 /* MyPageViewController.swift */,
+				EBD1571E2AA5DE5C00FD0F43 /* MyInfoPageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -160,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				EBD157252AA5E4EA00FD0F43 /* UsageRecordCell.swift */,
+				EB1151672AA6F8FC00FB875E /* SideMenuCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -183,6 +213,7 @@
 			packageProductDependencies = (
 				EBD157042AA5C07C00FD0F43 /* SnapKit */,
 				EBD157072AA5C08E00FD0F43 /* Then */,
+				EB1151602AA6D72600FB875E /* SideMenu */,
 			);
 			productName = "BoongBoong-ProJect";
 			productReference = EBD156E22AA5AC9D00FD0F43 /* BoongBoong-Project.app */;
@@ -215,6 +246,7 @@
 			packageReferences = (
 				EBD157032AA5C07C00FD0F43 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				EBD157062AA5C08E00FD0F43 /* XCRemoteSwiftPackageReference "Then" */,
+				EB11515F2AA6D72600FB875E /* XCRemoteSwiftPackageReference "SideMenu" */,
 			);
 			productRefGroup = EBD156E32AA5AC9D00FD0F43 /* Products */;
 			projectDirPath = "";
@@ -233,10 +265,11 @@
 				EB5A65C02AA6561A00AE58BC /* MainPage.storyboard in Resources */,
 				EBD156F22AA5AC9E00FD0F43 /* LaunchScreen.storyboard in Resources */,
 				EBD156EF2AA5AC9E00FD0F43 /* Assets.xcassets in Resources */,
+				EB11516A2AA70D8F00FB875E /* MyInfoPage.storyboard in Resources */,
 				EBD156ED2AA5AC9D00FD0F43 /* SignInPage.storyboard in Resources */,
 				D2D8F28D2AA6013F0014134D /* KickboardPage.storyboard in Resources */,
 				EBD157132AA5D38E00FD0F43 /* SignUpPage.storyboard in Resources */,
-				EB5A65C22AA659F700AE58BC /* ContainerViewPage.storyboard in Resources */,
+				EB5A65C22AA659F700AE58BC /* SideMenuPage.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,20 +280,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB1151642AA6E50D00FB875E /* SideMenuNav.swift in Sources */,
 				EBD157152AA5D3C600FD0F43 /* SignUpViewController.swift in Sources */,
 				EBD157262AA5E4EA00FD0F43 /* UsageRecordCell.swift in Sources */,
 				EBD1570F2AA5C64700FD0F43 /* Extensions.swift in Sources */,
-				EBD157172AA5DBD900FD0F43 /* ContainerViewController.swift in Sources */,
+				EBD157172AA5DBD900FD0F43 /* SideMenuViewController.swift in Sources */,
 				EBD157232AA5E09200FD0F43 /* BoongBoongModel.swift in Sources */,
 				EBD1570D2AA5C60100FD0F43 /* SignInViewController.swift in Sources */,
 				EBD1571B2AA5DC5C00FD0F43 /* MyBoongBoongViewController.swift in Sources */,
 				EBD156EA2AA5AC9D00FD0F43 /* MainPageViewController.swift in Sources */,
-				EBD1571F2AA5DE5C00FD0F43 /* MyPageViewController.swift in Sources */,
+				EB1151662AA6F8CA00FB875E /* SideMenuModel.swift in Sources */,
+				EBD1571F2AA5DE5C00FD0F43 /* MyInfoPageViewController.swift in Sources */,
 				EBD157192AA5DC3E00FD0F43 /* UsageRecordViewController.swift in Sources */,
 				EBCBE9242AA5F3FA00F93761 /* UserDefaultsManager.swift in Sources */,
 				EBD156E62AA5AC9D00FD0F43 /* AppDelegate.swift in Sources */,
 				EBD1571D2AA5DE4F00FD0F43 /* AddKickBoardViewController.swift in Sources */,
 				EBD156E82AA5AC9D00FD0F43 /* SceneDelegate.swift in Sources */,
+				EB1151682AA6F8FC00FB875E /* SideMenuCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +522,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EB11515F2AA6D72600FB875E /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jonkykong/SideMenu";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		EBD157032AA5C07C00FD0F43 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -505,6 +549,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EB1151602AA6D72600FB875E /* SideMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB11515F2AA6D72600FB875E /* XCRemoteSwiftPackageReference "SideMenu" */;
+			productName = SideMenu;
+		};
 		EBD157042AA5C07C00FD0F43 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EBD157032AA5C07C00FD0F43 /* XCRemoteSwiftPackageReference "SnapKit" */;

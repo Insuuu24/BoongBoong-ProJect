@@ -1,5 +1,5 @@
 //
-//  MyPageViewController.swift
+//  MyInfoPageViewController.swift
 //  BoongBoong-ProJect
 //
 //  Created by Insu on 2023/09/04.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyPageViewController: UIViewController {
+class MyInfoPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
