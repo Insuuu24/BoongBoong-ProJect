@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qG0-wB-Xmm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WKd-fM-zdJ">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -13,7 +13,6 @@
         <!--Navigation Controller-->
         <scene sceneID="YUL-H4-sce">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gpT-29-gSA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="WKd-fM-zdJ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="96y-9U-7sX">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -23,13 +22,13 @@
                         <segue destination="imm-fP-Me4" kind="relationship" relationship="rootViewController" id="yhD-H9-5hn"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gpT-29-gSA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-256" y="12"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="f2v-cf-49e">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2A0-ka-hZ7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="imm-fP-Me4" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ijt-Kw-JlF">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
@@ -50,6 +49,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="wAj-2L-fIP"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2A0-ka-hZ7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="535" y="12"/>
         </scene>
@@ -169,19 +169,6 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="278"/>
                                                         <standardMapConfiguration key="preferredConfiguration"/>
                                                     </mapView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smI-bi-ZdS">
-                                                        <rect key="frame" x="323" y="228" width="30" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="X1e-Gb-1Gp"/>
-                                                            <constraint firstAttribute="width" constant="30" id="l4J-ui-b9R"/>
-                                                        </constraints>
-                                                        <color key="tintColor" red="0.5176470876" green="0.2823529541" blue="0.92549020049999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" image="dot.circle.viewfinder" catalog="system"/>
-                                                        <connections>
-                                                            <action selector="regionButtonTapped:" destination="dkq-gi-rqE" eventType="touchUpInside" id="84O-j3-EOL"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                 <constraints>
@@ -189,9 +176,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="xi6-xZ-2lN" secondAttribute="trailing" id="ElL-z4-fQK"/>
                                                     <constraint firstAttribute="bottom" secondItem="xi6-xZ-2lN" secondAttribute="bottom" id="KxZ-u3-hqp"/>
                                                     <constraint firstAttribute="width" constant="361" id="Ogb-Bi-dWV"/>
-                                                    <constraint firstAttribute="bottom" secondItem="smI-bi-ZdS" secondAttribute="bottom" constant="20" id="apg-Ht-8Pv"/>
                                                     <constraint firstItem="xi6-xZ-2lN" firstAttribute="leading" secondItem="Y2j-Ma-iZQ" secondAttribute="leading" id="dWm-JP-ffK"/>
-                                                    <constraint firstAttribute="trailing" secondItem="smI-bi-ZdS" secondAttribute="trailing" constant="8" id="oWf-xA-Umf"/>
                                                     <constraint firstItem="xi6-xZ-2lN" firstAttribute="top" secondItem="Y2j-Ma-iZQ" secondAttribute="top" id="rj3-9r-cda"/>
                                                 </constraints>
                                             </view>
@@ -253,7 +238,7 @@
         <!--My BoongBoong-->
         <scene sceneID="OsF-VZ-GTX">
             <objects>
-                <viewController restorationIdentifier="MyBoongBoong" storyboardIdentifier="MyBoongBoong" id="5RB-dc-Mdv" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MyBoongBoong" storyboardIdentifier="MyBoongBoong" id="5RB-dc-Mdv" customClass="MyBoongBoongViewController" customModule="BoongBoong_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JZB-R3-hXk">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -323,11 +308,27 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="278"/>
                                                         <standardMapConfiguration key="preferredConfiguration"/>
                                                     </mapView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smI-bi-ZdS">
+                                                        <rect key="frame" x="323" y="228" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="X1e-Gb-1Gp"/>
+                                                            <constraint firstAttribute="width" constant="30" id="l4J-ui-b9R"/>
+                                                        </constraints>
+                                                        <color key="tintColor" red="0.5176470876" green="0.2823529541" blue="0.92549020049999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="dot.circle.viewfinder" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="regionButtonTapped:" destination="dkq-gi-rqE" eventType="touchUpInside" id="84O-j3-EOL"/>
+                                                            <action selector="regionButtonTapped:" destination="5RB-dc-Mdv" eventType="touchUpInside" id="rE2-kq-IpI"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="smI-bi-ZdS" secondAttribute="trailing" constant="8" id="AgL-yK-J2m"/>
                                                     <constraint firstAttribute="bottom" secondItem="iS4-j9-oSR" secondAttribute="bottom" id="GZv-0N-Kn0"/>
                                                     <constraint firstItem="iS4-j9-oSR" firstAttribute="leading" secondItem="CBg-bb-PXV" secondAttribute="leading" id="UAu-hZ-y0f"/>
+                                                    <constraint firstAttribute="bottom" secondItem="smI-bi-ZdS" secondAttribute="bottom" constant="20" id="baS-WG-T4o"/>
                                                     <constraint firstAttribute="height" constant="278" id="fGD-Ci-XzC"/>
                                                     <constraint firstAttribute="width" constant="361" id="iSa-2r-X74"/>
                                                     <constraint firstAttribute="trailing" secondItem="iS4-j9-oSR" secondAttribute="trailing" id="s9B-Ox-iNy"/>
@@ -349,25 +350,59 @@
                                 <state key="normal" title="내 붕붕이 삭제하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="deleteKickboardButtonTapped:" destination="5RB-dc-Mdv" eventType="touchUpInside" id="5oh-TF-r37"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bd-g4-Fm3">
+                                <rect key="frame" x="16" y="763" width="361" height="40"/>
+                                <color key="backgroundColor" red="0.89411764709999997" green="0.84705882349999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Mnc-TH-rBp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="내 붕붕이 정보 수정하기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="editButtonTapped:" destination="5RB-dc-Mdv" eventType="touchUpInside" id="ZdE-Q8-6Jn"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VL5-xs-ka1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="VL5-xs-ka1" firstAttribute="trailing" secondItem="0bd-g4-Fm3" secondAttribute="trailing" constant="16" id="PfY-Ff-HbR"/>
                             <constraint firstItem="1Iw-Jf-X5k" firstAttribute="leading" secondItem="VL5-xs-ka1" secondAttribute="leading" constant="16" id="RQU-d4-CTP"/>
                             <constraint firstItem="VL5-xs-ka1" firstAttribute="trailing" secondItem="1Iw-Jf-X5k" secondAttribute="trailing" constant="16" id="RjE-ea-1p1"/>
                             <constraint firstItem="VL5-xs-ka1" firstAttribute="trailing" secondItem="XBC-5i-c7f" secondAttribute="trailing" constant="16" id="Rs2-Ly-xl8"/>
                             <constraint firstItem="VL5-xs-ka1" firstAttribute="bottom" secondItem="XBC-5i-c7f" secondAttribute="bottom" constant="15" id="Wdm-Us-dzK"/>
                             <constraint firstItem="1Iw-Jf-X5k" firstAttribute="top" secondItem="0Ql-Mi-q2f" secondAttribute="bottom" constant="30" id="XjH-SH-Kzx"/>
+                            <constraint firstItem="0bd-g4-Fm3" firstAttribute="leading" secondItem="VL5-xs-ka1" secondAttribute="leading" constant="16" id="aYi-JD-mpb"/>
                             <constraint firstItem="XBC-5i-c7f" firstAttribute="top" secondItem="1Iw-Jf-X5k" secondAttribute="bottom" constant="35" id="bhR-Qf-vLp"/>
                             <constraint firstItem="XBC-5i-c7f" firstAttribute="leading" secondItem="VL5-xs-ka1" secondAttribute="leading" constant="16" id="gHK-iZ-Di7"/>
+                            <constraint firstItem="VL5-xs-ka1" firstAttribute="bottom" secondItem="0bd-g4-Fm3" secondAttribute="bottom" constant="15" id="s82-5F-lZ7"/>
                             <constraint firstItem="0Ql-Mi-q2f" firstAttribute="centerX" secondItem="JZB-R3-hXk" secondAttribute="centerX" id="v1S-Vf-RJY"/>
                             <constraint firstItem="0Ql-Mi-q2f" firstAttribute="top" secondItem="VL5-xs-ka1" secondAttribute="top" constant="35" id="zMz-1r-0vo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My BoongBoong" id="hMa-r4-QZY">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="XM5-U0-WhL"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="XM5-U0-WhL">
+                            <connections>
+                                <action selector="editBarButtonTapped:" destination="5RB-dc-Mdv" id="mEY-X6-XtX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="editBarButton" destination="XM5-U0-WhL" id="TbB-AO-gBt"/>
+                        <outlet property="editButton" destination="0bd-g4-Fm3" id="6mF-kT-Q7m"/>
+                        <outlet property="kickboardImage" destination="0Ql-Mi-q2f" id="WeL-lC-ceQ"/>
+                        <outlet property="kickboardMap" destination="iS4-j9-oSR" id="OD8-TY-nCC"/>
+                        <outlet property="kickboardName" destination="iQw-bN-uS1" id="0tO-Wx-cyW"/>
+                        <outlet property="regionButton" destination="smI-bi-ZdS" id="LxB-Iu-2Y0"/>
+                        <outlet property="registerDate" destination="03T-bL-UEd" id="K0S-XS-qsX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ciz-TA-2ql" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -75,6 +75,37 @@ class UserDefaultsManager {
         }
         return nil
     }
+    
+    // 등록된 킥보드 정보 변경
+    func updateKickboardInfo(kickboardID: UUID, newName: String, newImage: String) {
+        if var user = getUser(), var registeredKickboard = user.registeredKickboard {
+            if registeredKickboard.id == kickboardID {
+                registeredKickboard.boongboongName = newName
+                // TODO: 이미지 업데이트 로직 추가
+                user.registeredKickboard = registeredKickboard
+                saveUser(user)
+            }
+        }
+        if var kickboards = getRegisteredKickboards() {
+            if let index = kickboards.firstIndex(where: { $0.id == kickboardID }) {
+                kickboards[index].boongboongName = newName
+                // TODO: 이미지 업데이트 로직 추가
+                saveRegisteredKickboards(kickboards)
+            }
+        }
+    }
+    
+    // 등록된 킥보드 삭제
+    func deleteKickboard(_ kickboardIDToDelete: UUID) {
+        if var user = getUser() {
+            user.registeredKickboard = nil
+            saveUser(user)
+        }
+        if var kickboards = getRegisteredKickboards() {
+            kickboards.removeAll { $0.id == kickboardIDToDelete }
+            saveRegisteredKickboards(kickboards)
+        }
+    }
 
     // 로그아웃
     func logout() {
