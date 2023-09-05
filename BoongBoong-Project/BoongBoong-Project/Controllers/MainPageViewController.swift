@@ -1,5 +1,6 @@
 import UIKit
 import MapKit
+import CoreLocation
 
 // MainPageViewController 클래스는 메인 화면에 대한 ViewController입니다.
 class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate {
@@ -8,6 +9,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     
     // 현재 사용 중인 사용자 정보를 저장하기 위한 변수입니다.
     var currentUsing: User?
+    let locationManager = CLLocationManager()
     
     // Interface Builder에 있는 UI 요소에 대한 참조입니다.
     @IBOutlet weak var homeMap: MKMapView!
@@ -24,13 +26,16 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
         // 검색 바와 지도의 델리게이트 설정입니다.
         mapSearchBar.delegate = self
         mapSearchBar.placeholder = "위치 검색"
         homeMap.delegate = self
-        
-        // 킥보드 사용 상태에 따라 버튼 타이틀을 업데이트합니다.
-        updateKickboardButtonTitle()
         
         // 지도를 탭했을 때의 제스처 인식기를 설정합니다.
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -195,13 +200,6 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         }
     }
     
-    // 현재 사용자의 킥보드 사용 상태에 따라 버튼의 타이틀을 업데이트합니다.
-    func updateKickboardButtonTitle() {
-        if let user = currentUsing, user.isUsingKickboard {
-            addKickboardButton.setTitle("탑승 중", for: .normal)
-        }
-    }
-    
     // 지도를 탭했을 때의 액션입니다.
     @objc func handleTap(gesture: UITapGestureRecognizer) {
         // 탭한 위치의 좌표를 가져와서 주석을 생성하고 지도에 추가합니다.
@@ -266,5 +264,26 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             }
         }
         return annotationView
+    }
+    // 현재 사용자의 킥보드 사용 상태에 따라 버튼의 타이틀을 업데이트합니다.
+    func updateKickboardButtonTitle() {
+        if let user = currentUsing, user.isUsingKickboard {
+            addKickboardButton.setTitle("탑승 중", for: .normal)
+        }
+    }
+}
+
+extension MainPageViewController: CLLocationManagerDelegate {
+    
+    // 위치 업데이트 시 호출되는 메서드
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            let regionRadius: CLLocationDistance = 300 // 300m
+            
+            let region = MKCoordinateRegion(center: center, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+            homeMap.setRegion(region, animated: true)  // 수정된 부분
+            manager.stopUpdatingLocation()
+        }
     }
 }
