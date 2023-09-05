@@ -13,11 +13,11 @@ class SideMenuCell: UITableViewCell {
     
     // MARK: - Properties
     
-    private lazy var iconImageView = UIImageView().then {
+    lazy var iconImageView = UIImageView().then {
         $0.tintColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
     }
     
-    private lazy var titleLabel = UILabel().then {
+    lazy var titleLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.textColor = .black
         $0.textAlignment = .center
