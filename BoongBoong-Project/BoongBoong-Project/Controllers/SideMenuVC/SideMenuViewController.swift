@@ -72,9 +72,10 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             let usageRecordVC = UsageRecordViewController()
             self.navigationController?.pushViewController(usageRecordVC, animated: true)
-        //case 1:
-//            guard let myBoongBoongVC = storyboard?.instantiateViewController(withIdentifier: "MyBoongBoong") as? MyBoongBoongViewController else { return }
-//            self.present(myBoongBoongVC, animated: true, completion: nil)
+        case 1:
+            performSegue(withIdentifier: "myBoongBoongVC", sender: self)
+            //            guard let myBoongBoongVC = storyboard?.instantiateViewController(withIdentifier: "MyBoongBoong") as? MyBoongBoongViewController else { return }
+            //            self.present(myBoongBoongVC, animated: true, completion: nil)
         default:
             break
         }

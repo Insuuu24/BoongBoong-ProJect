@@ -120,11 +120,22 @@
                         <outlet property="myPageButton" destination="E3C-gh-YeY" id="dlh-rw-n34"/>
                         <outlet property="userImageView" destination="snd-OL-1Qo" id="IHv-EA-dgd"/>
                         <outlet property="userNameLabel" destination="xJb-zj-VPt" id="rqa-Y3-jxJ"/>
+                        <segue destination="cKz-ri-H94" kind="show" identifier="myBoongBoongVC" id="JQ1-Kv-lmO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5.343511450381679" y="-2.1126760563380285"/>
+        </scene>
+        <!--MyBoongBoong-->
+        <scene sceneID="MMO-v0-UJh">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="MyBoongBoong" storyboardName="KickboardPage" referencedIdentifier="MyBoongBoong" id="cKz-ri-H94" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="zdr-IR-5mY"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1sd-EO-lHl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="711" y="8"/>
         </scene>
         <!--MyInfoPage-->
         <scene sceneID="iz1-BS-bfy">
