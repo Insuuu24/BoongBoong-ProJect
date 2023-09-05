@@ -15,7 +15,7 @@ struct User: Codable {
     var profileImage: String
     var isUsingKickboard: Bool
     var rideHistory: [RideHistory]
-    var registeredKickboard: Kickboard
+    var registeredKickboard: Kickboard?
 }
 
 struct Kickboard: Codable {
