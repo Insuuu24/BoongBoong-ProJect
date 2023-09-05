@@ -26,7 +26,6 @@ extension UIStackView {
 }
 
 extension UIImageView {
-    
     var circleImage: Bool {
         set {
             if newValue {
@@ -52,23 +51,18 @@ extension UIImageView {
 //}
 
 extension UIButton {
-    
-    var circleImage: Bool {
-        set {
-            if newValue {
-                self.layer.borderColor = UIColor.lightGray.cgColor
-                self.layer.borderWidth = 0.5
-                self.layer.cornerRadius = 0.5 * self.bounds.size.width
-                self.clipsToBounds = true
-            } else {
-                self.layer.cornerRadius = 0
-                self.clipsToBounds = true
-            }
-        } get {
-            return false
-        }
+    func circleRect() {
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.cornerRadius = 8
+        self.clipsToBounds = true
     }
     
+    func circleImage() {
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = 0.5
+        self.layer.cornerRadius = 0.5 * self.bounds.size.width
+        self.clipsToBounds = true
+    }
 }
 
 extension String {

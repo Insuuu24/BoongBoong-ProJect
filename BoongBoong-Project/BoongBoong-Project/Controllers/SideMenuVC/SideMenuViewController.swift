@@ -48,7 +48,7 @@ class SideMenuViewController: UIViewController {
     func configureUI() {
         userImageView.layer.cornerRadius = 30
         userImageView.clipsToBounds = true
-        //userImageView.layer.borderColor = .lightGray
+        userImageView.layer.borderColor = UIColor.systemGray4.cgColor
         userImageView.layer.borderWidth = 1
         self.userImageView.image = UIImage(named: "boongBoongLogo.png")
     }
@@ -74,8 +74,6 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(usageRecordVC, animated: true)
         case 1:
             performSegue(withIdentifier: "myBoongBoongVC", sender: self)
-            //            guard let myBoongBoongVC = storyboard?.instantiateViewController(withIdentifier: "MyBoongBoong") as? MyBoongBoongViewController else { return }
-            //            self.present(myBoongBoongVC, animated: true, completion: nil)
         default:
             break
         }
