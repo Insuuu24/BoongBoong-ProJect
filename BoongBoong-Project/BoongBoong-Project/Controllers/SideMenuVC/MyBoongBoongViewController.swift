@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Then
 import MapKit
 
 class MyBoongBoongViewController: UIViewController {
@@ -15,15 +16,34 @@ class MyBoongBoongViewController: UIViewController {
     @IBOutlet weak var registerDate: UITextField!
     @IBOutlet weak var kickboardMap: MKMapView!
     @IBOutlet weak var regionButton: UIButton!
-    
-    @IBOutlet weak var editBarButton: UIBarButtonItem!
     @IBOutlet weak var editButton: UIButton!
-    
+    var editBarButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        configureNav()
         setupUI()
+    }
+    
+    private func configureNav() {
+        navigationItem.title = "My Boong Boong"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        editBarButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(editBarButtonTapped))
+        navigationItem.rightBarButtonItem = editBarButton
+
+
+        let appearance = UINavigationBarAppearance().then {
+            $0.configureWithOpaqueBackground()
+            $0.titleTextAttributes = [.foregroundColor: UIColor.label]
+            $0.shadowColor = .clear
+        }
+        
+        navigationController?.navigationBar.topItem?.title = ""
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
     }
     
     func setupUI() {
@@ -65,7 +85,7 @@ class MyBoongBoongViewController: UIViewController {
     }
     
     
-    @IBAction func editBarButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func editBarButtonTapped(_ sender: UIBarButtonItem) {
         editButton.isHidden = false
         kickboardName.isEnabled = true
         kickboardName.addTarget(self, action: #selector(kickboardNameChanged), for: .editingChanged)

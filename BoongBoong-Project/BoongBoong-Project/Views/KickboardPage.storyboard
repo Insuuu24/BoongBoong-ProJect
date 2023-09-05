@@ -207,7 +207,7 @@
             </objects>
             <point key="canvasLocation" x="1267.9389312977098" y="666.90140845070425"/>
         </scene>
-        <!--My BoongBoong-->
+        <!--My Boong Boong View Controller-->
         <scene sceneID="OsF-VZ-GTX">
             <objects>
                 <viewController restorationIdentifier="MyBoongBoong" storyboardIdentifier="MyBoongBoong" id="5RB-dc-Mdv" customClass="MyBoongBoongViewController" customModule="BoongBoong_Project" customModuleProvider="target" sceneMemberID="viewController">
@@ -358,15 +358,7 @@
                             <constraint firstItem="0Ql-Mi-q2f" firstAttribute="top" secondItem="VL5-xs-ka1" secondAttribute="top" constant="35" id="zMz-1r-0vo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My BoongBoong" id="hMa-r4-QZY">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="XM5-U0-WhL">
-                            <connections>
-                                <action selector="editBarButtonTapped:" destination="5RB-dc-Mdv" id="mEY-X6-XtX"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
-                        <outlet property="editBarButton" destination="XM5-U0-WhL" id="TbB-AO-gBt"/>
                         <outlet property="editButton" destination="0bd-g4-Fm3" id="6mF-kT-Q7m"/>
                         <outlet property="kickboardImage" destination="0Ql-Mi-q2f" id="WeL-lC-ceQ"/>
                         <outlet property="kickboardMap" destination="iS4-j9-oSR" id="OD8-TY-nCC"/>
@@ -383,7 +375,6 @@
     <resources>
         <image name="boongBoongLogo" width="79.5" height="70"/>
         <image name="dot.circle.viewfinder" catalog="system" width="128" height="115"/>
-        <image name="square.and.pencil" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
