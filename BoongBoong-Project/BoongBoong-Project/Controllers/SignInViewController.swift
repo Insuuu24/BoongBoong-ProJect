@@ -24,11 +24,17 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        passwordTextField.isSecureTextEntry = true 
+        passwordTextField.isSecureTextEntry = true
+       
         //setupUI()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
     }
     
+    func RUD() {
+        if let appDomain = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: appDomain)
+        }
+    }
     
     // MARK: - Helpers
     
@@ -86,14 +92,10 @@ class SignInViewController: UIViewController {
             return
         }
         
-        if let savedUser = UserDefaultsManager.shared.getUser() {
-            if savedUser.email == userEmail && savedUser.password == userPassword {
-                print("로그인 성공")
-            } else {
-                showErrorAlert(title: "로그인 실패", message: "이메일 또는 비밀번호가 일치하지 않습니다.")
-            }
+        if let users = UserDefaultsManager.shared.getUsers(), let _ = users.values.first(where: { $0.email == userEmail && $0.password == userPassword }) {
+            print("로그인 성공")
         } else {
-            showErrorAlert(title: "로그인 실패", message: "등록된 사용자 정보가 없습니다.")
+            showErrorAlert(title: "로그인 실패", message: "이메일 또는 비밀번호가 일치하지 않거나, 등록된 사용자 정보가 없습니다.")
         }
     }
     

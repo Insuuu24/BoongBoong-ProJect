@@ -23,7 +23,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var birthdateTextField: UITextField!
     @IBOutlet weak var showPasswordButton: UIButton!
     
-  
+    var selectedImageName: String?
+
     
     // MARK: - View Life Cycle
     
@@ -138,6 +139,12 @@ class SignUpViewController: UIViewController {
     //
     
     @IBAction func plusPhotoButtonTapped(_ sender: UIButton) {
+        
+
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self // 델리게이트 설정
+        imagePickerController.sourceType = .photoLibrary // 갤러리에서 이미지 선택 설정
+        present(imagePickerController, animated: true, completion: nil)
     
     }
     
@@ -152,29 +159,39 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
         let userEmail = userEmailTextField.text ?? ""
-           let userPassword = passwordTextField.text ?? ""
-           let userName = userNameTextField.text ?? ""
-           let birthdateText = birthdateTextField.text ?? ""
-        if !validateUserEmail(userEmail) {return}
-        if !validatePassword(userPassword) {return}
-        if !validateUserName(userName) {return}
-
+        let userPassword = passwordTextField.text ?? ""
+        let userName = userNameTextField.text ?? ""
+        let birthdateText = birthdateTextField.text ?? ""
         
-      
-           let dateFormatter = DateFormatter()
-           dateFormatter.dateFormat = "yyyy-MM-dd"
-           
-           if let birthdate = dateFormatter.date(from: birthdateText) {
-               let newUser = User(email: userEmail, password: userPassword, name: userName, birthdate: birthdate, profileImage: "", isUsingKickboard: false, rideHistory: [], registeredKickboards: Kickboard(id: UUID(), registerDay: Date(), boongboongImage: "", boongboongName: "", latitude: 0.0, longitude: 0.0, isBeingUsed: false))
-               
-               UserDefaultsManager.shared.saveUser(newUser)
-               UserDefaultsManager.shared.saveLoggedInState(true)
-               
-               
-               print("\(newUser)")
-               
-               self.dismiss(animated: true, completion: nil)
-           } else {
+        if !validateUserEmail(userEmail) { return }
+        if !validatePassword(userPassword) { return }
+        if !validateUserName(userName) { return }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        if let imageName = selectedImageName {
+            if let birthdate = dateFormatter.date(from: birthdateText) {
+                // 새로운 사용자 정보 생성
+                let newUser = User(email: userEmail, password: userPassword, name: userName, birthdate: birthdate, profileImage: imageName, isUsingKickboard: false, rideHistory: [], registeredKickboards: dummyKickboards[0])
+                
+                // 기존 사용자 정보 가져오기
+                var users = UserDefaultsManager.shared.getUsers() ?? [:]
+                
+                // 새로운 사용자 정보 추가
+                let newUserID = UUID().uuidString // 고유한 아이디 생성
+                users[newUserID] = newUser
+                
+                // Dictionary를 UserDefaults에 저장
+                UserDefaultsManager.shared.saveUsers(users)
+                
+                UserDefaultsManager.shared.saveLoggedInState(true)
+                
+                print("\(newUser)")
+                
+                self.dismiss(animated: true, completion: nil)
+            }
+        }  else {
                print("회원가입이 실패하였습니다.")
            }
     }
@@ -439,6 +456,33 @@ extension SignUpViewController: UITextFieldDelegate {
         self.view.endEditing(true)
     }
 }
-extension SignUpViewController: UIDocumentPickerDelegate {
 
+extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[.originalImage] as? UIImage,
+           let imageURL = info[.imageURL] as? URL {
+            // 선택한 이미지를 처리하거나 표시하는 등의 작업을 수행
+            // selectedImage 변수에 선택한 이미지가 저장됩니다.
+            plusPhotoButton.circleImage = true
+            // 이미지 파일의 URL에서 파일 이름을 추출
+            let imageName = imageURL.lastPathComponent
+            print("선택한 이미지 파일 이름: \(imageName)")
+            
+            // 이미지 파일 이름을 저장
+            selectedImageName = imageName
+            
+            // 이미지를 버튼에 설정
+            plusPhotoButton.setImage(selectedImage, for: .normal)
+        }
+        // 이미지 선택이 끝나면 이미지 피커를 닫습니다.
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        // 이미지 선택이 취소될 때 호출되는 메서드
+        // 이미지 피커를 닫습니다.
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
 }
