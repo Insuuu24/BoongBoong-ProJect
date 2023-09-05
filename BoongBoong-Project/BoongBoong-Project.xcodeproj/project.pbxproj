@@ -15,6 +15,7 @@
 		EB11516A2AA70D8F00FB875E /* MyInfoPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB1151692AA70D8F00FB875E /* MyInfoPage.storyboard */; };
 		EB5A65C02AA6561A00AE58BC /* MainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB5A65BF2AA6561A00AE58BC /* MainPage.storyboard */; };
 		EB5A65C22AA659F700AE58BC /* SideMenuPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB5A65C12AA659F700AE58BC /* SideMenuPage.storyboard */; };
+		EBBC057E2AA75C1400022E03 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBC057D2AA75C1400022E03 /* NoDataView.swift */; };
 		EBCBE9242AA5F3FA00F93761 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCBE9232AA5F3FA00F93761 /* UserDefaultsManager.swift */; };
 		EBD156E62AA5AC9D00FD0F43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD156E52AA5AC9D00FD0F43 /* AppDelegate.swift */; };
 		EBD156E82AA5AC9D00FD0F43 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD156E72AA5AC9D00FD0F43 /* SceneDelegate.swift */; };
@@ -45,6 +46,7 @@
 		EB1151692AA70D8F00FB875E /* MyInfoPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyInfoPage.storyboard; sourceTree = "<group>"; };
 		EB5A65BF2AA6561A00AE58BC /* MainPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainPage.storyboard; sourceTree = "<group>"; };
 		EB5A65C12AA659F700AE58BC /* SideMenuPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenuPage.storyboard; sourceTree = "<group>"; };
+		EBBC057D2AA75C1400022E03 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
 		EBCBE9232AA5F3FA00F93761 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		EBD156E22AA5AC9D00FD0F43 /* BoongBoong-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BoongBoong-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD156E52AA5AC9D00FD0F43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				EB5A65BF2AA6561A00AE58BC /* MainPage.storyboard */,
 				EB5A65C12AA659F700AE58BC /* SideMenuPage.storyboard */,
 				EB1151692AA70D8F00FB875E /* MyInfoPage.storyboard */,
+				EBBC057D2AA75C1400022E03 /* NoDataView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				EBD157172AA5DBD900FD0F43 /* SideMenuViewController.swift in Sources */,
 				EBD157232AA5E09200FD0F43 /* BoongBoongModel.swift in Sources */,
 				EBD1570D2AA5C60100FD0F43 /* SignInViewController.swift in Sources */,
+				EBBC057E2AA75C1400022E03 /* NoDataView.swift in Sources */,
 				EBD1571B2AA5DC5C00FD0F43 /* MyBoongBoongViewController.swift in Sources */,
 				EBD156EA2AA5AC9D00FD0F43 /* MainPageViewController.swift in Sources */,
 				EB1151662AA6F8CA00FB875E /* SideMenuModel.swift in Sources */,
