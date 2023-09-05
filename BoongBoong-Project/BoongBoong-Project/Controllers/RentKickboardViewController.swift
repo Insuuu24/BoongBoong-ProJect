@@ -8,33 +8,24 @@
 import UIKit
 import FloatingPanel
 
-// TODO: RentKickboardViewController은 테스트용 -> MainPageViewController에서 연결하기
-class RentKickboardViewController: UIViewController {
+class RentKickboardViewController2: UIViewController {
     
-    var fpc: FloatingPanelController!
+    @IBOutlet weak var kickboardImage: UIImageView!
+    @IBOutlet weak var kickboardName: UILabel!
+    @IBOutlet weak var kickboardDistance: UILabel!
+    @IBOutlet weak var kickboardRegion: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureFloatingPanel()
+        kickboardImage.layer.cornerRadius = 20
     }
     
-    func configureFloatingPanel() {
-        fpc = FloatingPanelController()
-        //fpc.delegate = self
+    @IBAction func rentButtonTapped(_ sender: UIButton) {
         
-        let contentVC = UIStoryboard(name: "RentKickboardPage", bundle: nil).instantiateViewController(withIdentifier: "RentKickboard2")
-        fpc.set(contentViewController: contentVC)
-        
-        fpc.changePanelStyle()
-        fpc.layout = MyFloatingPanelLayout()
-        fpc.contentMode = .static
-        fpc.backdropView.dismissalTapGestureRecognizer.isEnabled = true
-        
-        fpc.addPanel(toParent: self)
     }
+    
 }
-
-
 
 //extension RentKickboardViewController: FloatingPanelControllerDelegate {
 //    // Floating Panel의 상태가 변경될 때 호출됩니다.
@@ -81,19 +72,4 @@ class MyFloatingPanelLayout: FloatingPanelLayout {
     func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
         return 0.2
     }
-}
-
-class RentKickboardViewController2: UIViewController {
-    
-    @IBOutlet weak var kickboardImage: UIImageView!
-    @IBOutlet weak var kickboardName: UILabel!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        kickboardImage.layer.cornerRadius = 20
-    }
-    
-    @IBAction func rentButtonTapped(_ sender: UIButton) {
-    }
-    
 }

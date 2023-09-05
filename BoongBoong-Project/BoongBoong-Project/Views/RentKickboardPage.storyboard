@@ -131,8 +131,10 @@
                     <value key="contentSizeForViewInPopover" type="size" width="393" height="298.19999999999999"/>
                     <size key="freeformSize" width="393" height="298.19999999999999"/>
                     <connections>
+                        <outlet property="kickboardDistance" destination="NVy-bS-zDx" id="WKX-ui-SqF"/>
                         <outlet property="kickboardImage" destination="pXy-rT-CLy" id="tiW-jx-zxh"/>
                         <outlet property="kickboardName" destination="ILS-v2-4IJ" id="WMb-sU-IiT"/>
+                        <outlet property="kickboardRegion" destination="gMJ-2b-Cnw" id="AhR-DU-34u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Av6-g8-43W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -141,7 +143,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Maker" width="98" height="96.666664123535156"/>
+        <image name="Maker" width="147" height="145"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
