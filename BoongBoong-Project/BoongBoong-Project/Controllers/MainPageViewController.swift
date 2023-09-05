@@ -40,12 +40,40 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         // 지도를 탭했을 때의 제스처 인식기를 설정합니다.
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         homeMap.addGestureRecognizer(tapGesture)
+        
+        // 더미데이터 추가해놓음 -> 앱 실행 시킬때마다 계속 추가되니까 주의하세요!
+        if var kickboards = UserDefaultsManager.shared.getRegisteredKickboards() {
+            let kickboard1 = Kickboard(
+                id: UUID(),
+                registerDate: Date(),
+                boongboongImage: "",
+                boongboongName: "BoongBoong 1",
+                latitude: 37.1234,
+                longitude: 126.5678,
+                isBeingUsed: false
+            )
+            
+            let kickboard2 = Kickboard(
+                id: UUID(),
+                registerDate: Date(),
+                boongboongImage: "",
+                boongboongName: "BoongBoong 2",
+                latitude: 37.4321,
+                longitude: 127.8765,
+                isBeingUsed: true
+            )
+            kickboards.append(kickboard1)
+            kickboards.append(kickboard2)
+            UserDefaultsManager.shared.saveRegisteredKickboards(kickboards)
+        }
+        // FIXME: 생명주기 고려해서 다른 메소드에 넣어줘야 실시간 반영 가능!
+        addKickboardMarkersToMap()
     }
     
     override func viewWillLayoutSubviews() {
         let user = UserDefaultsManager.shared.getUser()
         
-        if let kickboard = user?.registeredKickboard {
+        if (user?.registeredKickboard) != nil {
             addKickboardButton.isHidden = true
             
             if user?.isUsingKickboard == true {
@@ -77,6 +105,18 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     }
     
     // MARK: - Helpers
+    
+    func addKickboardMarkersToMap() {
+        if let kickboards = UserDefaultsManager.shared.getRegisteredKickboards() {
+            print(kickboards.count)
+            for kickboard in kickboards {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: kickboard.latitude, longitude: kickboard.longitude)
+                annotation.title = kickboard.boongboongName
+                homeMap.addAnnotation(annotation)
+            }
+        }
+    }
     
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
