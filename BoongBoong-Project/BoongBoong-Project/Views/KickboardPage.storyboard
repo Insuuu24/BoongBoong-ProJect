@@ -13,6 +13,7 @@
         <!--Navigation Controller-->
         <scene sceneID="YUL-H4-sce">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gpT-29-gSA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="WKd-fM-zdJ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="96y-9U-7sX">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -22,13 +23,13 @@
                         <segue destination="imm-fP-Me4" kind="relationship" relationship="rootViewController" id="yhD-H9-5hn"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gpT-29-gSA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-256" y="12"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="f2v-cf-49e">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2A0-ka-hZ7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="imm-fP-Me4" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ijt-Kw-JlF">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
@@ -49,7 +50,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="wAj-2L-fIP"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2A0-ka-hZ7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="535" y="12"/>
         </scene>
