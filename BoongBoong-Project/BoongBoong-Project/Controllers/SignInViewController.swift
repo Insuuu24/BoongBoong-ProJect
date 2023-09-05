@@ -24,7 +24,7 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
+        passwordTextField.isSecureTextEntry = true 
         //setupUI()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
     }
@@ -44,7 +44,6 @@ class SignInViewController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         
         signInButton.layer.cornerRadius = 5
-        //signInButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         signInButton.isEnabled = false
         
         let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
@@ -63,9 +62,7 @@ class SignInViewController: UIViewController {
         signInButton.backgroundColor = .lightGray
     }
     
-//    func getUserByUsername(_ username: String) -> User? {
-//        return users.first { $0.username == username }
-//    }
+
     
     func showErrorAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -154,10 +151,10 @@ class SignInViewController: UIViewController {
     
     @IBAction func showPasswordButtonTapped(_ sender: UIButton) {
         if passwordTextField.isSecureTextEntry {
-            passwordTextField.isSecureTextEntry = false
+            passwordTextField.isSecureTextEntry = true
             sender.setImage(UIImage(systemName: "eye"), for: .normal)
         } else {
-            passwordTextField.isSecureTextEntry = true
+            passwordTextField.isSecureTextEntry = false
             sender.setImage(UIImage(systemName: "eye.slash"), for: .normal)
         }
     }

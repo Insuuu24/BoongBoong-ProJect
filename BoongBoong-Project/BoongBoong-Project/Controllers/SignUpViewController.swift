@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class SignUpViewController: UIViewController {
     
@@ -22,27 +23,17 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var birthdateTextField: UITextField!
     @IBOutlet weak var showPasswordButton: UIButton!
     
+  
     
-    var availableYear: [Int] = Array(1900...2004)
-    var allMonth: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    var allDay: [Int] = Array(1...31)
-    var selectedYear = 0
-    var selectedMonth = 0
-    var selectedDay = 0
-    var todayYear = "0"
-    var todayMonth = "0"
-    var todayDay = "0"
-    
- 
     // MARK: - View Life Cycle
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        passwordTextField.isSecureTextEntry = true
+        createDatePicker()
         
-        createPickerView()
-
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
         
         //setupUI()
@@ -94,18 +85,18 @@ class SignUpViewController: UIViewController {
     ////        }
     ////    }
     //
-    //    func validateUsername(_ username: String?) -> Bool {
-    //        guard let username = username else { return false }
-    //        userNameTextField.layer.borderWidth = 2.0
-    //        userNameTextField.layer.cornerRadius = 7.0
-    //        if username.isValidCredential {
-    //            idValidationText.text = ""
-    //            userNameTextField.layer.borderColor = UIColor(named: "green")?.cgColor
-    //            return true
-    //        } else {
-    //            idValidationText.text = "영문/숫자를 포함하여 5자 이상 작성하세요."
-    //            userNameTextField.layer.borderColor = UIColor(named: "red")?.cgColor
-    //            return false
+    //        func validateUsername(_ username: String?) -> Bool {
+    //            guard let username = username else { return false }
+    //            userNameTextField.layer.borderWidth = 2.0
+    //            userNameTextField.layer.cornerRadius = 7.0
+    //            if username.isValidCredential {
+    //                idValidationText.text = ""
+    //                userNameTextField.layer.borderColor = UIColor(named: "green")?.cgColor
+    //                return true
+    //            } else {
+    //                idValidationText.text = "영문/숫자를 포함하여 5자 이상 작성하세요."
+    //                userNameTextField.layer.borderColor = UIColor(named: "red")?.cgColor
+    //                return false
     //        }
     //    }
     //
@@ -147,59 +138,55 @@ class SignUpViewController: UIViewController {
     //
     
     @IBAction func plusPhotoButtonTapped(_ sender: UIButton) {
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.image"], in: .import)
-        documentPicker.delegate = self
-        documentPicker.allowsMultipleSelection = false
-        present(documentPicker, animated: true, completion: nil)
-        
+    
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let selectedURL = urls.first {
-            // 선택한 파일의 URL을 사용할 수 있습니다.
             let imagePath = selectedURL.path
             print("선택한 이미지 파일의 경로: \(imagePath)")
             
-            // 여기에서 imagePath를 사용하여 이미지를 로드하거나 다른 작업을 수행할 수 있습니다.
         }
     }
     
     
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
-        // 사용자가 입력한 정보 수집
         let userEmail = userEmailTextField.text ?? ""
-        let userName = userNameTextField.text ?? ""
-        let userPassword = passwordTextField.text ?? ""
+           let userPassword = passwordTextField.text ?? ""
+           let userName = userNameTextField.text ?? ""
+           let birthdateText = birthdateTextField.text ?? ""
+        if !validateUserEmail(userEmail) {return}
+        if !validatePassword(userPassword) {return}
+        if !validateUserName(userName) {return}
+
         
-        let calendar = Calendar(identifier: .gregorian)
-        var dateComponents = DateComponents()
-        dateComponents.year = selectedYear
-        dateComponents.month = selectedMonth
-        dateComponents.day = selectedDay
-        if let birthdate = calendar.date(from: dateComponents) {
-            let newUser = User(email: userEmail, password: userPassword, name: userName, birthdate: birthdate, profileImage: "", isUsingKickboard: false, rideHistory: [], registeredKickboards: Kickboard(id: UUID(), registerDay: Date(), boongboongImage: "", boongboongName: "", latitude: 0.0, longitude: 0.0, isBeingUsed: false))
-            
-            UserDefaultsManager.shared.saveUser(newUser)
-            
-            UserDefaultsManager.shared.saveLoggedInState(true)
-            
-            print("\(newUser)")
-            
-            self.dismiss(animated: true, completion: nil)
-            
-        } else {
-            print("날짜 생성에 실패했습니다.")
-        }
-      }
+      
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "yyyy-MM-dd"
+           
+           if let birthdate = dateFormatter.date(from: birthdateText) {
+               let newUser = User(email: userEmail, password: userPassword, name: userName, birthdate: birthdate, profileImage: "", isUsingKickboard: false, rideHistory: [], registeredKickboards: Kickboard(id: UUID(), registerDay: Date(), boongboongImage: "", boongboongName: "", latitude: 0.0, longitude: 0.0, isBeingUsed: false))
+               
+               UserDefaultsManager.shared.saveUser(newUser)
+               UserDefaultsManager.shared.saveLoggedInState(true)
+               
+               
+               print("\(newUser)")
+               
+               self.dismiss(animated: true, completion: nil)
+           } else {
+               print("회원가입이 실패하였습니다.")
+           }
+    }
     
- 
-       
+    
+    
     @IBAction func alreadyHaveAccountButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
-        
-  
+    
+    
     @IBAction func showPasswordButton(_ sender: UIButton) {
         if passwordTextField.isSecureTextEntry {
             passwordTextField.isSecureTextEntry = false
@@ -209,7 +196,67 @@ class SignUpViewController: UIViewController {
             sender.setImage(UIImage(systemName: "eye.slash"), for: .normal)
         }
     }
-   
+    
+    
+    func validateUserEmail(_ email: String?) -> Bool {
+        guard let email = email else { return false }
+        
+        let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+        
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        let isEmailValid = predicate.evaluate(with: email)
+        
+        if !isEmailValid {
+  
+            idValidationText.text = "이메일 주소 형식이 올바르지 않습니다."
+            userEmailTextField.layer.borderColor = UIColor(named: "red")?.cgColor
+        } else {
+            idValidationText.text = ""
+            userEmailTextField.layer.borderColor = UIColor(named: "green")?.cgColor
+        }
+        
+        return isEmailValid
+    }
+    
+    
+    func validatePassword(_ password: String?) -> Bool {
+        guard let password = password else { return false }
+
+        let regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{5,}$"
+
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        let isPasswordValid = predicate.evaluate(with: password)
+
+        if !isPasswordValid {
+            passwordValidationText.text = "영문 대문자, 소문자, 숫자를 모두 포함하여 5자 이상 작성하세요."
+            passwordTextField.layer.borderColor = UIColor(named: "red")?.cgColor
+        } else {
+            passwordValidationText.text = ""
+            passwordTextField.layer.borderColor = UIColor(named: "green")?.cgColor
+        }
+
+        return isPasswordValid
+    }
+    
+    
+    func validateUserName(_ userName: String?) -> Bool {
+        guard let userName = userName else { return false }
+
+        let regex = "^[가-힣ㄱ-ㅎㅏ-ㅣ]{2,5}$"
+
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        let isUserNameValid = predicate.evaluate(with: userName)
+
+        if !isUserNameValid {
+            idValidationText.text = "한글 2~5자만 입력하세요."
+            userNameTextField.layer.borderColor = UIColor(named: "red")?.cgColor
+        } else {
+            idValidationText.text = ""
+            userNameTextField.layer.borderColor = UIColor(named: "green")?.cgColor
+        }
+
+        return isUserNameValid
+    }
     
     
     //    @IBAction func userNameEditingDidBegin(_ sender: UITextField) {
@@ -339,99 +386,48 @@ class SignUpViewController: UIViewController {
     //    return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
     //}
     
-//    func loadImageFromPath(_ path: String) {
-//        if let image = UIImage(contentsOfFile: path) {
-//            yourProfileImageView.image = image
-//        } else {
-//            print("이미지를 불러올 수 없습니다.")
-//        }
-//    }
-//
-    func createPickerView() {
-         let pickerView = UIPickerView()
-         pickerView.delegate = self
-         pickerView.dataSource = self
-         birthdateTextField.tintColor = .clear
-         
-         birthdateTextField.inputView = pickerView
+    //    func loadImageFromPath(_ path: String) {
+    //        if let image = UIImage(contentsOfFile: path) {
+    //            yourProfileImageView.image = image
+    //        } else {
+    //            print("이미지를 불러올 수 없습니다.")
+    //        }
+    //    }
+    //
+    func createDatePicker() {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.locale = Locale(identifier: "ko-KR")
+        
+        let calendar = Calendar(identifier: .gregorian)
+        var minDateComponents = DateComponents()
+        minDateComponents.year = 1980
+        minDateComponents.month = 1
+        minDateComponents.day = 1
+        datePicker.minimumDate = calendar.date(from: minDateComponents)
+        
+        datePicker.maximumDate = Date()
 
-         let toolBar = UIToolbar()
-         toolBar.sizeToFit()
-         
-         let btnDone = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(onPickDone))
-         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-         let btnCancel = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(onPickCancel))
-         toolBar.setItems([btnCancel, space, btnDone], animated: true)
-         toolBar.isUserInteractionEnabled = true
-         
-         birthdateTextField.inputAccessoryView = toolBar
-         
-  
-         
-     }
-       
-       @objc func onPickDone() {
-           birthdateTextField.text = "\(selectedYear)년 \(selectedMonth)월 \(selectedDay)일" // 이름 변경
-           birthdateTextField.resignFirstResponder() // 이름 변경
-       }
-       
-       @objc func onPickCancel() {
-           birthdateTextField.resignFirstResponder() // 이름 변경
-       }
-   
+        datePicker.addTarget(self, action: #selector(dateChange), for: .valueChanged)
+        birthdateTextField.inputView = datePicker
+        birthdateTextField.text = dateFormat(date: Date())
+        birthdateTextField.placeholder = "birthdate"
+    }
+
+    @objc func dateChange(_ sender: UIDatePicker) {
+        // 값이 변하면 UIDatePicker에서 날자를 받아와 형식을 변형해서 textField에 넣어줍니다.
+        birthdateTextField.text = dateFormat(date: sender.date)
+    }
+
+    private func dateFormat(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        return formatter.string(from: date)
+    }
 }
 
-
-extension SignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-           return 3
-       }
-       
-       func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-           switch component {
-           case 0:
-               return availableYear.count /// 연도의 아이템 개수
-           case 1:
-               return allMonth.count /// 월의 아이템 개수
-               ///
-           case 2:
-               return allDay.count
-           default:
-               return 0
-           }
-       }
-       
-       func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-           switch component {
-           case 0:
-               return "\(availableYear[row])년"
-           case 1:
-               return "\(allMonth[row])월"
-           case 2:
-               return "\(allDay[row])일"
-           default:
-               return ""
-           }
-       }
-       
-       func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-           
-           switch component {
-           case 0:
-               selectedYear = availableYear[row]
-           case 1:
-               selectedMonth = allMonth[row]
-           case 2:
-               selectedDay =
-               allDay[row]
-           default:
-               break
-           }
-       }
-    
-}
 
 extension SignUpViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
