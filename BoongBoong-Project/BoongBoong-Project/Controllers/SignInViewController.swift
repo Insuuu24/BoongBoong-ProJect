@@ -14,7 +14,7 @@ class SignInViewController: UIViewController {
     // MARK: - Properties
     
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var userEmailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var dontHaveAccountButton: UIButton!
@@ -24,19 +24,19 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
 
         //setupUI()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
     }
     
     
     // MARK: - Helpers
     
     func setupUI() {
-        usernameTextField.autocorrectionType = .no
-        usernameTextField.autocapitalizationType = .none
-        usernameTextField.delegate = self
-        usernameTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        userEmailTextField.autocorrectionType = .no
+        userEmailTextField.autocapitalizationType = .none
+        userEmailTextField.delegate = self
+        userEmailTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         
         passwordTextField.isSecureTextEntry = true
         passwordTextField.textContentType = .oneTimeCode
@@ -46,7 +46,6 @@ class SignInViewController: UIViewController {
         signInButton.layer.cornerRadius = 5
         //signInButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         signInButton.isEnabled = false
-        signInButton.backgroundColor = .lightGray
         
         let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.systemBlue]))
@@ -54,10 +53,10 @@ class SignInViewController: UIViewController {
     }
     
     private func resetInputFields() {
-        usernameTextField.text = ""
+        userEmailTextField.text = ""
         passwordTextField.text = ""
         
-        usernameTextField.isUserInteractionEnabled = true
+        userEmailTextField.isUserInteractionEnabled = true
         passwordTextField.isUserInteractionEnabled = true
         
         signInButton.isEnabled = false
@@ -79,16 +78,36 @@ class SignInViewController: UIViewController {
     // MARK: - Actions
     
     
-    
+    @IBAction func signInButtonTapped(_ sender: UIButton) {
+        guard let userEmail = userEmailTextField.text else {
+            showErrorAlert(title: "로그인 실패", message: "이메일을 입력해주세요.")
+            return
+        }
+        
+        guard let userPassword = passwordTextField.text else {
+            showErrorAlert(title: "로그인 실패", message: "비밀번호를 입력해주세요.")
+            return
+        }
+        
+        if let savedUser = UserDefaultsManager.shared.getUser() {
+            if savedUser.email == userEmail && savedUser.password == userPassword {
+                print("로그인 성공")
+            } else {
+                showErrorAlert(title: "로그인 실패", message: "이메일 또는 비밀번호가 일치하지 않습니다.")
+            }
+        } else {
+            showErrorAlert(title: "로그인 실패", message: "등록된 사용자 정보가 없습니다.")
+        }
+    }
     
     
     @objc private func handleTapOnView(_ sender: UITextField) {
-        usernameTextField.resignFirstResponder()
+        userEmailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
     
     @objc private func handleTextInputChange() {
-        let isFormValid = usernameTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
+        let isFormValid = userEmailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
         if isFormValid {
             signInButton.isEnabled = true
             signInButton.backgroundColor = .systemBlue

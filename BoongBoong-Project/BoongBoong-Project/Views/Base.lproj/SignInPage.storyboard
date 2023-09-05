@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +13,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SignInViewController" customModule="BoongBoong_ProJect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="SignInPage" storyboardIdentifier="SignInPage" id="BYZ-38-t0r" customClass="SignInViewController" customModule="BoongBoong_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +28,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5cc-oN-3BK">
                                 <rect key="frame" x="70" y="299" width="253" height="122"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cDS-g9-4MG">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="userEmail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cDS-g9-4MG">
                                         <rect key="frame" x="0.0" y="0.0" width="253" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -39,11 +40,14 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFj-Wp-M67">
                                         <rect key="frame" x="0.0" y="88" width="253" height="34"/>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" name="mainColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Sign In">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="signInButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VEH-En-Ldf"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -54,7 +58,9 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="253" id="nfp-X5-tkb"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Don't have an account? Sign Up"/>
+                                <state key="normal" title="Don't have an account? Sign Up">
+                                    <color key="titleColor" name="mainColor"/>
+                                </state>
                                 <connections>
                                     <segue destination="UyO-ZN-Os3" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="bvA-Sm-EMM"/>
                                 </connections>
@@ -93,7 +99,7 @@
                         <outlet property="passwordTextField" destination="da6-Ls-0b3" id="kr0-RC-gi7"/>
                         <outlet property="profileImage" destination="22X-VB-KX5" id="TSK-Of-z5h"/>
                         <outlet property="signInButton" destination="HFj-Wp-M67" id="bX2-NY-Zaa"/>
-                        <outlet property="usernameTextField" destination="cDS-g9-4MG" id="tm1-vm-n2f"/>
+                        <outlet property="userEmailTextField" destination="cDS-g9-4MG" id="3Q4-jB-wpQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -114,6 +120,9 @@
     <resources>
         <image name="boongBoongLogo" width="79.5" height="70"/>
         <image name="eye.slash" catalog="system" width="128" height="84"/>
+        <namedColor name="mainColor">
+            <color red="0.56499999761581421" green="0.2669999897480011" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
