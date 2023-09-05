@@ -20,7 +20,7 @@ class SideMenuCell: UITableViewCell {
     lazy var titleLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.textColor = .black
-        $0.textAlignment = .center
+        $0.textAlignment = .left
     }
     
     private let stackView = UIStackView().then {
@@ -30,7 +30,7 @@ class SideMenuCell: UITableViewCell {
         $0.spacing = 20
     }
     
-    // MARK: - View Life Cycle
+    // MARK: - Initialization
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
@@ -58,8 +58,8 @@ class SideMenuCell: UITableViewCell {
         }
         
         iconImageView.snp.makeConstraints {
-            $0.width.equalTo(25)
-            $0.height.equalTo(25)
+            $0.width.equalTo(35)
+            $0.height.equalTo(35)
         }
     }
 }
