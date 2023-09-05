@@ -1,6 +1,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FloatingPanel
 
 // MainPageViewController 클래스는 메인 화면에 대한 ViewController입니다.
 class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate {
@@ -10,6 +11,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     // 현재 사용 중인 사용자 정보를 저장하기 위한 변수입니다.
     var currentUsing: User?
     let locationManager = CLLocationManager()
+    var fpc: FloatingPanelController!
     
     // Interface Builder에 있는 UI 요소에 대한 참조입니다.
     @IBOutlet weak var homeMap: MKMapView!
@@ -66,8 +68,6 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             kickboards.append(kickboard2)
             UserDefaultsManager.shared.saveRegisteredKickboards(kickboards)
         }
-        // FIXME: 생명주기 고려해서 다른 메소드에 넣어줘야 실시간 반영 가능!
-        addKickboardMarkersToMap()
     }
     
     override func viewWillLayoutSubviews() {
@@ -91,6 +91,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             addKickboardButton.isHidden = false
             returnKickboardButton.isHidden = true
         }
+        addKickboardMarkersToMap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -256,7 +257,27 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         // 선택된 주석을 지도에서 제거합니다.
         if let annotation = view.annotation {
             mapView.removeAnnotation(annotation)
+            
+            // FIXME: 데이터 전달 필요함
+            if let markerAnnotation = annotation as? MKPointAnnotation {
+                configureFloatingPanel()
+            }
         }
+    }
+    
+    func configureFloatingPanel() {
+        fpc = FloatingPanelController()
+        //fpc.delegate = self
+        
+        let contentVC = UIStoryboard(name: "RentKickboardPage", bundle: nil).instantiateViewController(withIdentifier: "RentKickboard2")
+        fpc.set(contentViewController: contentVC)
+        
+        fpc.changePanelStyle()
+        fpc.layout = MyFloatingPanelLayout()
+        fpc.contentMode = .static
+        fpc.backdropView.dismissalTapGestureRecognizer.isEnabled = true
+        
+        fpc.addPanel(toParent: self)
     }
     
     func circularImageWithBorder(image: UIImage, targetSize: CGSize, borderWidth: CGFloat = 4.0, borderColor: UIColor = UIColor.purple) -> UIImage? {
