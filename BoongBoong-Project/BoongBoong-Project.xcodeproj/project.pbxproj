@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D2D8F28D2AA6013F0014134D /* KickboardPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */; };
+		D2D8F29A2AA792F40014134D /* RentKickboardPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D8F2992AA792F40014134D /* RentKickboardPage.storyboard */; };
+		D2D8F29C2AA793120014134D /* RentKickboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F29B2AA793120014134D /* RentKickboardViewController.swift */; };
+		D2D8F29F2AA79DDC0014134D /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = D2D8F29E2AA79DDC0014134D /* FloatingPanel */; };
 		EB1151612AA6D72600FB875E /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = EB1151602AA6D72600FB875E /* SideMenu */; };
 		EB1151642AA6E50D00FB875E /* SideMenuNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1151632AA6E50D00FB875E /* SideMenuNav.swift */; };
 		EB1151662AA6F8CA00FB875E /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1151652AA6F8CA00FB875E /* SideMenuModel.swift */; };
@@ -40,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KickboardPage.storyboard; sourceTree = "<group>"; };
+		D2D8F2992AA792F40014134D /* RentKickboardPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RentKickboardPage.storyboard; sourceTree = "<group>"; };
+		D2D8F29B2AA793120014134D /* RentKickboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentKickboardViewController.swift; sourceTree = "<group>"; };
 		EB1151632AA6E50D00FB875E /* SideMenuNav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuNav.swift; sourceTree = "<group>"; };
 		EB1151652AA6F8CA00FB875E /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		EB1151672AA6F8FC00FB875E /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
@@ -75,6 +80,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBD157082AA5C08E00FD0F43 /* Then in Frameworks */,
+				D2D8F29F2AA79DDC0014134D /* FloatingPanel in Frameworks */,
 				EB1151612AA6D72600FB875E /* SideMenu in Frameworks */,
 				EBD157052AA5C07C00FD0F43 /* SnapKit in Frameworks */,
 			);
@@ -162,6 +168,7 @@
 				EB5A65C12AA659F700AE58BC /* SideMenuPage.storyboard */,
 				EB1151692AA70D8F00FB875E /* MyInfoPage.storyboard */,
 				EBBC057D2AA75C1400022E03 /* NoDataView.swift */,
+				D2D8F2992AA792F40014134D /* RentKickboardPage.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -174,6 +181,7 @@
 				EBD156E92AA5AC9D00FD0F43 /* MainPageViewController.swift */,
 				EBD1571C2AA5DE4F00FD0F43 /* AddKickBoardViewController.swift */,
 				EBD1571E2AA5DE5C00FD0F43 /* MyInfoPageViewController.swift */,
+				D2D8F29B2AA793120014134D /* RentKickboardViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -217,6 +225,7 @@
 				EBD157042AA5C07C00FD0F43 /* SnapKit */,
 				EBD157072AA5C08E00FD0F43 /* Then */,
 				EB1151602AA6D72600FB875E /* SideMenu */,
+				D2D8F29E2AA79DDC0014134D /* FloatingPanel */,
 			);
 			productName = "BoongBoong-ProJect";
 			productReference = EBD156E22AA5AC9D00FD0F43 /* BoongBoong-Project.app */;
@@ -250,6 +259,7 @@
 				EBD157032AA5C07C00FD0F43 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				EBD157062AA5C08E00FD0F43 /* XCRemoteSwiftPackageReference "Then" */,
 				EB11515F2AA6D72600FB875E /* XCRemoteSwiftPackageReference "SideMenu" */,
+				D2D8F29D2AA79DDC0014134D /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 			);
 			productRefGroup = EBD156E32AA5AC9D00FD0F43 /* Products */;
 			projectDirPath = "";
@@ -265,6 +275,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2D8F29A2AA792F40014134D /* RentKickboardPage.storyboard in Resources */,
 				EB5A65C02AA6561A00AE58BC /* MainPage.storyboard in Resources */,
 				EBD156F22AA5AC9E00FD0F43 /* LaunchScreen.storyboard in Resources */,
 				EBD156EF2AA5AC9E00FD0F43 /* Assets.xcassets in Resources */,
@@ -299,6 +310,7 @@
 				EBCBE9242AA5F3FA00F93761 /* UserDefaultsManager.swift in Sources */,
 				EBD156E62AA5AC9D00FD0F43 /* AppDelegate.swift in Sources */,
 				EBD1571D2AA5DE4F00FD0F43 /* AddKickBoardViewController.swift in Sources */,
+				D2D8F29C2AA793120014134D /* RentKickboardViewController.swift in Sources */,
 				EBD156E82AA5AC9D00FD0F43 /* SceneDelegate.swift in Sources */,
 				EB1151682AA6F8FC00FB875E /* SideMenuCell.swift in Sources */,
 			);
@@ -449,9 +461,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BoongBoong-Project/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보를 사용하여 현재 위치 주변의 킥보드를 검색합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = SignInPage;
+				INFOPLIST_KEY_UIMainStoryboardFile = MainPage;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -480,9 +493,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "BoongBoong-Project/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보를 사용하여 현재 위치 주변의 킥보드를 검색합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = SignInPage;
+				INFOPLIST_KEY_UIMainStoryboardFile = MainPage;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -526,6 +540,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D2D8F29D2AA79DDC0014134D /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scenee/FloatingPanel.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		EB11515F2AA6D72600FB875E /* XCRemoteSwiftPackageReference "SideMenu" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jonkykong/SideMenu";
@@ -553,6 +575,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D2D8F29E2AA79DDC0014134D /* FloatingPanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2D8F29D2AA79DDC0014134D /* XCRemoteSwiftPackageReference "FloatingPanel" */;
+			productName = FloatingPanel;
+		};
 		EB1151602AA6D72600FB875E /* SideMenu */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EB11515F2AA6D72600FB875E /* XCRemoteSwiftPackageReference "SideMenu" */;
