@@ -34,15 +34,35 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        passwordTextField.isSecureTextEntry = true
+
         createDatePicker()
-        
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
-        
-        //setupUI()
+        setupUI()
     }
     
     // MARK: - Helpers
+    
+    func setupUI() {
+        passwordTextField.isSecureTextEntry = true
+        
+        signUpButton.layer.cornerRadius = 5
+        
+        handleTextInputChange()
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
+        
+        signUpButton.isEnabled = false
+        signUpButton.backgroundColor = UIColor(red: 0.88, green: 0.76, blue: 1.00, alpha: 1.00)
+    
+        userEmailTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        userNameTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        birthdateTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        attributedTitle.append(NSAttributedString(string: "Sign In", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.systemBlue]))
+        alreadyHaveAccountButton.setAttributedTitle(attributedTitle, for: .normal)
+        
+    }
     
     //    func setupUI() {
     //        // FIXME: 사진 버튼에 fill되게 수정하기
@@ -65,9 +85,9 @@ class SignUpViewController: UIViewController {
     //        signUpButton.isEnabled = false
     //        signUpButton.backgroundColor = .lightGray
     //
-    //        let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-    //        attributedTitle.append(NSAttributedString(string: "Sign In", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.systemBlue]))
-    //        alreadyHaveAccountButton.setAttributedTitle(attributedTitle, for: .normal)
+//            let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+//            attributedTitle.append(NSAttributedString(string: "Sign In", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.systemBlue]))
+//            alreadyHaveAccountButton.setAttributedTitle(attributedTitle, for: .normal)
     //        alreadyHaveAccountButton.addTarget(self, action: #selector(handleAlreadyHaveAccount), for: .touchUpInside)
     //    }
     //
@@ -339,6 +359,18 @@ class SignUpViewController: UIViewController {
     }
     
     
+    @objc private func handleTextInputChange() {
+        let isFormValid = userEmailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false && userNameTextField.text?.isEmpty == false && birthdateTextField.text?.isEmpty == false
+        if isFormValid {
+            signUpButton.isEnabled = true
+            signUpButton.backgroundColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
+        } else {
+            signUpButton.isEnabled = false
+            signUpButton.backgroundColor = UIColor(red: 0.88, green: 0.76, blue: 1.00, alpha: 1.00)
+        }
+    }
+
+    
     //    @IBAction func userNameEditingDidBegin(_ sender: UITextField) {
     //        _ = validateUsername(sender.text)
     //        handleTextInputChange(textField: sender)
@@ -518,6 +550,18 @@ extension SignUpViewController: UITextFieldDelegate {
     @objc private func handleTapOnView() {
         self.view.endEditing(true)
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let userEmailText = userEmailTextField.text ?? ""
+        let passwordText = passwordTextField.text ?? ""
+        let userNameText = userNameTextField.text ?? ""
+        let birthdateText = birthdateTextField.text ?? ""
+        
+        signUpButton.isEnabled = !userEmailText.isEmpty && !userNameText.isEmpty && !passwordText.isEmpty && !birthdateText.isEmpty
+        
+        return true
+    }
+    
 }
 
 extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

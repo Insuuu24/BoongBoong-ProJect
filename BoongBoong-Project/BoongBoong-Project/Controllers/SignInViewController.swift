@@ -24,10 +24,11 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        passwordTextField.isSecureTextEntry = true
+        
+        setupUI()
+        
        
-        //setupUI()
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
+
     }
     
     func RUD() {
@@ -39,23 +40,47 @@ class SignInViewController: UIViewController {
     // MARK: - Helpers
     
     func setupUI() {
-        userEmailTextField.autocorrectionType = .no
-        userEmailTextField.autocapitalizationType = .none
-        userEmailTextField.delegate = self
-        userEmailTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
-        
         passwordTextField.isSecureTextEntry = true
-        passwordTextField.textContentType = .oneTimeCode
-        passwordTextField.delegate = self
+       
+     
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
+
+
+            signInButton.isEnabled = false
+            signInButton.backgroundColor = UIColor(red: 0.88, green: 0.76, blue: 1.00, alpha: 1.00)
+        
+        userEmailTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         
+        
         signInButton.layer.cornerRadius = 5
-        signInButton.isEnabled = false
         
         let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.systemBlue]))
         dontHaveAccountButton.setAttributedTitle(attributedTitle, for: .normal)
+        
+        
     }
+//    func setupUI() {
+//        userEmailTextField.autocorrectionType = .no
+//        userEmailTextField.autocapitalizationType = .none
+//        userEmailTextField.delegate = self
+//        userEmailTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+//
+//        passwordTextField.isSecureTextEntry = true
+//        passwordTextField.textContentType = .oneTimeCode
+//        passwordTextField.delegate = self
+//        passwordTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+//
+//        signInButton.layer.cornerRadius = 5
+//        signInButton.isEnabled = false
+//
+//        let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+//        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.systemBlue]))
+//        dontHaveAccountButton.setAttributedTitle(attributedTitle, for: .normal)
+//    }
     
     private func resetInputFields() {
         userEmailTextField.text = ""
@@ -122,10 +147,10 @@ class SignInViewController: UIViewController {
         let isFormValid = userEmailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
         if isFormValid {
             signInButton.isEnabled = true
-            signInButton.backgroundColor = .systemBlue
+            signInButton.backgroundColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
         } else {
             signInButton.isEnabled = false
-            signInButton.backgroundColor = .lightGray
+            signInButton.backgroundColor = UIColor(red: 0.88, green: 0.76, blue: 1.00, alpha: 1.00)
         }
     }
     
@@ -181,8 +206,21 @@ class SignInViewController: UIViewController {
 
 // TODO: username 입력완료 시 password로 위임하기
 extension SignInViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let userEmailText = userEmailTextField.text ?? ""
+        let passwordText = passwordTextField.text ?? ""
+        
+        signInButton.isEnabled = !userEmailText.isEmpty && !passwordText.isEmpty
+        
+        return true
+    }
+
+    
+    
 }
