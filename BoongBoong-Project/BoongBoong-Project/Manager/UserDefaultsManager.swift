@@ -35,7 +35,7 @@ let dummyKickboards = [
 ]
 
 let dummyUsers = [
-    User(email: "user1@example.com", password: "password1", name: "박인수", birthdate: Date(), profileImage: "profile1.jpg", isUsingKickboard: false, rideHistory: dummyRideHistories, registeredKickboard: dummyKickboards[0]),
+    User(email: "user1@example.com", password: "password1", name: "박인수", birthdate: Date(), profileImage: "", isUsingKickboard: false, rideHistory: dummyRideHistories, registeredKickboard: dummyKickboards[0]),
     User(email: "user2@example.com", password: "password2", name: "서영덕", birthdate: Date(), profileImage: "profile2.jpg", isUsingKickboard: false, rideHistory: [], registeredKickboard: dummyKickboards[1])
 ]
 
