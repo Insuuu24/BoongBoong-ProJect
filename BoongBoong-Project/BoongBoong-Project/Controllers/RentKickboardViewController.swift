@@ -22,9 +22,7 @@ class RentKickboardViewController: UIViewController {
         super.viewDidLoad()
         kickboardImage.layer.cornerRadius = 20
         if let kickboard = selectedKickboard {
-            if kickboard.boongboongImage != "" {
-                kickboardImage.image = UIImage(named: kickboard.boongboongImage)
-            }
+            kickboardImage.image = UIImage(data: kickboard.boongboongImage)
             kickboardName.text = kickboard.boongboongName
         }
     }

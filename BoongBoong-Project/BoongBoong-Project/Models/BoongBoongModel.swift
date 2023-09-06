@@ -12,7 +12,7 @@ struct User: Codable {
     var password: String
     var name: String
     var birthdate: Date
-    var profileImage: String
+    var profileImage: Data
     var isUsingKickboard: Bool
     var rideHistory: [RideHistory]
     var registeredKickboard: Kickboard?
@@ -21,7 +21,7 @@ struct User: Codable {
 struct Kickboard: Codable {
     var id: UUID
     var registerDate: Date
-    var boongboongImage: String
+    var boongboongImage: Data
     var boongboongName: String
     var latitude: Double
     var longitude: Double

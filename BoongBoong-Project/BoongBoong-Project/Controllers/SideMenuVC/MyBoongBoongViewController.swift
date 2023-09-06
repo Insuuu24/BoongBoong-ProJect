@@ -48,9 +48,7 @@ class MyBoongBoongViewController: UIViewController {
     
     func setupUI() {
         if let kickboard = UserDefaultsManager.shared.getUser()?.registeredKickboard {
-            if kickboard.boongboongImage != "" {
-                kickboardImage.image = UIImage(named: kickboard.boongboongImage)
-            }
+            kickboardImage.image = UIImage(data: kickboard.boongboongImage)
             kickboardImage.circleImage = true
             
             kickboardName.text = kickboard.boongboongName
@@ -113,10 +111,10 @@ class MyBoongBoongViewController: UIViewController {
     @IBAction func editButtonTapped(_ sender: UIButton) {
         
         if let newName = kickboardName.text,
-           //let newImage = kickboardImage.image,
+           let newImage = kickboardImage.image,
            let kickboardID = UserDefaultsManager.shared.getUser()?.registeredKickboard?.id {
             
-            UserDefaultsManager.shared.updateKickboardInfo(kickboardID: kickboardID, newName: newName, newImage: "")
+            UserDefaultsManager.shared.updateKickboardInfo(kickboardID: kickboardID, newName: newName, newImage: newImage)
         }
         
         editButton.isHidden = true

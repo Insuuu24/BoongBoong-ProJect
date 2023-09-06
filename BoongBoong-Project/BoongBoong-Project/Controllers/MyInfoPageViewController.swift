@@ -30,9 +30,7 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
         configureNav()
         
         if let profileImage = userDefaults.getUser()?.profileImage {
-            if profileImage != "" {
-                profileImageView.image = UIImage(named: profileImage)
-            }
+            profileImageView.image = UIImage(data: profileImage)
         }
         profileImageView.circleImage = true
         changeImageButton.isHidden = true
@@ -40,6 +38,7 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
         nameTextField.isEnabled = false
         emailTextField.isEnabled = false
         birthdateTextField.isEnabled = false
+        
     }
     
     // MARK: - Helpers

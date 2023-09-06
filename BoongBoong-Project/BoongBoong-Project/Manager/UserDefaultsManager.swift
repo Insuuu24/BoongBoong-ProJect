@@ -30,13 +30,13 @@ let dummyRideHistories = [
 ]
 
 let dummyKickboards = [
-    Kickboard(id: UUID(), registerDate: Date(), boongboongImage: "image1.jpg", boongboongName: "BoongBoong 1", latitude: 37.5665, longitude: 126.9780, isBeingUsed: true),
-    Kickboard(id: UUID(), registerDate: Date(), boongboongImage: "image2.jpg", boongboongName: "BoongBoong 2", latitude: 37.5675, longitude: 126.9790, isBeingUsed: false)
+    Kickboard(id: UUID(), registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData()!)!, boongboongName: "BoongBoong 1", latitude: 37.5665, longitude: 126.9780, isBeingUsed: true),
+    Kickboard(id: UUID(), registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData()!)!, boongboongName: "BoongBoong 2", latitude: 37.5675, longitude: 126.9790, isBeingUsed: false)
 ]
 
 let dummyUsers = [
-    User(email: "user1@example.com", password: "password1", name: "박인수", birthdate: Date(), profileImage: "", isUsingKickboard: false, rideHistory: dummyRideHistories, registeredKickboard: dummyKickboards[0]),
-    User(email: "user2@example.com", password: "password2", name: "서영덕", birthdate: Date(), profileImage: "profile2.jpg", isUsingKickboard: false, rideHistory: [], registeredKickboard: dummyKickboards[1])
+    User(email: "user1@example.com", password: "password1", name: "박인수", birthdate: Date(), profileImage: (UIImage(named: "defaultUserImage")?.pngData()!)!, isUsingKickboard: false, rideHistory: dummyRideHistories, registeredKickboard: dummyKickboards[0]),
+    User(email: "user2@example.com", password: "password2", name: "서영덕", birthdate: Date(), profileImage: (UIImage(named: "defaultUserImage")?.pngData()!)!, isUsingKickboard: false, rideHistory: [], registeredKickboard: dummyKickboards[1])
 ]
 
 class UserDefaultsManager {
@@ -62,8 +62,7 @@ class UserDefaultsManager {
         for (index, location) in locations.enumerated() {
             kickboards.append(Kickboard(
                 id: UUID(),
-                registerDate: Date(),
-                boongboongImage: "",
+                registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData()!)!,
                 boongboongName: "BoongBoong \(index + 1)",
                 latitude: location.latitude,
                 longitude: location.longitude,
@@ -109,19 +108,19 @@ class UserDefaultsManager {
     }
     
     // 등록된 킥보드 정보 변경
-    func updateKickboardInfo(kickboardID: UUID, newName: String, newImage: String) {
+    func updateKickboardInfo(kickboardID: UUID, newName: String, newImage: UIImage) {
         if var user = getUser(), var registeredKickboard = user.registeredKickboard {
             if registeredKickboard.id == kickboardID {
                 registeredKickboard.boongboongName = newName
-                // TODO: 이미지 업데이트 로직 추가
                 user.registeredKickboard = registeredKickboard
+                user.registeredKickboard?.boongboongImage = newImage.pngData()!
                 saveUser(user)
             }
         }
         if var kickboards = getRegisteredKickboards() {
             if let index = kickboards.firstIndex(where: { $0.id == kickboardID }) {
                 kickboards[index].boongboongName = newName
-                // TODO: 이미지 업데이트 로직 추가
+                kickboards[index].boongboongImage = newImage.pngData()!
                 saveRegisteredKickboards(kickboards)
             }
         }

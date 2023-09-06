@@ -72,8 +72,8 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="F72-GU-WLR">
-                                <rect key="frame" x="121.66666666666669" y="120.66666666666667" width="150" height="147.33333333333331"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F72-GU-WLR">
+                                <rect key="frame" x="121.66666666666669" y="119" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="QTR-aq-XUR"/>
                                     <constraint firstAttribute="width" secondItem="F72-GU-WLR" secondAttribute="height" multiplier="1:1" id="kXm-Zr-gIU"/>
@@ -107,7 +107,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K8R-dz-fTu">
-                                <rect key="frame" x="236.66666666666666" y="234" width="34.999999999999972" height="35"/>
+                                <rect key="frame" x="231.66666666666666" y="229" width="34.999999999999972" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="GUa-r9-ijq"/>
@@ -138,10 +138,10 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1Kh-zc-KqD" secondAttribute="trailing" constant="16" id="Ual-k3-8Pj"/>
                             <constraint firstItem="dN9-Zi-4TP" firstAttribute="top" secondItem="oH0-8X-AsH" secondAttribute="top" id="WH4-Xz-Qp3"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="geg-vy-zSq" secondAttribute="bottom" constant="50" id="Ycg-Am-v8w"/>
-                            <constraint firstItem="K8R-dz-fTu" firstAttribute="trailing" secondItem="F72-GU-WLR" secondAttribute="trailing" id="YzP-xf-S3f"/>
+                            <constraint firstItem="K8R-dz-fTu" firstAttribute="trailing" secondItem="F72-GU-WLR" secondAttribute="trailing" constant="-5" id="YzP-xf-S3f"/>
                             <constraint firstItem="1Kh-zc-KqD" firstAttribute="top" secondItem="vp2-nC-TXK" secondAttribute="bottom" constant="15" id="ZU0-uf-eUs"/>
                             <constraint firstItem="RGP-2T-I3c" firstAttribute="leading" secondItem="vp2-nC-TXK" secondAttribute="leading" id="amH-TJ-W64"/>
-                            <constraint firstItem="K8R-dz-fTu" firstAttribute="bottom" secondItem="F72-GU-WLR" secondAttribute="bottom" id="lmT-mE-daF"/>
+                            <constraint firstItem="K8R-dz-fTu" firstAttribute="bottom" secondItem="F72-GU-WLR" secondAttribute="bottom" constant="-5" id="lmT-mE-daF"/>
                             <constraint firstItem="geg-vy-zSq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="q7N-JY-X3B"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="vp2-nC-TXK" secondAttribute="trailing" constant="16" id="sXT-R4-ONG"/>
                             <constraint firstItem="oH0-8X-AsH" firstAttribute="top" secondItem="F72-GU-WLR" secondAttribute="bottom" constant="40" id="shM-2w-Xki"/>
@@ -168,7 +168,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="person" catalog="system" width="128" height="121"/>
         <image name="photo.on.rectangle" catalog="system" width="128" height="98"/>
         <namedColor name="mainColor">
             <color red="0.56499999761581421" green="0.2669999897480011" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
