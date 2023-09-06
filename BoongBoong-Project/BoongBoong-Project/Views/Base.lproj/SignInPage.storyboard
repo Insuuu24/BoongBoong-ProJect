@@ -106,6 +106,16 @@
             </objects>
             <point key="canvasLocation" x="140" y="-2"/>
         </scene>
+        <!--MainPage-->
+        <scene sceneID="nyK-bv-kxw">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="MainPage" storyboardName="MainPage" referencedIdentifier="MainPage" id="VRY-2l-TVm" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="z5c-w8-hxR"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NdS-Ly-2VM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="694" y="-94"/>
+        </scene>
         <!--SignUpPage-->
         <scene sceneID="5Jh-Nw-64x">
             <objects>

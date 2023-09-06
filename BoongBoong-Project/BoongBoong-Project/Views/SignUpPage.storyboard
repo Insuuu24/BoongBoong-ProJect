@@ -43,10 +43,10 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hgy-w3-6gu">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vkz-wS-ikr">
                                         <rect key="frame" x="0.0" y="40" width="253" height="10"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="10" id="lRU-Dw-fIO"/>
+                                            <constraint firstAttribute="height" constant="10" id="33m-LI-G4a"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                         <nil key="textColor"/>
@@ -162,7 +162,8 @@
                     <connections>
                         <outlet property="alreadyHaveAccountButton" destination="4tc-Ge-o10" id="rmi-Dy-E31"/>
                         <outlet property="birthdateTextField" destination="pjj-H1-GO1" id="YzY-Cd-5rb"/>
-                        <outlet property="idValidationText" destination="Hgy-w3-6gu" id="PWA-ug-F3B"/>
+                        <outlet property="birthdateValidationText" destination="Vvx-PI-CdS" id="YMP-cp-fLp"/>
+                        <outlet property="idValidationText" destination="Vkz-wS-ikr" id="h7E-ef-oVv"/>
                         <outlet property="passwordTextField" destination="a94-Dm-9ov" id="0Gp-lM-7WA"/>
                         <outlet property="passwordValidationText" destination="LMz-h7-9mn" id="wS2-BU-FIP"/>
                         <outlet property="plusPhotoButton" destination="Irt-1J-bif" id="VgG-3X-qk6"/>
@@ -170,6 +171,7 @@
                         <outlet property="signUpButton" destination="GSa-ci-VEk" id="v7f-k3-25s"/>
                         <outlet property="userEmailTextField" destination="Db5-W7-WId" id="m44-Ob-kIO"/>
                         <outlet property="userNameTextField" destination="nFE-Z3-Ls4" id="j8o-kO-iMs"/>
+                        <outlet property="userNameValidationText" destination="tiv-nV-5Dj" id="gRn-dd-K5a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -94,8 +94,21 @@ class SignInViewController: UIViewController {
         
         if let users = UserDefaultsManager.shared.getUsers(), let _ = users.values.first(where: { $0.email == userEmail && $0.password == userPassword }) {
             print("로그인 성공")
+            let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
+            if let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "MainPage") as? MainPageViewController {
+                self.changeRootViewController(mainPageViewController)
+            }
         } else {
             showErrorAlert(title: "로그인 실패", message: "이메일 또는 비밀번호가 일치하지 않거나, 등록된 사용자 정보가 없습니다.")
+        }
+    }
+    
+    func changeRootViewController(_ viewControllerToPresent: UIViewController) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                window.rootViewController = viewControllerToPresent
+            }, completion: nil)
         }
     }
     
