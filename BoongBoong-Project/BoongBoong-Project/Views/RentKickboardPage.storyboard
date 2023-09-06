@@ -1,43 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
-        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Rent Kickboard View Controller-->
-        <scene sceneID="s0d-6b-0kx">
-            <objects>
-                <viewController id="Y6W-OH-hqX" customClass="RentKickboardViewController" customModule="BoongBoong_Project" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4e4-Wd-MjY">
-                                <rect key="frame" x="0.0" y="81" width="393" height="702"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <standardMapConfiguration key="preferredConfiguration"/>
-                            </mapView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="243.51145038167937" y="0.0"/>
-        </scene>
-        <!--Rent Kickboard View Controller-->
         <scene sceneID="8HU-VR-lap">
             <objects>
                 <viewController storyboardIdentifier="RentKickboard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CEi-1l-l8I" customClass="RentKickboardViewController" customModule="BoongBoong_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jdb-2U-ew2">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="298.33333333333331"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="298"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Maker" translatesAutoresizingMaskIntoConstraints="NO" id="pXy-rT-CLy">
@@ -135,6 +112,7 @@
                         <outlet property="kickboardImage" destination="pXy-rT-CLy" id="tiW-jx-zxh"/>
                         <outlet property="kickboardName" destination="ILS-v2-4IJ" id="WMb-sU-IiT"/>
                         <outlet property="kickboardRegion" destination="gMJ-2b-Cnw" id="AhR-DU-34u"/>
+                        <outlet property="rentButton" destination="k8X-Px-cPa" id="xRq-Eq-Lda"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Av6-g8-43W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
