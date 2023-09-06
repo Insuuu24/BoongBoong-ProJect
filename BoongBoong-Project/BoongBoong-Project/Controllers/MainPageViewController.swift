@@ -45,6 +45,8 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         homeMap.addGestureRecognizer(tapGesture)
         
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        homeMap.addGestureRecognizer(tapRecognizer)
     }
     
     override func viewWillLayoutSubviews() {
@@ -121,6 +123,10 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             if let kickboard = getKickboardInfo(for: annotation) {
                 configureFloatingPanel(for: kickboard)
             }
+        }
+        
+        if let selectedAnnotation = view.annotation {
+            mapView.removeAnnotation(selectedAnnotation)
         }
     }
     
@@ -238,25 +244,43 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         let southKoreaMinLat: CLLocationDegrees = 33.004115
         let southKoreaMaxLon: CLLocationDegrees = 131.872699
         let southKoreaMinLon: CLLocationDegrees = 124.586300
-        
+            
         // 지도가 한국의 영역을 벗어나면 중심 좌표를 서울로 되돌립니다.
         if center.latitude > southKoreaMaxLat || center.latitude < southKoreaMinLat || center.longitude > southKoreaMaxLon || center.longitude < southKoreaMinLon {
             mapView.setCenter(CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780), animated: true)
         }
     }
 
+
     // 지도를 탭했을 때의 액션입니다.
     @objc func handleTap(gesture: UITapGestureRecognizer) {
-        // 탭한 위치의 좌표를 가져와서 주석을 생성하고 지도에 추가합니다.
-//        let location = gesture.location(in: homeMap)
-//        let coordinate = homeMap.convert(location, toCoordinateFrom: homeMap)
-//
-//        let annotation = MKPointAnnotation()
-//        annotation.coordinate = coordinate
-//        homeMap.addAnnotation(annotation)
+        let locationInView = gesture.location(in: homeMap)
+        let tappedCoordinate = homeMap.convert(locationInView, toCoordinateFrom: homeMap)
+        
+        var isTappingOnAnnotation = false
+
+        for annotation in homeMap.annotations {
+            let annotationView = homeMap.view(for: annotation)
+            if let annotationView = annotationView, annotationView.frame.contains(locationInView) {
+                // 마커를 탭했을 경우
+                homeMap.removeAnnotation(annotation)
+                isTappingOnAnnotation = true
+                break
+            }
+        }
+        
+        // 탭한 곳에 주석이 없다면 새로운 주석을 추가합니다.
+        if !isTappingOnAnnotation {
+            let annotation = CustomPointAnnotation()
+            annotation.isDefaultMarker = true  // 이 주석은 기본 마커를 사용합니다.
+            annotation.coordinate = tappedCoordinate
+            homeMap.addAnnotation(annotation)
+        }
     }
-    
-    
+
+
+
+
     func circularImageWithBorder(image: UIImage, targetSize: CGSize, borderWidth: CGFloat = 4.0, borderColor: UIColor = UIColor.purple) -> UIImage? {
         let diameter = min(targetSize.width, targetSize.height)
         
@@ -285,24 +309,44 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             return nil
         }
         
+        // 사용자가 탭하여 추가한 주석을 처리
+        if annotation is CustomPointAnnotation {
+            let identifier = "pinAnnotation"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
+            
+            if annotationView == nil {
+                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView?.canShowCallout = true
+                annotationView?.pinTintColor = .red
+            } else {
+                annotationView?.annotation = annotation
+            }
+            
+            return annotationView
+        }
+        
+        // 기본 마커 외의 마커들을 처리
         let identifier = "customAnnotation"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView?.canShowCallout = true // 터치시 정보 창이 나타나도록 합니다.
+            annotationView?.canShowCallout = true
         } else {
             annotationView?.annotation = annotation
         }
         
-        // "Maker" 이미지를 불러옵니다. // 이 부분에서 사이즈 조절 가능
         if let makerImage = UIImage(named: "Maker") {
             if let circularMakerImage = circularImageWithBorder(image: makerImage, targetSize: CGSize(width: 50, height: 50)) {
                 annotationView?.image = circularMakerImage
             }
         }
+
         return annotationView
     }
+
+
+    
     // 현재 사용자의 킥보드 사용 상태에 따라 버튼의 타이틀을 업데이트합니다.
     func updateKickboardButtonTitle() {
         if let user = currentUsing, user.isUsingKickboard {
@@ -330,3 +374,8 @@ extension MainPageViewController: CLLocationManagerDelegate {
 class KickboardAnnotation: MKPointAnnotation {
     var kickboard: Kickboard?
 }
+
+class CustomPointAnnotation: MKPointAnnotation {
+    var isDefaultMarker: Bool = false
+}
+
