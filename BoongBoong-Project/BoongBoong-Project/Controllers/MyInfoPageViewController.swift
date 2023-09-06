@@ -8,7 +8,7 @@
 import UIKit
 
 class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     // MARK: - Properties
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -23,11 +23,14 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
     let userDefaults = UserDefaultsManager.shared
     var selectedImage: UIImage?
     
+    var isNameChanged = false
+    var isImageChanged = false
+    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureNav()
         
         let user = userDefaults.getUser()!
@@ -41,6 +44,7 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
         
         nameTextField.isEnabled = false
         nameTextField.text = user.name
+        nameTextField.addTarget(self, action: #selector(nameTextFieldEditingChanged(_:)), for: .editingChanged)
         
         emailTextField.isEnabled = false
         emailTextField.text = user.email
@@ -56,12 +60,12 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     // MARK: - Helpers
-
+    
     private func configureNav() {
         navigationItem.title = "마이페이지"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.largeTitleDisplayMode = .never
-
+        
         let appearance = UINavigationBarAppearance().then {
             $0.configureWithOpaqueBackground()
             $0.titleTextAttributes = [.foregroundColor: UIColor.label]
@@ -76,7 +80,7 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
         
     }
     
-    // MARK: - Image Picker
+    // MARK: - IBAction
     
     @IBAction func changeImageButtonTapped(_ sender: UIButton) {
         let imagePicker = UIImagePickerController()
@@ -85,12 +89,57 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
         present(imagePicker, animated: true, completion: nil)
     }
     
+    
+    @IBAction func editButtonTapped(_ sender: UIButton) {
+        changeImageButton.isHidden = false
+        nameTextField.isEnabled = true
+        doneEditButton.isHidden = false
+        doneEditButton.isEnabled = false
+        changePasswordButton.isEnabled = false
+        changePasswordButton.setTitleColor(.lightGray, for: .disabled)
+    }
+    
+    @IBAction func doneEditButtonTapped(_ sender: UIButton) {
+        // TODO: user정보 업데이트하기
+        isNameChanged = false
+        isImageChanged = false
+        changePasswordButton.isEnabled = true
+        changePasswordButton.setTitleColor(.systemBlue, for: .normal)
+    }
+    
+    @IBAction func nameTextFieldEditingChanged(_ sender: UITextField) {
+        if let text = sender.text, !text.isEmpty, text != userDefaults.getUser()?.name {
+            isNameChanged = true
+        } else {
+            isNameChanged = false
+        }
+        updateDoneEditButton()
+    }
+    
+    fileprivate func updateDoneEditButton() {
+        if isNameChanged || isImageChanged {
+            doneEditButton.isEnabled = true
+            doneEditButton.backgroundColor = UIColor(named: "mainColor")
+        } else {
+            doneEditButton.isEnabled = false
+            doneEditButton.backgroundColor = UIColor(named: "subColor")
+        }
+    }
+    
+    // TODO: 비밀번호 변경 기능 구현
+    @IBAction func changePasswordButtonTapped(_ sender: UIButton) {
+    }
+    
+    // MARK: - ImagePicker
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         
         if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
             profileImageView.image = editedImage
             selectedImage = editedImage
+            isImageChanged = true
+            updateDoneEditButton()
         }
         dismiss(animated: true, completion: nil)
     }
@@ -101,20 +150,6 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    @IBAction func editButtonTapped(_ sender: UIButton) {
-        changeImageButton.isHidden = false
-        nameTextField.isEnabled = true
-        doneEditButton.isHidden = false
-        doneEditButton.isEnabled = false
-    }
-    
-    @IBAction func doneEditButtonTapped(_ sender: UIButton) {
-    }
-    
-    @IBAction func changePasswordButtonTapped(_ sender: UIButton) {
     }
     
     
