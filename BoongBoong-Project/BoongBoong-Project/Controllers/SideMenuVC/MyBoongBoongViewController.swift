@@ -30,7 +30,7 @@ class MyBoongBoongViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         editBarButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(editBarButtonTapped))
         navigationItem.rightBarButtonItem = editBarButton
-
+        navigationItem.largeTitleDisplayMode = .never
 
         let appearance = UINavigationBarAppearance().then {
             $0.configureWithOpaqueBackground()

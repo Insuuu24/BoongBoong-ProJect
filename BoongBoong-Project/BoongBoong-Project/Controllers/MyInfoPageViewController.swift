@@ -9,21 +9,38 @@ import UIKit
 
 class MyInfoPageViewController: UIViewController {
 
+    // MARK: - Properties
+    
+    
+    
+    
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        configureNav()
     }
     
+    // MARK: - Helpers
 
-    /*
-    // MARK: - Navigation
+    private func configureNav() {
+        navigationItem.title = "마이페이지"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.largeTitleDisplayMode = .never
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        let appearance = UINavigationBarAppearance().then {
+            $0.configureWithOpaqueBackground()
+            $0.titleTextAttributes = [.foregroundColor: UIColor.label]
+            $0.shadowColor = .clear
+        }
+        
+        navigationController?.navigationBar.topItem?.title = ""
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
     }
-    */
 
 }

@@ -58,8 +58,8 @@ class SideMenuCell: UITableViewCell {
         }
         
         iconImageView.snp.makeConstraints {
-            $0.width.equalTo(35)
-            $0.height.equalTo(35)
+            $0.width.equalTo(30)
+            $0.height.equalTo(30)
         }
     }
 }

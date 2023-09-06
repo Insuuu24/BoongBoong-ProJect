@@ -77,10 +77,13 @@ class UsageRecordCell: UITableViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         
-        let startTimeString = dateFormatter.string(from: history.startTime)
-        let endTimeString = dateFormatter.string(from: history.endTime)
+        let dateLabelString = dateFormatter.string(from: history.startTime)
         
-        timeLabel.text = "\(startTimeString) ~ \(endTimeString)"
+        dateFormatter.dateFormat = "HH:mm"
+        let startTimeLabelString = dateFormatter.string(from: history.startTime)
+        let endTimeLabelString = dateFormatter.string(from: history.endTime)
+        
+        timeLabel.text = "\(dateLabelString) (\(startTimeLabelString)~\(endTimeLabelString))"
         
         let duration = history.endTime.timeIntervalSince(history.startTime)
         let hours = Int(duration) / 3600
@@ -88,6 +91,7 @@ class UsageRecordCell: UITableViewCell {
         
         durationLabel.text = "\(hours)시간 \(minutes)분"
     }
+
 }
 
 
