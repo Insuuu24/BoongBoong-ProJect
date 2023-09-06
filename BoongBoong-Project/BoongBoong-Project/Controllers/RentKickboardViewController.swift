@@ -8,13 +8,14 @@
 import UIKit
 import FloatingPanel
 
-class RentKickboardViewController2: UIViewController {
+class RentKickboardViewController: UIViewController {
     
     @IBOutlet weak var kickboardImage: UIImageView!
     @IBOutlet weak var kickboardName: UILabel!
     @IBOutlet weak var kickboardDistance: UILabel!
     @IBOutlet weak var kickboardRegion: UILabel!
     
+    var selectedKickboard: Kickboard?
     
     override func viewDidLoad() {
         super.viewDidLoad()
