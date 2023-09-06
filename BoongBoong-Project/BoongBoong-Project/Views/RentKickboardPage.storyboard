@@ -32,10 +32,10 @@
             </objects>
             <point key="canvasLocation" x="243.51145038167937" y="0.0"/>
         </scene>
-        <!--Rent Kickboard View Controller2-->
+        <!--Rent Kickboard View Controller-->
         <scene sceneID="8HU-VR-lap">
             <objects>
-                <viewController storyboardIdentifier="RentKickboard2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CEi-1l-l8I" customClass="RentKickboardViewController2" customModule="BoongBoong_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RentKickboard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CEi-1l-l8I" customClass="RentKickboardViewController" customModule="BoongBoong_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jdb-2U-ew2">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="298.33333333333331"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

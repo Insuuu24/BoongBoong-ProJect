@@ -82,20 +82,8 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    // MARK: - Helpers
-    
-    func addKickboardMarkersToMap() {
-        if let kickboards = UserDefaultsManager.shared.getRegisteredKickboards() {
-            print(kickboards.count)
-            for kickboard in kickboards {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = CLLocationCoordinate2D(latitude: kickboard.latitude, longitude: kickboard.longitude)
-                annotation.title = kickboard.boongboongName
-                homeMap.addAnnotation(annotation)
-            }
-        }
-    }
-    
+    // MARK: - Timer
+        
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
             guard let self = self else {
@@ -124,6 +112,50 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             RunLoop.current.add(self.timer!, forMode: .default)
             RunLoop.current.run()
         }
+    }
+    
+    // MARK: - Bottom Sheet
+    // 지도의 마커를 탭했을 때 호출됩니다.
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotation = view.annotation as? KickboardAnnotation {
+            if let kickboard = getKickboardInfo(for: annotation) {
+                configureFloatingPanel(for: kickboard)
+            }
+        }
+    }
+    
+    func addKickboardMarkersToMap() {
+        if let kickboards = UserDefaultsManager.shared.getRegisteredKickboards() {
+            print(kickboards.count)
+            for kickboard in kickboards {
+                let annotation = KickboardAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: kickboard.latitude, longitude: kickboard.longitude)
+                annotation.kickboard = kickboard
+                homeMap.addAnnotation(annotation)
+            }
+        }
+    }
+    
+    func configureFloatingPanel(for kickboard: Kickboard) {
+        fpc = FloatingPanelController()
+        //fpc.delegate = self
+        
+        let contentVC = UIStoryboard(name: "RentKickboardPage", bundle: nil).instantiateViewController(withIdentifier: "RentKickboard") as? RentKickboardViewController
+        contentVC?.selectedKickboard = kickboard
+        
+        fpc.set(contentViewController: contentVC)
+        fpc.changePanelStyle()
+        fpc.layout = MyFloatingPanelLayout()
+        fpc.contentMode = .static
+        fpc.backdropView.dismissalTapGestureRecognizer.isEnabled = true
+        
+        fpc.addPanel(toParent: self)
+        
+        homeMap.setCenter(CLLocationCoordinate2D(latitude: kickboard.latitude, longitude: kickboard.longitude), animated: true)
+    }
+    
+    func getKickboardInfo(for annotation: KickboardAnnotation) -> Kickboard? {
+        return annotation.kickboard
     }
     
     // MARK: - Actions
@@ -216,41 +248,14 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     // 지도를 탭했을 때의 액션입니다.
     @objc func handleTap(gesture: UITapGestureRecognizer) {
         // 탭한 위치의 좌표를 가져와서 주석을 생성하고 지도에 추가합니다.
-        let location = gesture.location(in: homeMap)
-        let coordinate = homeMap.convert(location, toCoordinateFrom: homeMap)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        homeMap.addAnnotation(annotation)
+//        let location = gesture.location(in: homeMap)
+//        let coordinate = homeMap.convert(location, toCoordinateFrom: homeMap)
+//
+//        let annotation = MKPointAnnotation()
+//        annotation.coordinate = coordinate
+//        homeMap.addAnnotation(annotation)
     }
     
-    // 지도의 주석을 탭했을 때 호출됩니다.
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        // 선택된 주석을 지도에서 제거합니다.
-        if let annotation = view.annotation {
-            mapView.removeAnnotation(annotation)
-            
-            // FIXME: 데이터 전달 필요함
-            if let markerAnnotation = annotation as? MKPointAnnotation {
-                configureFloatingPanel()
-            }
-        }
-    }
-    
-    func configureFloatingPanel() {
-        fpc = FloatingPanelController()
-        //fpc.delegate = self
-        
-        let contentVC = UIStoryboard(name: "RentKickboardPage", bundle: nil).instantiateViewController(withIdentifier: "RentKickboard2")
-        fpc.set(contentViewController: contentVC)
-        
-        fpc.changePanelStyle()
-        fpc.layout = MyFloatingPanelLayout()
-        fpc.contentMode = .static
-        fpc.backdropView.dismissalTapGestureRecognizer.isEnabled = true
-        
-        fpc.addPanel(toParent: self)
-    }
     
     func circularImageWithBorder(image: UIImage, targetSize: CGSize, borderWidth: CGFloat = 4.0, borderColor: UIColor = UIColor.purple) -> UIImage? {
         let diameter = min(targetSize.width, targetSize.height)
@@ -319,4 +324,9 @@ extension MainPageViewController: CLLocationManagerDelegate {
             manager.stopUpdatingLocation()
         }
     }
+}
+
+// 킥보드 마커를 위한 커스텀 어노테이션
+class KickboardAnnotation: MKPointAnnotation {
+    var kickboard: Kickboard?
 }
