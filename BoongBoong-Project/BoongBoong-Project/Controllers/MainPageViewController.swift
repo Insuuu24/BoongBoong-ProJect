@@ -20,7 +20,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     @IBOutlet weak var returnKickboardButton: UIButton!
     
     var timer: Timer?
-    var remainingTimeInSeconds = 60
+    var remainingTimeInSeconds = 0
     
     // MARK: - View Life Cycle
     
@@ -56,8 +56,8 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             if user?.isUsingKickboard == true {
                 if timer == nil {
                     startTimer()
+                    returnKickboardButton.isHidden = false
                 }
-                returnKickboardButton.isHidden = false
             } else {
                 timer?.invalidate()
                 timer = nil
@@ -85,6 +85,10 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     // MARK: - Timer
         
     func startTimer() {
+        if let history = UserDefaultsManager.shared.getUser()?.rideHistory.last {
+            self.remainingTimeInSeconds = Int(history.endTime.timeIntervalSince(history.startTime))
+        }
+        
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
             guard let self = self else {
                 return
@@ -92,7 +96,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             
             if self.remainingTimeInSeconds > 0 {
                 self.remainingTimeInSeconds -= 1
-                
+
                 DispatchQueue.main.async {
                     let minutes = self.remainingTimeInSeconds / 60
                     let seconds = self.remainingTimeInSeconds % 60
@@ -148,6 +152,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         fpc.layout = MyFloatingPanelLayout()
         fpc.contentMode = .static
         fpc.backdropView.dismissalTapGestureRecognizer.isEnabled = true
+        fpc.isRemovalInteractionEnabled = true
         
         fpc.addPanel(toParent: self)
         
