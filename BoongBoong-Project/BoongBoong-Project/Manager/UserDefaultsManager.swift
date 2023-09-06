@@ -138,6 +138,16 @@ class UserDefaultsManager {
             saveRegisteredKickboards(kickboards)
         }
     }
+    
+    // 사용자 정보를 가져와서 대여 기록을 업데이트하는 함수
+    func updateRideHistory(with rideHistory: RideHistory) {
+        if var user = getUser() {
+            var userRideHistories = user.rideHistory
+            userRideHistories.append(rideHistory)
+            user.rideHistory = userRideHistories
+            saveUser(user)
+        }
+    }
 
     // 로그아웃
     func logout() {

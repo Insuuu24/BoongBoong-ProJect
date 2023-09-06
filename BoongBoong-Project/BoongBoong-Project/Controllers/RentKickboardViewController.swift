@@ -20,9 +20,43 @@ class RentKickboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         kickboardImage.layer.cornerRadius = 20
+        if let kickboard = selectedKickboard {
+            if kickboard.boongboongImage != "" {
+                kickboardImage.image = UIImage(named: kickboard.boongboongImage)
+            }
+            kickboardName.text = kickboard.boongboongName
+        }
     }
     
     @IBAction func rentButtonTapped(_ sender: UIButton) {
+        let userDefaultsManager = UserDefaultsManager.shared
+        
+        // 1. 현재 사용자의 isUsingKickboard를 true로 변경
+        if var user = userDefaultsManager.getUser() {
+            user.isUsingKickboard = true
+            userDefaultsManager.saveUser(user)
+        }
+        
+        // 2. 현재 사용자의 rideHistory에 추가 (예: 현재 시간을 추가)
+        // FIXME: 대여시간 받아와서 내용 수정하기
+        let kickboardID = selectedKickboard?.id
+        let startTime = Date()
+        let endTime = Date()
+        let startPosition = Position(latitude: 37.1234, longitude: 126.5678)
+        let endPosition = Position(latitude: 37.5678, longitude: 127.1234)
+        
+        // 대여 기록 추가
+        userDefaultsManager.updateRideHistory(with: RideHistory(kickboardID: kickboardID!, startTime: startTime, endTime: endTime, startPosition: startPosition, endPosition: endPosition))
+        
+        
+        // 3. 해당 킥보드의 isBeingUsed를 true로 변경
+        if let selectedKickboard = selectedKickboard, var kickboards = userDefaultsManager.getRegisteredKickboards() {
+            if let index = kickboards.firstIndex(where: { $0.id == selectedKickboard.id }) {
+                kickboards[index].isBeingUsed = true
+                userDefaultsManager.saveRegisteredKickboards(kickboards)
+            }
+        }
+        dismiss(animated: true)
         
     }
     
