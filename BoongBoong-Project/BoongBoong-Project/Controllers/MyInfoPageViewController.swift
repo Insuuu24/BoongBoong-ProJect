@@ -17,6 +17,7 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var birthdateTextField: UITextField!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var doneEditButton: UIButton!
     @IBOutlet weak var changePasswordButton: UIButton!
     
     let userDefaults = UserDefaultsManager.shared
@@ -29,16 +30,29 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
 
         configureNav()
         
+        let user = userDefaults.getUser()!
+        
         if let profileImage = userDefaults.getUser()?.profileImage {
             profileImageView.image = UIImage(data: profileImage)
         }
         profileImageView.circleImage = true
         changeImageButton.isHidden = true
         changeImageButton.layer.cornerRadius = 5
+        
         nameTextField.isEnabled = false
+        nameTextField.text = user.name
+        
         emailTextField.isEnabled = false
+        emailTextField.text = user.email
+        
         birthdateTextField.isEnabled = false
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy / MM / dd"
+        birthdateTextField.text = dateFormatter.string(from: user.birthdate)
+        birthdateTextField.isEnabled = false
+        
+        doneEditButton.isHidden = true
     }
     
     // MARK: - Helpers
@@ -93,6 +107,11 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
     @IBAction func editButtonTapped(_ sender: UIButton) {
         changeImageButton.isHidden = false
         nameTextField.isEnabled = true
+        doneEditButton.isHidden = false
+        doneEditButton.isEnabled = false
+    }
+    
+    @IBAction func doneEditButtonTapped(_ sender: UIButton) {
     }
     
     @IBAction func changePasswordButtonTapped(_ sender: UIButton) {
