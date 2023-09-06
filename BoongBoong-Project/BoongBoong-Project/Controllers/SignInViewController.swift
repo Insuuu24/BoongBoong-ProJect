@@ -26,8 +26,6 @@ class SignInViewController: UIViewController {
         view.backgroundColor = .white
         
         setupUI()
-        
-       
 
     }
     
@@ -117,8 +115,13 @@ class SignInViewController: UIViewController {
             return
         }
         
-        if let users = UserDefaultsManager.shared.getUsers(), let _ = users.values.first(where: { $0.email == userEmail && $0.password == userPassword }) {
+        if let users = UserDefaultsManager.shared.getUsers(),
+           let signInUser = users.values.first(where: { $0.email == userEmail && $0.password == userPassword }) {
+            
             print("로그인 성공")
+            
+            UserDefaultsManager.shared.saveUser(signInUser)
+
             let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
             if let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "MainPage") as? MainPageViewController {
                 self.changeRootViewController(mainPageViewController)
@@ -136,6 +139,13 @@ class SignInViewController: UIViewController {
             }, completion: nil)
         }
     }
+    
+    
+    @IBAction func dontHaveAccountButtonTapped(_ sender: UIButton) {
+        userEmailTextField.text = ""
+        passwordTextField.text = ""
+    }
+    
     
     
     @objc private func handleTapOnView(_ sender: UITextField) {

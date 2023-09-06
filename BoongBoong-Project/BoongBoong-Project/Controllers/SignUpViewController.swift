@@ -193,34 +193,34 @@ class SignUpViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
 
-        if let imageName = selectedImageName {
-            if let birthdate = dateFormatter.date(from: birthdateText) {
-                
-                let newUser = User(email: userEmail, password: userPassword, name: userName, birthdate: birthdate, profileImage: imageName, isUsingKickboard: false, rideHistory: [], registeredKickboards: dummyKickboards[0])
-                
-                
-                var users = UserDefaultsManager.shared.getUsers() ?? [:]
-                
-                
-                let newUserID = UUID().uuidString // 고유한 아이디 생성
-                users[newUserID] = newUser
-                
-                
-                UserDefaultsManager.shared.saveUsers(users)
-                
-                UserDefaultsManager.shared.saveLoggedInState(true)
-                
-                print("\(newUser)")
-                
-                self.dismiss(animated: true, completion: nil)
-            }
-        }  else {
-               print("회원가입이 실패하였습니다.")
-           }
+        if let imageName = selectedImageName,
+            let birthdate = dateFormatter.date(from: birthdateText) {
+            let newUser = User(email: userEmail, password: userPassword, name: userName, birthdate: birthdate, profileImage: imageName, isUsingKickboard: false, rideHistory: [], registeredKickboards: dummyKickboards[0])
+            var users = UserDefaultsManager.shared.getUsers() ?? [:]
+            let newUserID = UUID().uuidString
+            users[newUserID] = newUser
+            UserDefaultsManager.shared.saveUsers(users)
+            UserDefaultsManager.shared.saveLoggedInState(true)
+            print("\(newUser)")
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            let defaultImageName = "defaultProfileImage.jpg"
+            let newUser = User(email: userEmail, password: userPassword, name: userName, birthdate: Date(), profileImage: defaultImageName, isUsingKickboard: false, rideHistory: [], registeredKickboards: dummyKickboards[0])
+            var users = UserDefaultsManager.shared.getUsers() ?? [:]
+            let newUserID = UUID().uuidString
+            users[newUserID] = newUser
+            UserDefaultsManager.shared.saveUsers(users)
+            UserDefaultsManager.shared.saveLoggedInState(true)
+            print("\(newUser)")
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     
     @IBAction func alreadyHaveAccountButtonTapped(_ sender: UIButton) {
+        userEmailTextField.text = ""
+        passwordTextField.text = ""
+        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -239,19 +239,39 @@ class SignUpViewController: UIViewController {
     
     func validateUserEmail(_ email: String?) -> Bool {
         guard let email = email else { return false }
-        
+
         let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
         
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
         let isEmailValid = predicate.evaluate(with: email)
-        
-        if !isEmailValid {
+
+        if isEmailValid {
+            idValidationText.text = ""
+            userEmailTextField.layer.borderColor = UIColor(named: "green")?.cgColor
+            
+            if let users = UserDefaultsManager.shared.getUsers(),
+               users.values.contains(where: { $0.email == email }) {
+                idValidationText.text = "이미 등록된 이메일 주소입니다."
+                idValidationText.font = UIFont.systemFont(ofSize: 12)
+                idValidationText.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
+                userEmailTextField.layer.borderColor = UIColor(named: "red")?.cgColor
+                
+                let animation = CABasicAnimation(keyPath: "position")
+                animation.duration = 0.07
+                animation.repeatCount = 4
+                animation.autoreverses = true
+                animation.fromValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x - 10, y: userEmailTextField.center.y))
+                animation.toValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x + 10, y: userEmailTextField.center.y))
+                userEmailTextField.layer.add(animation, forKey: "position")
+                
+                return false
+            }
+        } else {
             idValidationText.text = "이메일 주소 형식이 올바르지 않습니다."
             idValidationText.font = UIFont.systemFont(ofSize: 12)
             idValidationText.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
             userEmailTextField.layer.borderColor = UIColor(named: "red")?.cgColor
             
-           
             let animation = CABasicAnimation(keyPath: "position")
             animation.duration = 0.07
             animation.repeatCount = 4
@@ -259,12 +279,11 @@ class SignUpViewController: UIViewController {
             animation.fromValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x - 10, y: userEmailTextField.center.y))
             animation.toValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x + 10, y: userEmailTextField.center.y))
             userEmailTextField.layer.add(animation, forKey: "position")
-        } else {
-            idValidationText.text = ""
-            userEmailTextField.layer.borderColor = UIColor(named: "green")?.cgColor
+            
+            return false
         }
-        
-        return isEmailValid
+
+        return true
     }
     
     
@@ -278,7 +297,7 @@ class SignUpViewController: UIViewController {
 
         if !isPasswordValid {
             passwordValidationText.text = "영문 대문자, 소문자, 숫자를 모두 포함하여 5자 이상 작성하세요."
-            passwordValidationText.font = UIFont.systemFont(ofSize: 10)
+            passwordValidationText.font = UIFont.systemFont(ofSize: 9)
             passwordValidationText.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
             passwordTextField.layer.borderColor = UIColor(named: "red")?.cgColor
                 
@@ -302,7 +321,7 @@ class SignUpViewController: UIViewController {
     func validateUserName(_ userName: String?) -> Bool {
         guard let userName = userName else { return false }
 
-        let regex = "^[가-힣ㄱ-ㅎㅏ-ㅣ]{2,5}$"
+        let regex = "^[가-힣]{2,5}$"
 
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
         let isUserNameValid = predicate.evaluate(with: userName)
@@ -528,7 +547,6 @@ class SignUpViewController: UIViewController {
     }
 
     @objc func dateChange(_ sender: UIDatePicker) {
-        // 값이 변하면 UIDatePicker에서 날자를 받아와 형식을 변형해서 textField에 넣어줍니다.
         birthdateTextField.text = dateFormat(date: sender.date)
     }
 
@@ -569,20 +587,14 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[.originalImage] as? UIImage,
            let imageURL = info[.imageURL] as? URL {
-            // 선택한 이미지를 처리하거나 표시하는 등의 작업을 수행
-            // selectedImage 변수에 선택한 이미지가 저장됩니다.
             plusPhotoButton.circleImage = true
-            // 이미지 파일의 URL에서 파일 이름을 추출
             let imageName = imageURL.lastPathComponent
             print("선택한 이미지 파일 이름: \(imageName)")
             
-            // 이미지 파일 이름을 저장
             selectedImageName = imageName
             
-            // 이미지를 버튼에 설정
             plusPhotoButton.setImage(selectedImage, for: .normal)
         }
-        // 이미지 선택이 끝나면 이미지 피커를 닫습니다.
         picker.dismiss(animated: true, completion: nil)
     }
     
