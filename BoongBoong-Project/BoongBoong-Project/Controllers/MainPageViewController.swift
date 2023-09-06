@@ -27,6 +27,8 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     // 뷰 컨트롤러가 메모리에 로드된 후 호출됩니다.
     override func viewDidLoad() {
         super.viewDidLoad()
+        // FIXME: 로그인 연결되고 나면 코드 삭제하기
+        UserDefaultsManager.shared.saveUser(dummyUsers[0])
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -43,31 +45,6 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         homeMap.addGestureRecognizer(tapGesture)
         
-        // 더미데이터 추가해놓음 -> 앱 실행 시킬때마다 계속 추가되니까 주의하세요!
-        if var kickboards = UserDefaultsManager.shared.getRegisteredKickboards() {
-            let kickboard1 = Kickboard(
-                id: UUID(),
-                registerDate: Date(),
-                boongboongImage: "",
-                boongboongName: "BoongBoong 1",
-                latitude: 37.1234,
-                longitude: 126.5678,
-                isBeingUsed: false
-            )
-            
-            let kickboard2 = Kickboard(
-                id: UUID(),
-                registerDate: Date(),
-                boongboongImage: "",
-                boongboongName: "BoongBoong 2",
-                latitude: 37.4321,
-                longitude: 127.8765,
-                isBeingUsed: true
-            )
-            kickboards.append(kickboard1)
-            kickboards.append(kickboard2)
-            UserDefaultsManager.shared.saveRegisteredKickboards(kickboards)
-        }
     }
     
     override func viewWillLayoutSubviews() {

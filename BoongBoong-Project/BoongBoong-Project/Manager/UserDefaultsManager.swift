@@ -7,6 +7,23 @@
 
 import UIKit
 
+let locations: [(latitude: Double, longitude: Double)] = [
+    // 용산구 위치
+    (37.545415, 126.978312), // 위치 1
+    (37.541756, 126.976892), // 위치 2
+    (37.546048, 126.981992), // 위치 3
+
+    // 중구 위치
+    (37.566295, 126.978924), // 위치 4
+    (37.564342, 126.977984), // 위치 5
+    (37.567229, 126.979500), // 위치 6
+
+    // 동작구 위치
+    (37.496415, 126.961470), // 위치 7
+    (37.500567, 126.961884), // 위치 8
+    (37.498267, 126.962614)  // 위치 9
+]
+
 let dummyRideHistories = [
     RideHistory(kickboardID: UUID(), startTime: Date(), endTime: Date(), startPosition: Position(latitude: 37.5665, longitude: 126.9780), endPosition: Position(latitude: 37.5775, longitude: 126.9880)),
     RideHistory(kickboardID: UUID(), startTime: Date(), endTime: Date(), startPosition: Position(latitude: 37.5665, longitude: 126.9780), endPosition: Position(latitude: 37.5775, longitude: 126.9880))
@@ -18,7 +35,7 @@ let dummyKickboards = [
 ]
 
 let dummyUsers = [
-    User(email: "user1@example.com", password: "password1", name: "박인수", birthdate: Date(), profileImage: "profile1.jpg", isUsingKickboard: true, rideHistory: dummyRideHistories, registeredKickboard: dummyKickboards[0]),
+    User(email: "user1@example.com", password: "password1", name: "박인수", birthdate: Date(), profileImage: "profile1.jpg", isUsingKickboard: false, rideHistory: dummyRideHistories, registeredKickboard: dummyKickboards[0]),
     User(email: "user2@example.com", password: "password2", name: "서영덕", birthdate: Date(), profileImage: "profile2.jpg", isUsingKickboard: false, rideHistory: [], registeredKickboard: dummyKickboards[1])
 ]
 
@@ -33,12 +50,27 @@ class UserDefaultsManager {
 
     // 싱글톤 인스턴스
     static let shared = UserDefaultsManager()
+    
 
     // 사용자 정보 저장
     func saveUser(_ user: User) {
         if let encodedData = try? JSONEncoder().encode(user) {
             userDefaults.set(encodedData, forKey: userKey)
         }
+        // FIXME: 아래 코드 위치 나중에 변경하기 (킥보드 더미데이터 추가하는 부분임)
+        var kickboards: [Kickboard] = []
+        for (index, location) in locations.enumerated() {
+            kickboards.append(Kickboard(
+                id: UUID(),
+                registerDate: Date(),
+                boongboongImage: "",
+                boongboongName: "BoongBoong \(index + 1)",
+                latitude: location.latitude,
+                longitude: location.longitude,
+                isBeingUsed: false
+            ))
+        }
+        UserDefaultsManager.shared.saveRegisteredKickboards(kickboards)
     }
 
     // 사용자 정보 가져오기
