@@ -192,44 +192,39 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     
     // MARK: - Functions
     
-    // 사용자가 검색 바에 텍스트를 입력할 때마다 호출됩니다.
+    // 사용자가 검색 바에 텍스트를 입력할 때마다 호출
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // 주어진 검색어로 로컬 검색을 시작합니다.
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = searchText
+        // 검색 범위를 서울특별시로 제한
+        searchRequest.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780), latitudinalMeters: 20000, longitudinalMeters: 20000)
+        
         let activeSearch = MKLocalSearch(request: searchRequest)
         
         activeSearch.start { (response, error) in
-            // 검색 결과가 없거나 에러가 발생하면 에러를 출력합니다.
             if response == nil {
                 print("Error")
             } else {
-                // 검색된 위치의 좌표를 가져옵니다.
                 let latitude = response?.boundingRegion.center.latitude
                 let longitude = response?.boundingRegion.center.longitude
                 
-                // 지도에 있는 모든 주석을 제거합니다.
                 let annotations = self.homeMap.annotations
                 self.homeMap.removeAnnotations(annotations)
                 
-                // 새로운 주석을 생성하고 지도에 추가합니다.
                 let annotation = MKPointAnnotation()
                 annotation.title = searchText
                 annotation.coordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
                 self.homeMap.addAnnotation(annotation)
                 
-                // 지도를 검색된 위치로 이동시킵니다.
                 let coordinateRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
                 self.homeMap.setRegion(coordinateRegion, animated: true)
             }
         }
     }
-    
+
     // 지도의 영역이 변경되면 호출됩니다.
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        // 현재 지도의 중심 좌표를 가져옵니다.
         let center = mapView.centerCoordinate
-        // 한국의 최대/최소 위도와 경도 값을 정의합니다.
         let southKoreaMaxLat: CLLocationDegrees = 38.634000
         let southKoreaMinLat: CLLocationDegrees = 33.004115
         let southKoreaMaxLon: CLLocationDegrees = 131.872699
@@ -240,7 +235,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             mapView.setCenter(CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780), animated: true)
         }
     }
-    
+
     // 지도를 탭했을 때의 액션입니다.
     @objc func handleTap(gesture: UITapGestureRecognizer) {
         // 탭한 위치의 좌표를 가져와서 주석을 생성하고 지도에 추가합니다.
@@ -340,7 +335,7 @@ extension MainPageViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            let regionRadius: CLLocationDistance = 300 // 300m
+            let regionRadius: CLLocationDistance = 10000 // 10000m
             
             let region = MKCoordinateRegion(center: center, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
             homeMap.setRegion(region, animated: true)  // 수정된 부분

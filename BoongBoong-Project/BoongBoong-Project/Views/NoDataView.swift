@@ -30,7 +30,9 @@ class NoDataView: UIView {
     lazy var actionButton = UIButton().then {
         $0.backgroundColor = .white
         $0.setTitleColor(.black, for: .normal)
-        $0.circleRect()
+        $0.layer.borderColor = UIColor.systemGray4.cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.cornerRadius = 20
         $0.addTarget(self, action: #selector(didTapActionButton), for: .touchUpInside)
     }
 
