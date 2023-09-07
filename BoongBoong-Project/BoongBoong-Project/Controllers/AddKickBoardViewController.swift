@@ -75,7 +75,7 @@ class AddKickBoardViewController: UIViewController {
             longitude = userLocation.coordinate.longitude
         }
         
-        let newKickboard = Kickboard(id: UUID(), registerDate: Date(), boongboongImage: "", boongboongName: kickboardName.text!, latitude: latitude, longitude: longitude, isBeingUsed: false)
+        let newKickboard = Kickboard(id: UUID(), registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData())!, boongboongName: kickboardName.text!, latitude: latitude, longitude: longitude, isBeingUsed: false)
         
         if var registeredKickboards = userDefaultsManager.getRegisteredKickboards() {
             registeredKickboards.append(newKickboard)
