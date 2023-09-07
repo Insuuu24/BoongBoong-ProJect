@@ -144,7 +144,7 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
         changePasswordVC.didMove(toParent: self)
         
         UIView.animate(withDuration: 0.3) {
-            changePasswordVC.view.frame = CGRect(x: 0, y: self.view.frame.height * 0.78, width: self.view.frame.width, height: self.view.frame.height * 0.4)
+            changePasswordVC.view.frame = CGRect(x: 0, y: self.view.frame.height * 0.75, width: self.view.frame.width, height: self.view.frame.height * 0.4)
         }
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnDimmingView))

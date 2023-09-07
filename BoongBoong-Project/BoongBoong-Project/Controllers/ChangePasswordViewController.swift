@@ -54,6 +54,8 @@ class ChangePasswordViewController: UIViewController {
         changePasswordTextField.layer.borderColor = UIColor.lightGray.cgColor
         changePasswordTextField.layer.borderWidth = 1.0
         changePasswordTextField.layer.cornerRadius = 5.0
+        changePasswordTextField.isSecureTextEntry = true
+
 
         changePasswordTextField.delegate = self
         let textFieldBottomY = changePasswordTextField.frame.maxY
@@ -87,8 +89,8 @@ class ChangePasswordViewController: UIViewController {
     }
 
     @objc func changeButtonTapped() {
-        // 패스워드 유효성 검사
-        if let newPassword = activeTextField?.text, validatePassword(newPassword) {
+        // 텍스트 필드의 값을 가져옵니다.
+        if let newPassword = changePasswordTextField.text, validatePassword(newPassword) {
             // 사용자 정보를 가져옵니다.
             if var user = UserDefaultsManager.shared.getUser() {
                 // 비밀번호를 업데이트합니다.
@@ -116,41 +118,23 @@ class ChangePasswordViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    
- 
-
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboardHeight = keyboardSize.height
-            
-            if let activeField = activeTextField {
-                let frame = activeField.frame
-                let yPosition = frame.origin.y + frame.size.height
-                
-                if yPosition > self.view.frame.height - keyboardHeight {
-                    let diff = yPosition - (self.view.frame.height - keyboardHeight - 240)
-                    self.view.frame.origin.y -= diff
-                }
-            }
+            self.view.frame.origin.y -= keyboardHeight
         }
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
-        let contentInsets = UIEdgeInsets.zero
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
-        self.view.frame.origin.y = 650
-
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            self.view.frame.origin.y += keyboardHeight
+        }
     }
     
     @objc func handleTapOnView() {
-          view.endEditing(true) // 키보드 숨기기
-          
-          // 화면을 원래 위치로 되돌리기
-          UIView.animate(withDuration: 0.3) {
-              self.view.frame.origin.y = 650
-          }
-      }
+        view.endEditing(true)
+    }
     
     
     func validatePassword(_ password: String?) -> Bool {
