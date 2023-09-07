@@ -37,7 +37,9 @@ class SignUpViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
+        
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.textContentType = .oneTimeCode
         
         handleTextInputChange()
         

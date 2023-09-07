@@ -372,10 +372,26 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             addKickboardButton.setTitle("탑승 중", for: .normal)
         }
     }
+    
+    func setAuthAlertAction() {
+         let authAlertController : UIAlertController
+         
+         authAlertController = UIAlertController(title: "위치 사용 권한이 필요합니다.", message: "위치 권한을 허용해야만 앱을 사용하실 수 있습니다.", preferredStyle: .alert)
+         
+         let getAuthAction : UIAlertAction
+         getAuthAction = UIAlertAction(title: "설정", style: .default, handler: { (UIAlertAction) in
+             if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                 UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+             }
+         })
+         authAlertController.addAction(getAuthAction)
+         self.present(authAlertController, animated: true, completion: nil)
+     }
 }
 
+// MARK: - CLLocationManagerDelegate
+
 extension MainPageViewController: CLLocationManagerDelegate {
-    
     // 위치 업데이트 시 호출되는 메서드
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
@@ -385,6 +401,15 @@ extension MainPageViewController: CLLocationManagerDelegate {
             let region = MKCoordinateRegion(center: center, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
             homeMap.setRegion(region, animated: true)  // 수정된 부분
             manager.stopUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .restricted, .denied:
+            setAuthAlertAction()
+        default:
+            break
         }
     }
 }
