@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9BF62B932AA972F3007982D6 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF62B922AA972F3007982D6 /* ChangePasswordViewController.swift */; };
 		D2D8F28D2AA6013F0014134D /* KickboardPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */; };
 		D2D8F29A2AA792F40014134D /* RentKickboardPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D8F2992AA792F40014134D /* RentKickboardPage.storyboard */; };
 		D2D8F29C2AA793120014134D /* RentKickboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F29B2AA793120014134D /* RentKickboardViewController.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9BF62B922AA972F3007982D6 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		D2D8F28C2AA6013F0014134D /* KickboardPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KickboardPage.storyboard; sourceTree = "<group>"; };
 		D2D8F2992AA792F40014134D /* RentKickboardPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RentKickboardPage.storyboard; sourceTree = "<group>"; };
 		D2D8F29B2AA793120014134D /* RentKickboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentKickboardViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				EBD156E92AA5AC9D00FD0F43 /* MainPageViewController.swift */,
 				EBD1571C2AA5DE4F00FD0F43 /* AddKickBoardViewController.swift */,
 				EBD1571E2AA5DE5C00FD0F43 /* MyInfoPageViewController.swift */,
+				9BF62B922AA972F3007982D6 /* ChangePasswordViewController.swift */,
 				D2D8F29B2AA793120014134D /* RentKickboardViewController.swift */,
 			);
 			path = Controllers;
@@ -307,6 +310,7 @@
 				EB1151662AA6F8CA00FB875E /* SideMenuModel.swift in Sources */,
 				EBD1571F2AA5DE5C00FD0F43 /* MyInfoPageViewController.swift in Sources */,
 				EBD157192AA5DC3E00FD0F43 /* UsageRecordViewController.swift in Sources */,
+				9BF62B932AA972F3007982D6 /* ChangePasswordViewController.swift in Sources */,
 				EBCBE9242AA5F3FA00F93761 /* UserDefaultsManager.swift in Sources */,
 				EBD156E62AA5AC9D00FD0F43 /* AppDelegate.swift in Sources */,
 				EBD1571D2AA5DE4F00FD0F43 /* AddKickBoardViewController.swift in Sources */,

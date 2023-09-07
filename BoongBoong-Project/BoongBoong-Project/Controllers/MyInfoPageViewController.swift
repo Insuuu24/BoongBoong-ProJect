@@ -31,6 +31,7 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         configureNav()
         
         let user = userDefaults.getUser()!
@@ -128,7 +129,50 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
     
     // TODO: 비밀번호 변경 기능 구현
     @IBAction func changePasswordButtonTapped(_ sender: UIButton) {
+        
+        let changePasswordVC = ChangePasswordViewController()
+
+        let dimmingView = UIView(frame: self.view.bounds)
+        dimmingView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        self.view.addSubview(dimmingView)
+
+        let startY = self.view.frame.height
+        changePasswordVC.view.frame = CGRect(x: 0, y: startY, width: self.view.frame.width, height: self.view.frame.height * 0.4)
+
+        self.addChild(changePasswordVC)
+        self.view.addSubview(changePasswordVC.view)
+        changePasswordVC.didMove(toParent: self)
+        
+        UIView.animate(withDuration: 0.3) {
+            changePasswordVC.view.frame = CGRect(x: 0, y: self.view.frame.height * 0.78, width: self.view.frame.width, height: self.view.frame.height * 0.4)
+        }
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnDimmingView))
+        dimmingView.addGestureRecognizer(tapGesture)
+        
+        changePasswordVC.cancelButtonHandler = {
+            dimmingView.backgroundColor = .clear
+            dimmingView.removeFromSuperview()
+            changePasswordVC.view.removeFromSuperview()
+            changePasswordVC.removeFromParent()
+        }
+        
+        changePasswordVC.changeButtonHandler = {
+            dimmingView.backgroundColor = .clear
+            dimmingView.removeFromSuperview()
+            changePasswordVC.view.removeFromSuperview()
+            changePasswordVC.removeFromParent()
+        }
+        
     }
+
+    @objc func handleTapOnDimmingView() {
+        if let changePasswordVC = children.first as? ChangePasswordViewController {
+            changePasswordVC.view.endEditing(true)
+        }
+    }
+    
+
     
     // MARK: - ImagePicker
     
