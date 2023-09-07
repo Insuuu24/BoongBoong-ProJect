@@ -13,7 +13,7 @@ class UsageRecordCell: UITableViewCell {
 
     // MARK: - Properties
     
-    let kickboardIDLabel = UILabel().then {
+    private let kickboardIDLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
@@ -22,13 +22,13 @@ class UsageRecordCell: UITableViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let timeLabel = UILabel().then {
+    private let timeLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 12)
         $0.textColor = .gray
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let durationLabel = UILabel().then {
+    private let durationLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         $0.textAlignment = .right
     }

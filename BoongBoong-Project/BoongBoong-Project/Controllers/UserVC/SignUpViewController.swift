@@ -11,248 +11,304 @@ class SignUpViewController: UIViewController {
     
     // MARK: - Properties
     
-    @IBOutlet weak var plusPhotoButton: UIButton!
-    @IBOutlet weak var userNameTextField: UITextField!
-    @IBOutlet weak var idValidationText: UILabel!
+    @IBOutlet weak var photoButton: UIButton!
+    @IBOutlet weak var userEmailTextField: UITextField!
+    @IBOutlet weak var userEmailValidationLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var passwordValidationText: UILabel!
+    @IBOutlet weak var passwordVaildationLabel: UILabel!
+    @IBOutlet weak var showPasswordButton: UIButton!
+    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var userNameValidationLabel: UILabel!
+    @IBOutlet weak var birthDateTextField: UITextField!
+    @IBOutlet weak var birthDateValidationLabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var alreadyHaveAccountButton: UIButton!
-    
-    
-    
+    var selectedProfileImageData: Data?
     
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
-        
-        //setupUI()
+        createDatePicker()
+        configureUI()
     }
     
     // MARK: - Helpers
     
-    //    func setupUI() {
-    //        // FIXME: 사진 버튼에 fill되게 수정하기
-    //        plusPhotoButton.setImage(UIImage(systemName: "person.crop.circle.badge.plus")?.withRenderingMode(.alwaysOriginal), for: .normal)
-    //        plusPhotoButton.imageView?.contentMode = .scaleAspectFill
-    //        //plusPhotoButton.addTarget(self, action: #selector(handlePlusPhoto), for: .touchUpInside)
-    //
-    //        userNameTextField.autocorrectionType = .no
-    //        userNameTextField.autocapitalizationType = .none
-    //        userNameTextField.delegate = self
-    //        userNameTextField.addTarget(self, action: #selector(handleTextInputChange(textField:)), for: .editingChanged)
-    //
-    //        passwordTextField.isSecureTextEntry = true
-    //        passwordTextField.textContentType = .oneTimeCode
-    //        passwordTextField.delegate = self
-    //        passwordTextField.addTarget(self, action: #selector(handleTextInputChange(textField:)), for: .editingChanged)
-    //
-    //        signUpButton.layer.cornerRadius = 5
-    //        //signUpButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
-    //        signUpButton.isEnabled = false
-    //        signUpButton.backgroundColor = .lightGray
-    //
-    //        let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-    //        attributedTitle.append(NSAttributedString(string: "Sign In", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.systemBlue]))
-    //        alreadyHaveAccountButton.setAttributedTitle(attributedTitle, for: .normal)
-    //        alreadyHaveAccountButton.addTarget(self, action: #selector(handleAlreadyHaveAccount), for: .touchUpInside)
-    //    }
-    //
-    //    private func resetInputFields() {
-    //        userNameTextField.text = ""
-    //        passwordTextField.text = ""
-    //
-    //        userNameTextField.isUserInteractionEnabled = true
-    //        passwordTextField.isUserInteractionEnabled = true
-    //
-    //        signUpButton.isEnabled = false
-    //        signUpButton.backgroundColor = .lightGray
-    //    }
-    //
-    ////    func isUsernameTaken(_ username: String) -> Bool {
-    ////        return users.contains { user in
-    ////            return user.username == username
-    ////        }
-    ////    }
-    //
-    //    func validateUsername(_ username: String?) -> Bool {
-    //        guard let username = username else { return false }
-    //        userNameTextField.layer.borderWidth = 2.0
-    //        userNameTextField.layer.cornerRadius = 7.0
-    //        if username.isValidCredential {
-    //            idValidationText.text = ""
-    //            userNameTextField.layer.borderColor = UIColor(named: "green")?.cgColor
-    //            return true
-    //        } else {
-    //            idValidationText.text = "영문/숫자를 포함하여 5자 이상 작성하세요."
-    //            userNameTextField.layer.borderColor = UIColor(named: "red")?.cgColor
-    //            return false
-    //        }
-    //    }
-    //
-    //    func validatePassword(_ password: String?) -> Bool {
-    //        guard let password = password else { return false }
-    //        passwordTextField.layer.borderWidth = 2.0
-    //        passwordTextField.layer.cornerRadius = 7.0
-    //        if password.isValidCredential {
-    //            passwordValidationText.text = ""
-    //            passwordTextField.layer.borderColor = UIColor(named: "green")?.cgColor
-    //            return true
-    //        } else {
-    //            passwordValidationText.text = "영문/숫자를 포함하여 5자 이상 작성하세요."
-    //            passwordTextField.layer.borderColor = UIColor(named: "red")?.cgColor
-    //            return false
-    //        }
-    //    }
-    //
-    //    func validateUsernameWithoutChangingUI(_ username: String?) -> Bool {
-    //        guard let username = username else { return false }
-    //        if username.isValidCredential {
-    //            return true
-    //        } else {
-    //            return false
-    //        }
-    //    }
-    //
-    //    func validatePasswordWithoutChangingUI(_ password: String?) -> Bool {
-    //        guard let password = password else { return false }
-    //        if password.isValidCredential {
-    //            return true
-    //        } else {
-    //            return false
-    //        }
-    //    }
-    //
-    //    // MARK: - Actions
-    //
-    //
-    //    @IBAction func userNameEditingDidBegin(_ sender: UITextField) {
-    //        _ = validateUsername(sender.text)
-    //        handleTextInputChange(textField: sender)
-    //    }
-    //
-    //
-    //    @IBAction func passwordEditingDidBegin(_ sender: UITextField) {
-    //        _ = validateUsername(userNameTextField.text)
-    //        _ = validatePassword(sender.text)
-    //        handleTextInputChange(textField: sender)
-    //    }
-    //
-    //
-    //    @IBAction func showPasswordButtonTapped(_ sender: UIButton) {
-    //        if passwordTextField.isSecureTextEntry {
-    //            passwordTextField.isSecureTextEntry = false
-    //            sender.setImage(UIImage(systemName: "eye"), for: .normal)
-    //        } else {
-    //            passwordTextField.isSecureTextEntry = true
-    //            sender.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-    //        }
-    //    }
-    //
-    //
-    //
-    //
-    //    @objc private func handleTapOnView(_ sender: UITextField) {
-    //        userNameTextField.resignFirstResponder()
-    //        passwordTextField.resignFirstResponder()
-    //    }
-    //
-    ////    @objc private func handlePlusPhoto() {
-    ////        let imagePickerController = UIImagePickerController()
-    ////        imagePickerController.delegate = self
-    ////        imagePickerController.allowsEditing = true
-    ////        present(imagePickerController, animated: true, completion: nil)
-    ////    }
-    //
-    //    @objc private func handleTextInputChange(textField: UITextField) {
-    //        if textField == userNameTextField {
-    //            _ = validateUsername(textField.text)
-    //        } else if textField == passwordTextField {
-    //            _ = validatePassword(textField.text)
-    //        }
-    //
-    //        let isUsernameValid = validateUsernameWithoutChangingUI(userNameTextField.text)
-    //        let isPasswordValid = validatePasswordWithoutChangingUI(passwordTextField.text)
-    //
-    //        let isFormValid = isUsernameValid && isPasswordValid
-    //        signUpButton.isEnabled = isFormValid
-    //        signUpButton.backgroundColor = isFormValid ? .systemBlue : .lightGray
-    //    }
-    //
-    //    @objc private func handleAlreadyHaveAccount() {
-    //        self.dismiss(animated: true)
-    //    }
-    //
-    ////    @objc private func handleSignUp() {
-    ////        guard let username = userNameTextField.text else { return }
-    ////        guard let password = passwordTextField.text else { return }
-    ////
-    ////        userNameTextField.isUserInteractionEnabled = false
-    ////        passwordTextField.isUserInteractionEnabled = false
-    ////
-    ////        signUpButton.isEnabled = false
-    ////        signUpButton.backgroundColor = UIColor.lightGray
-    ////
-    ////        let newUser = User(username: username, profilePhoto: profileImage ?? UIImage(systemName: "person.circle.fill")!, password: password)
-    ////        if isUsernameTaken(username) {
-    ////            self.resetInputFields()
-    ////        } else {
-    ////            users.append(newUser)
-    ////            myInfo = newUser.username
-    ////            print(users)
-    ////            if let mainTabBarController = UIStoryboard(name: "MainPage", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController {
-    ////                mainTabBarController.selectedIndex = 0
-    ////                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-    ////                   let delegate = windowScene.delegate as? SceneDelegate,
-    ////                   let window = delegate.window {
-    ////                    window.rootViewController = mainTabBarController
-    ////                    window.makeKeyAndVisible()
-    ////                }
-    ////            }
-    ////        }
-    ////    }
-    //
-    //
-    //
-    //
-    //}
-    //
-    //
-    ////MARK: - UIImagePickerControllerDelegate
-    //
-    ////extension SignUpViewController: UIImagePickerControllerDelegate {
-    ////    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    ////        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-    ////
-    ////        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
-    ////            plusPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
-    ////            profileImage = editedImage
-    ////            plusPhotoButton.circleImage = true
-    ////        } else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-    ////            plusPhotoButton.setImage(originalImage.withRenderingMode(.alwaysOriginal), for: .normal)
-    ////            profileImage = originalImage
-    ////        }
-    ////        plusPhotoButton.imageView?.contentMode = .scaleAspectFill
-    ////        dismiss(animated: true, completion: nil)
-    ////    }
-    ////}
-    //
-    //// MARK: - UITextFieldDelegate
-    //
-    //// TODO: username 입력완료 시 password로 위임하기
-    //// TODO: usernameTextField, passwordTextField 실시간 유효성 검증 기능 추가 (아이디 중복 여부, 패스워드 유효성 여부)
-    //extension SignUpViewController: UITextFieldDelegate {
-    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    //        textField.resignFirstResponder()
-    //        return true
-    //    }
-    //}
-    //
-    //
-    //fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-    //    return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-    //}
+    private func configureUI() {
+        view.backgroundColor = .white
+        passwordTextField.isSecureTextEntry = true
+        
+        handleTextInputChange()
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
+        
+        signUpButton.isEnabled = false
+        
+        userEmailTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        userNameTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        birthDateTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        
+        attributedTitle.append(NSAttributedString(string: "Sign In", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor(named: "mainColor") ?? UIColor.systemBlue]))
+        
+        alreadyHaveAccountButton.setAttributedTitle(attributedTitle, for: .normal)
+    }
+    
+    private func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        if let selectedURL = urls.first {
+            let imagePath = selectedURL.path
+            print("선택한 이미지 파일의 경로: \(imagePath)")
+        }
+    }
+    
+    private func validateUserEmail(_ email: String?) -> Bool {
+        guard let email = email else { return false }
+        
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        let isEmailValid = predicate.evaluate(with: email)
+        
+        if !isEmailValid {
+            userEmailValidationLabel.text = "이메일 주소 형식이 올바르지 않습니다."
+            userEmailValidationLabel.font = UIFont.systemFont(ofSize: 12)
+            userEmailValidationLabel.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
+            
+            let animation = CABasicAnimation(keyPath: "position")
+            animation.duration = 0.07
+            animation.repeatCount = 4
+            animation.autoreverses = true
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x - 10, y: userEmailTextField.center.y))
+            animation.toValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x + 10, y: userEmailTextField.center.y))
+            userEmailTextField.layer.add(animation, forKey: "position")
+        } else {
+            userEmailValidationLabel.text = ""
+        }
+        
+        return isEmailValid
+    }
+    
+    private func validatePassword(_ password: String?) -> Bool {
+        guard let password = password else { return false }
+        
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{5,}"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        let isPasswordValid = predicate.evaluate(with: password)
+        
+        if !isPasswordValid {
+            passwordVaildationLabel.text = "영어, 숫자, 특수문자를 포함하여 5자 이상 입력해주세요."
+            passwordVaildationLabel.font = UIFont.systemFont(ofSize: 10)
+            passwordVaildationLabel.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
+            
+            let animation = CABasicAnimation(keyPath: "position")
+            animation.duration = 0.07
+            animation.repeatCount = 4
+            animation.autoreverses = true
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: passwordTextField.center.x - 10, y: passwordTextField.center.y))
+            animation.toValue = NSValue(cgPoint: CGPoint(x: passwordTextField.center.x + 10, y: passwordTextField.center.y))
+            passwordTextField.layer.add(animation, forKey: "position")
+        } else {
+            passwordVaildationLabel.text = ""
+        }
+        
+        return isPasswordValid
+    }
+    
+    private func validateUserName(_ userName: String?) -> Bool {
+        guard let userName = userName else { return false }
+        
+        let regex = "^[가-힣ㄱ-ㅎㅏ-ㅣ]{2,5}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        let isUserNameValid = predicate.evaluate(with: userName)
+        
+        if !isUserNameValid {
+            userNameValidationLabel.text = "한글 2~5자만 입력하세요."
+            userNameValidationLabel.font = UIFont.systemFont(ofSize: 12)
+            userNameValidationLabel.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
+            
+            let animation = CABasicAnimation(keyPath: "position")
+            animation.duration = 0.07
+            animation.repeatCount = 4
+            animation.autoreverses = true
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: userNameTextField.center.x - 10, y: userNameTextField.center.y))
+            animation.toValue = NSValue(cgPoint: CGPoint(x: userNameTextField.center.x + 10, y: userNameTextField.center.y))
+            userNameTextField.layer.add(animation, forKey: "position")
+        } else {
+            userEmailValidationLabel.text = ""
+        }
+        
+        return isUserNameValid
+    }
+    
+    private func validateBirthdate(_ birthdate: String?) -> Bool {
+        guard let birthdate = birthdate else { return false }
+        
+        let regex = "^\\d{4}.\\d{2}.\\d{2}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        let isBirthdateValid = predicate.evaluate(with: birthdate)
+        
+        if !isBirthdateValid {
+            birthDateValidationLabel.text = "올바른 생년월일 형식이 아닙니다"
+            birthDateValidationLabel.font = UIFont.systemFont(ofSize: 12)
+            birthDateValidationLabel.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
+            
+            let animation = CABasicAnimation(keyPath: "position")
+            animation.duration = 0.07
+            animation.repeatCount = 4
+            animation.autoreverses = true
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: birthDateTextField.center.x - 10, y: birthDateTextField.center.y))
+            animation.toValue = NSValue(cgPoint: CGPoint(x: birthDateTextField.center.x + 10, y: birthDateTextField.center.y))
+            birthDateTextField.layer.add(animation, forKey: "position")
+        } else {
+            birthDateValidationLabel.text = ""
+        }
+        
+        return isBirthdateValid
+    }
+    
+    private func createDatePicker() {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .inline
+        datePicker.locale = Locale(identifier: "ko-KR")
+        datePicker.maximumDate = Date()
+        datePicker.addTarget(self, action: #selector(dateChange), for: .valueChanged)
+        
+        birthDateTextField.inputView = datePicker
+        birthDateTextField.placeholder = "날짜를 선택해주세요"
+    }
+    
+    private func dateFormat(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        return formatter.string(from: date)
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func photoButtonTapped(_ sender: UIButton) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    @IBAction func signUpButtonTapped(_ sender: UIButton) {
+        let userEmail = userEmailTextField.text ?? ""
+        let userPassword = passwordTextField.text ?? ""
+        let userName = userNameTextField.text ?? ""
+        let birthdateText = birthDateTextField.text ?? ""
+        
+        if !validateUserEmail(userEmail) { return }
+        if !validatePassword(userPassword) { return }
+        if !validateUserName(userName) { return }
+        if !validateBirthdate(birthdateText) {return}
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let imageData = selectedProfileImageData {
+            if let birthdate = dateFormatter.date(from: birthdateText) {
+                let newUser = User(email: userEmail, password: userPassword, name: userName, birthdate: birthdate, profileImage: imageData, isUsingKickboard: false, rideHistory: [], registeredKickboard: dummyKickboards[0])
+                
+                var users = UserDefaultsManager.shared.getUsers() ?? [:]
+                
+                let newUserID = UUID().uuidString
+                users[newUserID] = newUser
+                
+                UserDefaultsManager.shared.saveUsers(users)
+                UserDefaultsManager.shared.saveLoggedInState(true)
+                
+                print("\(newUser)")
+                
+                self.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            print("회원가입이 실패하였습니다.")
+        }
+
+    }
+    
+    @IBAction func alreadyHaveAccountButtonTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func showPasswordButtonTapped(_ sender: UIButton) {
+        if passwordTextField.isSecureTextEntry {
+            passwordTextField.isSecureTextEntry = false
+            sender.setImage(UIImage(systemName: "eye"), for: .normal)
+        } else {
+            passwordTextField.isSecureTextEntry = true
+            sender.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        }
+    }
+    
+    @objc private func handleTapOnView() {
+        self.view.endEditing(true)
+    }
+    
+    @objc private func handleTextInputChange() {
+        let isFormValid = userEmailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false && userNameTextField.text?.isEmpty == false && birthDateTextField.text?.isEmpty == false && selectedProfileImageData != nil
+
+        if isFormValid {
+            signUpButton.isEnabled = true
+            signUpButton.backgroundColor = UIColor(named: "mainColor")
+        } else {
+            signUpButton.isEnabled = false
+            signUpButton.backgroundColor = UIColor(named: "subColor")
+        }
+    }
+
+    @objc func dateChange(_ sender: UIDatePicker) {
+        birthDateTextField.text = dateFormat(date: sender.date)
+        birthDateTextField.resignFirstResponder()
+        handleTextInputChange()
+    }
 }
+
+// MARK: - UITextFieldDelegate
+
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let userEmailText = userEmailTextField.text ?? ""
+        let passwordText = passwordTextField.text ?? ""
+        let userNameText = userNameTextField.text ?? ""
+        let birthdateText = birthDateTextField.text ?? ""
+        
+        signUpButton.isEnabled = !userEmailText.isEmpty && !userNameText.isEmpty && !passwordText.isEmpty && !birthdateText.isEmpty
+        
+        return true
+    }
+    
+}
+
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+
+extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[.originalImage] as? UIImage {
+            photoButton.circleImage()
+            
+            if let imageData = selectedImage.pngData() {
+                selectedProfileImageData = imageData
+                photoButton.setImage(selectedImage, for: .normal)
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+
+

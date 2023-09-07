@@ -86,7 +86,7 @@ class AddKickBoardViewController: UIViewController {
         }
         
         // FIXME: 로그인 구현 후에 삭제
-        userDefaultsManager.saveUser(dummyUsers[0])
+        //userDefaultsManager.saveUser(dummyUsers[0])
         
         if var user = userDefaultsManager.getUser() {
             user.registeredKickboard = newKickboard

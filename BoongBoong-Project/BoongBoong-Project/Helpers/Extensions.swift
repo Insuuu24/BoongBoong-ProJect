@@ -41,14 +41,35 @@ extension UIImageView {
             return false
         }
     }
+    
+    @IBInspectable var borderColor: UIColor {
+        get {
+            let color = self.layer.borderColor ?? UIColor.clear.cgColor
+            return UIColor(cgColor: color)
+        }
+        set {
+            self.layer.borderColor = newValue.cgColor
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat {
+        get {
+            return self.layer.borderWidth
+        }
+        set {
+            self.layer.borderWidth = newValue
+        }
+    }
+    
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return self.layer.cornerRadius
+        }
+        set {
+            self.layer.cornerRadius = newValue
+        }
+    }
 }
-
-//extension MainViewController: DetailPageViewControllerDelegate {
-//    func didUpdatePost(at index: Int, post: UserPost) {
-//        posts[index] = post
-//        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
-//    }
-//}
 
 extension UIButton {
     func circleRect() {
@@ -63,13 +84,34 @@ extension UIButton {
         self.layer.cornerRadius = 0.5 * self.bounds.size.width
         self.clipsToBounds = true
     }
-}
-
-extension String {
-    var isValidCredential: Bool {
-            let regex = "^(?=.*[a-zA-Z])(?=.*\\d).{5,}$"
-            return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: self)
+    
+    @IBInspectable var borderColor: UIColor {
+        get {
+            let color = self.layer.borderColor ?? UIColor.clear.cgColor
+            return UIColor(cgColor: color)
         }
+        set {
+            self.layer.borderColor = newValue.cgColor
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat {
+        get {
+            return self.layer.borderWidth
+        }
+        set {
+            self.layer.borderWidth = newValue
+        }
+    }
+    
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return self.layer.cornerRadius
+        }
+        set {
+            self.layer.cornerRadius = newValue
+        }
+    }
 }
 
 extension Int {
