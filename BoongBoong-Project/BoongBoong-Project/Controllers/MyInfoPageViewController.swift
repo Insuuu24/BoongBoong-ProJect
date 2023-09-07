@@ -40,7 +40,7 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
         }
         profileImageView.circleImage = true
         changeImageButton.isHidden = true
-        changeImageButton.circleImage = true
+        changeImageButton.layer.cornerRadius = changeImageButton.bounds.size.width * 0.5
         
         nameTextField.isEnabled = false
         nameTextField.text = user.name
