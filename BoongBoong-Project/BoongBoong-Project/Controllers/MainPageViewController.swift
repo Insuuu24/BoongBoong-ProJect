@@ -27,8 +27,6 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     // 뷰 컨트롤러가 메모리에 로드된 후 호출됩니다.
     override func viewDidLoad() {
         super.viewDidLoad()
-        // FIXME: 로그인 연결되고 나면 코드 삭제하기
-        UserDefaultsManager.shared.saveUser(dummyUsers[0])
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
