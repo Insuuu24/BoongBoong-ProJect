@@ -135,7 +135,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     }
     
     func addKickboardMarkersToMap() {
-        if let kickboards = UserDefaultsManager.shared.getRegisteredKickboards() {
+        if let kickboards = UserDefaultsManager.shared.getRegisteredKickboards()?.filter({$0.isBeingUsed == false}) {
             print(kickboards.count)
             for kickboard in kickboards {
                 let annotation = KickboardAnnotation()
@@ -185,21 +185,44 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         present(alert, animated: true, completion: nil)
     }
     
+    // FIXME: 작동 안함,.....위치,,,안불러옴.....
     func performReturnKickboardAction() {
-        // TODO: 현재 위치 저장 로직 추가
-        if var user = UserDefaultsManager.shared.getUser() {
+        let userDefaultsManager = UserDefaultsManager.shared
+        
+        var (latitude, longitude) = (0.0, 0.0)
+        if let userLocation = homeMap.userLocation.location {
+            latitude = userLocation.coordinate.latitude
+            longitude = userLocation.coordinate.longitude
+        }
+
+        DispatchQueue.main.async {
+            print(latitude, longitude, 1)
+        }
+        
+        // 1. 현재 사용자의 isUsingKickboard를 false로 변경, rideHistory에 endPosition 변경
+        if var user = userDefaultsManager.getUser() {
             user.isUsingKickboard = false
-            UserDefaultsManager.shared.saveUser(user)
+            user.rideHistory[user.rideHistory.count-1].endPosition = Position(latitude: latitude, longitude: longitude)
+            userDefaultsManager.saveUser(user)
+        }
+        
+        // 2. 해당 킥보드의 isBeingUsed를 false로 변경
+        if let user = userDefaultsManager.getUser(),
+           var kickboards = userDefaultsManager.getRegisteredKickboards() {
+            if let index = kickboards.firstIndex(where: { $0.id == user.rideHistory.last?.kickboardID }) {
+                kickboards[index].isBeingUsed = false
+                userDefaultsManager.saveRegisteredKickboards(kickboards)
+            }
         }
         returnKickboardButton.isHidden = true
-        
+ 
         // FIXME: 작동 왜 안함..?
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = "알림"
         notificationContent.body = "킥보드 반납이 완료되었습니다"
-        
+
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
-        
+
         let request = UNNotificationRequest(identifier: "returnKickboardNotification", content: notificationContent, trigger: trigger)
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
