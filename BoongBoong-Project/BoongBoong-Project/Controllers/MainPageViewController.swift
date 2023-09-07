@@ -171,6 +171,14 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     
     // MARK: - Actions
     
+    // 지도 현위치 버른을 탭했을 때 호출될 액션입니다.
+    @IBAction func mainPageregionButtonTapped(_ sender: UIButton) {
+        if let userLocation = homeMap.userLocation.location {
+          let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 300, longitudinalMeters: 300)
+            homeMap.setRegion(region, animated: true)
+        }
+    }
+    
     // 킥보드 추가 버튼이 탭됐을 때 호출될 액션입니다.
     @IBAction func addKickboardButtonTapped(_ sender: UIButton) {
     }
@@ -285,29 +293,22 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         let locationInView = gesture.location(in: homeMap)
         let tappedCoordinate = homeMap.convert(locationInView, toCoordinateFrom: homeMap)
         
-        var isTappingOnAnnotation = false
-
+        // 기본 주석만 제거합니다.
         for annotation in homeMap.annotations {
-            let annotationView = homeMap.view(for: annotation)
-            if let annotationView = annotationView, annotationView.frame.contains(locationInView) {
-                // 마커를 탭했을 경우
+            if annotation is CustomPointAnnotation {
                 homeMap.removeAnnotation(annotation)
-                isTappingOnAnnotation = true
-                break
             }
         }
         
-        // 탭한 곳에 주석이 없다면 새로운 주석을 추가합니다.
-        if !isTappingOnAnnotation {
-            let annotation = CustomPointAnnotation()
-            annotation.isDefaultMarker = true  // 이 주석은 기본 마커를 사용합니다.
-            annotation.coordinate = tappedCoordinate
-            homeMap.addAnnotation(annotation)
-        }
+        // 새로운 주석을 추가합니다.
+        let annotation = CustomPointAnnotation()
+        annotation.isDefaultMarker = true  // 이 주석은 기본 마커를 사용합니다.
+        annotation.coordinate = tappedCoordinate
+        homeMap.addAnnotation(annotation)
+        
+        // 지도의 중심을 새로운 주석의 위치로 이동시킵니다.
+        homeMap.setCenter(tappedCoordinate, animated: true)
     }
-
-
-
 
     func circularImageWithBorder(image: UIImage, targetSize: CGSize, borderWidth: CGFloat = 4.0, borderColor: UIColor = UIColor.purple) -> UIImage? {
         let diameter = min(targetSize.width, targetSize.height)
@@ -318,18 +319,12 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         path.addClip()
         image.draw(in: CGRect(x: 0, y: 0, width: targetSize.width, height: targetSize.height))
         
-        // 테두리 그리기
-        borderColor.setStroke()
-        path.lineWidth = borderWidth
-        path.stroke()
-        
         let resultImage = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
         
         return resultImage
     }
-
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         // 사용자의 현재 위치에 대한 주석은 기본 뷰를 반환합니다.
@@ -365,7 +360,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         }
         
         if let makerImage = UIImage(named: "Maker") {
-            if let circularMakerImage = circularImageWithBorder(image: makerImage, targetSize: CGSize(width: 50, height: 50)) {
+            if let circularMakerImage = circularImageWithBorder(image: makerImage, targetSize: CGSize(width: 450, height: 300)) {
                 annotationView?.image = circularMakerImage
             }
         }
@@ -373,8 +368,6 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         return annotationView
     }
 
-
-    
     // 현재 사용자의 킥보드 사용 상태에 따라 버튼의 타이틀을 업데이트합니다.
     func updateKickboardButtonTitle() {
         if let user = currentUsing, user.isUsingKickboard {

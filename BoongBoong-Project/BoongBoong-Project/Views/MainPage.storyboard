@@ -70,6 +70,15 @@
                                     <segue destination="Lq0-EM-gI5" kind="presentation" id="9MU-54-mN4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FH3-lJ-9Nu">
+                                <rect key="frame" x="327" y="720" width="50" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="dot.circle.viewfinder" catalog="system"/>
+                                <connections>
+                                    <action selector="mainPageregionButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="wYo-vw-gj1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -162,6 +171,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="dot.circle.viewfinder" catalog="system" width="128" height="115"/>
         <image name="line.3.horizontal" catalog="system" width="128" height="65"/>
         <namedColor name="mainColor">
             <color red="0.56499999761581421" green="0.2669999897480011" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
