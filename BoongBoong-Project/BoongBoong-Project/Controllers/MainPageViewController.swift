@@ -45,6 +45,8 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         homeMap.addGestureRecognizer(tapRecognizer)
+        
+        homeMap.showsUserLocation = true
     }
     
     override func viewWillLayoutSubviews() {
@@ -172,7 +174,8 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     // 지도 현위치 버른을 탭했을 때 호출될 액션입니다.
     @IBAction func mainPageregionButtonTapped(_ sender: UIButton) {
         if let userLocation = homeMap.userLocation.location {
-          let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 300, longitudinalMeters: 300)
+            print(userLocation.coordinate.latitude)
+          let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 3000, longitudinalMeters: 3000)
             homeMap.setRegion(region, animated: true)
         }
     }

@@ -44,6 +44,7 @@ class MyBoongBoongViewController: UIViewController {
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
+        kickboardMap.showsUserLocation = true
     }
     
     func setupUI() {
