@@ -19,7 +19,7 @@ struct User: Codable {
 }
 
 struct Kickboard: Codable {
-    var id: UUID
+    let id: UUID
     var registerDate: Date
     var boongboongImage: Data
     var boongboongName: String
@@ -29,7 +29,7 @@ struct Kickboard: Codable {
 }
 
 struct RideHistory: Codable {
-    var kickboardID: UUID
+    var boongboongName: String
     var startTime: Date
     var endTime: Date
     var startPosition: Position

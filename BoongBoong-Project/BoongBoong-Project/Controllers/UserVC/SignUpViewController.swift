@@ -221,7 +221,7 @@ class SignUpViewController: UIViewController {
                 users[newUserID] = newUser
                 
                 UserDefaultsManager.shared.saveUsers(users)
-                UserDefaultsManager.shared.saveLoggedInState(true)
+                //UserDefaultsManager.shared.saveLoggedInState(true)
                 
                 print("\(newUser)")
                 

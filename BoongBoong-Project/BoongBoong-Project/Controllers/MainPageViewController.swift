@@ -226,7 +226,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         // 2. 해당 킥보드의 isBeingUsed를 false로 변경
         if let user = userDefaultsManager.getUser(),
            var kickboards = userDefaultsManager.getRegisteredKickboards() {
-            if let index = kickboards.firstIndex(where: { $0.id == user.rideHistory.last?.kickboardID }) {
+            if let index = kickboards.firstIndex(where: { $0.boongboongName == user.rideHistory.last?.boongboongName }) {
                 kickboards[index].isBeingUsed = false
                 userDefaultsManager.saveRegisteredKickboards(kickboards)
             }

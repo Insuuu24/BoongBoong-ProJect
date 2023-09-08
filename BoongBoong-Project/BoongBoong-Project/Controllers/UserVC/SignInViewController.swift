@@ -91,6 +91,7 @@ class SignInViewController: UIViewController {
             print("로그인 성공")
             let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
             UserDefaultsManager.shared.saveUser(user)
+            UserDefaultsManager.shared.saveLoggedInState(true)
             if let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "MainPage") as? MainPageViewController {
                 self.changeRootViewController(mainPageViewController)
             }

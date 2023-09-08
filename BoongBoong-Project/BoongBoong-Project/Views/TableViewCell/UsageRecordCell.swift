@@ -72,7 +72,7 @@ class UsageRecordCell: UITableViewCell {
     
     func configure(with history: RideHistory) {
         // 데이터 바인딩
-        kickboardIDLabel.text = "Kickboard: \(history.kickboardID)"
+        kickboardIDLabel.text = "Kickboard: \(history.boongboongName)"
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
