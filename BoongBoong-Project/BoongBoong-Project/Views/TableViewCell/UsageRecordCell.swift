@@ -72,6 +72,10 @@ class UsageRecordCell: UITableViewCell {
     
     func configure(with history: RideHistory) {
         // 데이터 바인딩
+        print(UserDefaultsManager.shared.getRegisteredKickboards())
+        if let kickboardName = UserDefaultsManager.shared.getRegisteredKickboards()?.first(where: {$0.id == history.kickboardID}) {
+            print(kickboardName)
+        }
         kickboardIDLabel.text = "Kickboard: \(history.kickboardID)"
         
         let dateFormatter = DateFormatter()

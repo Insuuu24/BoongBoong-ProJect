@@ -89,6 +89,10 @@ class RentKickboardViewController: UIViewController {
                     user.isUsingKickboard = true
                     userDefaultsManager.saveUser(user)
                 }
+                
+                print(userDefaultsManager.getRegisteredKickboards())
+                print(userDefaultsManager.getUser()?.rideHistory)
+                print(self.selectedKickboard?.id)
 
                 // 2. 현재 사용자의 rideHistory에 추가 (예: 현재 시간을 추가)
                 // FIXME: 위치 받아와서 내용 수정하기
