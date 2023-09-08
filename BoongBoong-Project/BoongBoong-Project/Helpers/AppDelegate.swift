@@ -10,13 +10,52 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // 앱 초기화 작업을 수행할 때 여기에서 더미데이터 추가 등의 작업을 수행합니다.
+        
+        // "첫 실행" 여부를 확인하고 더미데이터를 추가합니다.
+        if !isAppAlreadyLaunchedOnce() {
+            addDummyKickboardData()
+        }
         sleep(1)
+        // 앱의 나머지 초기화 코드를 진행합니다.
         return true
     }
+
+    func isAppAlreadyLaunchedOnce() -> Bool {
+        let fileManager = FileManager.default
+        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let fileURL = documentsURL.appendingPathComponent("firstLaunch.txt")
+
+        if fileManager.fileExists(atPath: fileURL.path) {
+            return true
+        } else {
+            try? "App Launched".write(to: fileURL, atomically: true, encoding: .utf8)
+            return false
+        }
+    }
+    
+    func addDummyKickboardData() {
+        var kickboards: [Kickboard] = []
+        for (index, location) in locations.enumerated() {
+            kickboards.append(Kickboard(
+                id: UUID(), registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData()!)!,
+                boongboongName: "BoongBoong \(index + 1)",
+                latitude: location.latitude,
+                longitude: location.longitude,
+                isBeingUsed: false
+            ))
+        }
+        UserDefaultsManager.shared.saveRegisteredKickboards(kickboards)
+    }
+
+//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//        // Override point for customization after application launch.
+//        sleep(1)
+//        return true
+//    }
 
     // MARK: UISceneSession Lifecycle
 

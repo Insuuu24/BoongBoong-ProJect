@@ -20,21 +20,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         self.window = window
-        
-        if !isAppAlreadyLaunchedOnce() {
-            // FIXME: 아래 코드 위치 나중에 변경하기 (킥보드 더미데이터 추가하는 부분임)
-            var kickboards: [Kickboard] = []
-            for (index, location) in locations.enumerated() {
-                kickboards.append(Kickboard(
-                    id: UUID(), registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData()!)!,
-                    boongboongName: "BoongBoong \(index + 1)",
-                    latitude: location.latitude,
-                    longitude: location.longitude,
-                    isBeingUsed: false
-                ))
-            }
-            UserDefaultsManager.shared.saveRegisteredKickboards(kickboards)
-        }
+//
+//        if !isAppAlreadyLaunchedOnce() {
+//            // FIXME: 아래 코드 위치 나중에 변경하기 (킥보드 더미데이터 추가하는 부분임)
+//            var kickboards: [Kickboard] = []
+//            for (index, location) in locations.enumerated() {
+//                kickboards.append(Kickboard(
+//                    id: UUID(), registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData()!)!,
+//                    boongboongName: "BoongBoong \(index + 1)",
+//                    latitude: location.latitude,
+//                    longitude: location.longitude,
+//                    isBeingUsed: false
+//                ))
+//            }
+//            UserDefaultsManager.shared.saveRegisteredKickboards(kickboards)
+//        }
         
         if UserDefaultsManager.shared.isLoggedIn() {
             let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
