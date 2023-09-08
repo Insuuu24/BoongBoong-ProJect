@@ -254,22 +254,15 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             if response == nil {
                 print("Error")
             } else {
-                let latitude = response?.boundingRegion.center.latitude
-                let longitude = response?.boundingRegion.center.longitude
-                
-                let annotations = self.homeMap.annotations
-                self.homeMap.removeAnnotations(annotations)
-                
-                let annotation = MKPointAnnotation()
-                annotation.title = searchText
-                annotation.coordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
-                self.homeMap.addAnnotation(annotation)
-                
-                let coordinateRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
-                self.homeMap.setRegion(coordinateRegion, animated: true)
+                if let latitude = response?.boundingRegion.center.latitude,
+                   let longitude = response?.boundingRegion.center.longitude {
+                    let coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), latitudinalMeters: 5000, longitudinalMeters: 5000)
+                    self.homeMap.setRegion(coordinateRegion, animated: true)
+                }
             }
         }
     }
+
 
     // 지도의 영역이 변경되면 호출됩니다.
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -329,6 +322,8 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         if annotation is MKUserLocation {
             return nil
         }
+        
+        
         
         // 사용자가 탭하여 추가한 주석을 처리
         if annotation is CustomPointAnnotation {
