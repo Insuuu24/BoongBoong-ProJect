@@ -16,7 +16,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+        
+        if !isAppAlreadyLaunchedOnce() {
+            // FIXME: 아래 코드 위치 나중에 변경하기 (킥보드 더미데이터 추가하는 부분임)
+            var kickboards: [Kickboard] = []
+            for (index, location) in locations.enumerated() {
+                kickboards.append(Kickboard(
+                    id: UUID(), registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData()!)!,
+                    boongboongName: "BoongBoong \(index + 1)",
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                    isBeingUsed: false
+                ))
+            }
+            UserDefaultsManager.shared.saveRegisteredKickboards(kickboards)
+        }
+        
+        if UserDefaultsManager.shared.isLoggedIn() {
+            let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
+            if let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "MainPage") as? MainPageViewController {
+                window.rootViewController = mainPageViewController
+                window.makeKeyAndVisible()
+            }
+        } else {
+            let storyboard = UIStoryboard(name: "SignInPage", bundle: nil)
+            if let signInPageViewController = storyboard.instantiateViewController(withIdentifier: "SignInPage") as? SignInViewController {
+                window.rootViewController = signInPageViewController
+                window.makeKeyAndVisible()
+            }
+        }
+
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -47,6 +81,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    func isAppAlreadyLaunchedOnce() -> Bool {
+        let defaults = UserDefaults.standard
 
+        if defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil {
+            return true
+        } else {
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            return false
+        }
+    }
 }
 

@@ -28,6 +28,7 @@ let locations: [(latitude: Double, longitude: Double)] = [
 class UserDefaultsManager {
     // UserDefaults 키 정의
     private let userKey = "user"
+    private let usersKey = "users"
     private let isLoggedInKey = "isLoggedIn"
     private let registeredKickboardsKey = "registeredKickboards"
 
@@ -37,25 +38,13 @@ class UserDefaultsManager {
     // 싱글톤 인스턴스
     static let shared = UserDefaultsManager()
     
-
+    static var id = 0
+    
     // 사용자 정보 저장
     func saveUser(_ user: User) {
         if let encodedData = try? JSONEncoder().encode(user) {
             userDefaults.set(encodedData, forKey: userKey)
         }
-        // FIXME: 아래 코드 위치 나중에 변경하기 (킥보드 더미데이터 추가하는 부분임)
-        var kickboards: [Kickboard] = []
-        for (index, location) in locations.enumerated() {
-            kickboards.append(Kickboard(
-                id: UUID(),
-                registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData()!)!,
-                boongboongName: "BoongBoong \(index + 1)",
-                latitude: location.latitude,
-                longitude: location.longitude,
-                isBeingUsed: false
-            ))
-        }
-        UserDefaultsManager.shared.saveRegisteredKickboards(kickboards)
     }
 
     // 사용자 정보 가져오기
@@ -70,13 +59,13 @@ class UserDefaultsManager {
     // 모든 사용자 정보 저장하기
     func saveUsers(_ users: [String: User]) {
         if let encodedData = try? JSONEncoder().encode(users) {
-            userDefaults.set(encodedData, forKey: userKey)
+            userDefaults.set(encodedData, forKey: usersKey)
         }
     }
 
     // 모든 사용자 정보 가져오기
     func getUsers() -> [String: User]? {
-        if let userData = userDefaults.data(forKey: userKey),
+        if let userData = userDefaults.data(forKey: usersKey),
            let users = try? JSONDecoder().decode([String: User].self, from: userData) {
             return users
         }
@@ -95,6 +84,7 @@ class UserDefaultsManager {
 
     // 등록된 킥보드 정보 저장
     func saveRegisteredKickboards(_ kickboards: [Kickboard]) {
+        print(kickboards)
         if let encodedData = try? JSONEncoder().encode(kickboards) {
             userDefaults.set(encodedData, forKey: registeredKickboardsKey)
         }
@@ -112,14 +102,14 @@ class UserDefaultsManager {
     // 등록된 킥보드 정보 변경
     func updateKickboardInfo(kickboardID: UUID, newName: String, newImage: UIImage) {
         if var user = getUser(), var registeredKickboard = user.registeredKickboard {
-            if registeredKickboard.id == kickboardID {
-                registeredKickboard.boongboongName = newName
-                user.registeredKickboard = registeredKickboard
-                user.registeredKickboard?.boongboongImage = newImage.pngData()!
-                saveUser(user)
-            }
+            registeredKickboard.boongboongName = newName
+            registeredKickboard.boongboongImage = newImage.pngData()!
+            user.registeredKickboard = registeredKickboard
+            saveUser(user)
         }
+        print(kickboardID)
         if var kickboards = getRegisteredKickboards() {
+            print(kickboards)
             if let index = kickboards.firstIndex(where: { $0.id == kickboardID }) {
                 kickboards[index].boongboongName = newName
                 kickboards[index].boongboongImage = newImage.pngData()!

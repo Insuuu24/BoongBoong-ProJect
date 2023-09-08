@@ -96,14 +96,14 @@ class RentKickboardViewController: UIViewController {
 
                 // 2. 현재 사용자의 rideHistory에 추가 (예: 현재 시간을 추가)
                 // FIXME: 위치 받아와서 내용 수정하기
-                let kickboardID = self.selectedKickboard?.id
+                let boongboongName = self.selectedKickboard?.boongboongName
                 let startTime = Date()
                 let endTime = Calendar.current.date(byAdding: .minute, value: selectedHours * 60 + selectedMinutes, to: startTime)!
                 let startPosition = Position(latitude: 37.1234, longitude: 126.5678)
                 let endPosition = Position(latitude: 37.5678, longitude: 127.1234)
 
                 // 대여 기록 추가
-                userDefaultsManager.updateRideHistory(with: RideHistory(kickboardID: kickboardID!, startTime: startTime, endTime: endTime, startPosition: startPosition, endPosition: endPosition))
+                userDefaultsManager.updateRideHistory(with: RideHistory(boongboongName: boongboongName!, startTime: startTime, endTime: endTime, startPosition: startPosition, endPosition: endPosition))
 
 
                 // 3. 해당 킥보드의 isBeingUsed를 true로 변경

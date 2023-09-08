@@ -77,18 +77,26 @@ class AddKickBoardViewController: UIViewController {
 
         let newKickboard = Kickboard(id: UUID(), registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData())!, boongboongName: kickboardName.text!, latitude: latitude, longitude: longitude, isBeingUsed: false)
         
+        print(newKickboard)
+        
         if var user = userDefaultsManager.getUser() {
             user.registeredKickboard = newKickboard
             userDefaultsManager.saveUser(user)
+            print(newKickboard)
         }
         
         if var registeredKickboards = userDefaultsManager.getRegisteredKickboards() {
             registeredKickboards.append(newKickboard)
             userDefaultsManager.saveRegisteredKickboards(registeredKickboards)
+            print(newKickboard)
         } else {
             let registeredKickboards = [newKickboard]
             userDefaultsManager.saveRegisteredKickboards(registeredKickboards)
         }
+        
+        print(userDefaultsManager.getUser()?.registeredKickboard)
+        print(userDefaultsManager.getRegisteredKickboards()?.last)
+        print(userDefaultsManager.getRegisteredKickboards())
         
         MainPageViewController.sharedInstance?.addKickboardMarkersToMap()
         dismiss(animated: true)
