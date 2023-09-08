@@ -87,9 +87,10 @@ class SignInViewController: UIViewController {
             return
         }
         
-        if let users = UserDefaultsManager.shared.getUsers(), let _ = users.values.first(where: { $0.email == userEmail && $0.password == userPassword }) {
+        if let users = UserDefaultsManager.shared.getUsers(), let user = users.values.first(where: { $0.email == userEmail && $0.password == userPassword }) {
             print("로그인 성공")
             let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
+            UserDefaultsManager.shared.saveUser(user)
             if let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "MainPage") as? MainPageViewController {
                 self.changeRootViewController(mainPageViewController)
             }

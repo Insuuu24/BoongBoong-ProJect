@@ -213,7 +213,7 @@ class SignUpViewController: UIViewController {
         
         if let imageData = selectedProfileImageData {
             if let birthdate = dateFormatter.date(from: birthdateText) {
-                let newUser = User(email: userEmail, password: userPassword, name: userName, birthdate: birthdate, profileImage: imageData, isUsingKickboard: false, rideHistory: [], registeredKickboard: dummyKickboards[0])
+                let newUser = User(email: userEmail, password: userPassword, name: userName, birthdate: birthdate, profileImage: imageData, isUsingKickboard: false, rideHistory: [])
                 
                 var users = UserDefaultsManager.shared.getUsers() ?? [:]
                 

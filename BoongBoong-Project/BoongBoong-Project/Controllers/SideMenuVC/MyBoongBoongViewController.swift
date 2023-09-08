@@ -73,7 +73,6 @@ class MyBoongBoongViewController: UIViewController {
             registerDate.isEnabled = false
             editButton.isEnabled = false
             editButton.isHidden = true
-            //TODO: 취소버튼 만들기---------------------
         }
     }
     

@@ -24,20 +24,6 @@ let locations: [(latitude: Double, longitude: Double)] = [
     (37.498267, 126.962614)  // 위치 9
 ]
 
-let dummyRideHistories = [
-    RideHistory(kickboardID: UUID(), startTime: Date(), endTime: Date(), startPosition: Position(latitude: 37.5665, longitude: 126.9780), endPosition: Position(latitude: 37.5775, longitude: 126.9880)),
-    RideHistory(kickboardID: UUID(), startTime: Date(), endTime: Date(), startPosition: Position(latitude: 37.5665, longitude: 126.9780), endPosition: Position(latitude: 37.5775, longitude: 126.9880))
-]
-
-let dummyKickboards = [
-    Kickboard(id: UUID(), registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData()!)!, boongboongName: "BoongBoong 1", latitude: 37.5665, longitude: 126.9780, isBeingUsed: true),
-    Kickboard(id: UUID(), registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData()!)!, boongboongName: "BoongBoong 2", latitude: 37.5675, longitude: 126.9790, isBeingUsed: false)
-]
-
-let dummyUsers = [
-    User(email: "user1@example.com", password: "password1", name: "박인수", birthdate: Date(), profileImage: (UIImage(named: "defaultUserImage")?.pngData()!)!, isUsingKickboard: false, rideHistory: dummyRideHistories, registeredKickboard: dummyKickboards[0]),
-    User(email: "user2@example.com", password: "password2", name: "서영덕", birthdate: Date(), profileImage: (UIImage(named: "defaultUserImage")?.pngData()!)!, isUsingKickboard: false, rideHistory: [], registeredKickboard: dummyKickboards[1])
-]
 
 class UserDefaultsManager {
     // UserDefaults 키 정의
