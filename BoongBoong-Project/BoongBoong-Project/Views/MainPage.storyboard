@@ -24,14 +24,14 @@
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ylB-Lr-9o8">
-                                <rect key="frame" x="0.0" y="123" width="393" height="57"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="b23-E9-bEo"/>
                                 </connections>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61D-4K-FZZ">
-                                <rect key="frame" x="332" y="134" width="51" height="35"/>
+                                <rect key="frame" x="332" y="113.66666666666669" width="51" height="35"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="line.3.horizontal" catalog="system"/>
@@ -47,7 +47,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="00 : 00">
+                                <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -70,13 +70,17 @@
                                     <segue destination="Lq0-EM-gI5" kind="presentation" id="9MU-54-mN4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FH3-lJ-9Nu">
-                                <rect key="frame" x="327" y="720" width="50" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FH3-lJ-9Nu">
+                                <rect key="frame" x="347" y="693" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="FH3-lJ-9Nu" secondAttribute="height" multiplier="1:1" id="0Og-mA-GL1"/>
+                                    <constraint firstAttribute="height" constant="30" id="47s-lX-Kzd"/>
+                                </constraints>
+                                <color key="tintColor" name="mainColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="dot.circle.viewfinder" catalog="system"/>
                                 <connections>
-                                    <action selector="mainPageregionButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="wYo-vw-gj1"/>
+                                    <action selector="mainPageregionButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="kNb-qx-6CR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -85,16 +89,17 @@
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="61D-4K-FZZ" secondAttribute="trailing" constant="10" id="EgF-a1-B96"/>
                             <constraint firstItem="mtE-2c-3J6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="EhO-p9-Nca"/>
-                            <constraint firstItem="61D-4K-FZZ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="31" id="Fx2-i3-eHx"/>
                             <constraint firstItem="ylB-Lr-9o8" firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" id="JNQ-TZ-KGn"/>
                             <constraint firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" id="OEU-gF-gNL"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mtE-2c-3J6" secondAttribute="trailing" constant="16" id="PLJ-QU-ijN"/>
+                            <constraint firstItem="mtE-2c-3J6" firstAttribute="top" secondItem="FH3-lJ-9Nu" secondAttribute="bottom" constant="40" id="QSS-lm-yGw"/>
                             <constraint firstItem="0aC-h9-npE" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="b4A-fs-rC4"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="FH3-lJ-9Nu" secondAttribute="trailing" constant="16" id="btF-A7-mQz"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="fhx-sG-cmx" secondAttribute="bottom" constant="15" id="cvi-mV-6kZ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="mtE-2c-3J6" secondAttribute="bottom" constant="15" id="dSV-BX-JCy"/>
                             <constraint firstAttribute="bottom" secondItem="0aC-h9-npE" secondAttribute="bottom" id="hCm-GC-MsF"/>
                             <constraint firstItem="0aC-h9-npE" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="hXP-1c-ea5"/>
-                            <constraint firstItem="ylB-Lr-9o8" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="lPo-bZ-q1q"/>
+                            <constraint firstItem="ylB-Lr-9o8" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="lPo-bZ-q1q"/>
                             <constraint firstItem="61D-4K-FZZ" firstAttribute="centerY" secondItem="ylB-Lr-9o8" secondAttribute="centerY" id="lWC-IM-zca"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fhx-sG-cmx" secondAttribute="trailing" constant="16" id="lvM-zj-hRc"/>
                             <constraint firstItem="fhx-sG-cmx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="r3l-yl-PoT"/>

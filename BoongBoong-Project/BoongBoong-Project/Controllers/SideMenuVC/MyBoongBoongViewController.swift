@@ -23,6 +23,7 @@ class MyBoongBoongViewController: UIViewController {
         super.viewDidLoad()
         configureNav()
         setupUI()
+        kickboardMap.showsUserLocation = true
     }
     
     private func configureNav() {
@@ -72,6 +73,7 @@ class MyBoongBoongViewController: UIViewController {
             registerDate.isEnabled = false
             editButton.isEnabled = false
             editButton.isHidden = true
+            //TODO: 취소버튼 만들기---------------------
         }
     }
     
@@ -129,6 +131,9 @@ class MyBoongBoongViewController: UIViewController {
     @IBAction func deleteKickboardButtonTapped(_ sender: UIButton) {
         if let kickboardID = UserDefaultsManager.shared.getUser()?.registeredKickboard?.id {
             UserDefaultsManager.shared.deleteKickboard(kickboardID)
+            
+            navigationController?.popViewController(animated: true)
+            MainPageViewController.sharedInstance?.addKickboardMarkersToMap()
         }
         
     }

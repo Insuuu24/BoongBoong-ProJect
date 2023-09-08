@@ -68,14 +68,19 @@ class AddKickBoardViewController: UIViewController {
     
     @IBAction func registerButtonTapped(_ sender: UIButton) {
         let userDefaultsManager = UserDefaultsManager.shared
-        
+
         var (latitude, longitude) = (0.0, 0.0)
         if let userLocation = kickboardMapView.userLocation.location {
             latitude = userLocation.coordinate.latitude
             longitude = userLocation.coordinate.longitude
         }
-        
+
         let newKickboard = Kickboard(id: UUID(), registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData())!, boongboongName: kickboardName.text!, latitude: latitude, longitude: longitude, isBeingUsed: false)
+        
+        if var user = userDefaultsManager.getUser() {
+            user.registeredKickboard = newKickboard
+            userDefaultsManager.saveUser(user)
+        }
         
         if var registeredKickboards = userDefaultsManager.getRegisteredKickboards() {
             registeredKickboards.append(newKickboard)
@@ -85,15 +90,7 @@ class AddKickBoardViewController: UIViewController {
             userDefaultsManager.saveRegisteredKickboards(registeredKickboards)
         }
         
-        // FIXME: 로그인 구현 후에 삭제
-        //userDefaultsManager.saveUser(dummyUsers[0])
-        
-        if var user = userDefaultsManager.getUser() {
-            user.registeredKickboard = newKickboard
-            userDefaultsManager.saveUser(user)
-        }
-    
-        print(userDefaultsManager.getRegisteredKickboards()!)
+        MainPageViewController.sharedInstance?.addKickboardMarkersToMap()
         dismiss(animated: true)
     }
     

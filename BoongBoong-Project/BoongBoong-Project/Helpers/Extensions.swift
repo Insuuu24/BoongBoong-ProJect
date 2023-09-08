@@ -131,3 +131,20 @@ extension Int {
         }
     }
 }
+
+extension UIImage {
+    func scaleAspectFit(toSize newSize: CGSize) -> UIImage? {
+        let widthRatio = newSize.width / size.width
+        let heightRatio = newSize.height / size.height
+        let scaleFactor = min(widthRatio, heightRatio)
+
+        let scaledSize = CGSize(width: size.width * scaleFactor, height: size.height * scaleFactor)
+
+        UIGraphicsBeginImageContextWithOptions(scaledSize, false, scale)
+        draw(in: CGRect(origin: .zero, size: scaledSize))
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return scaledImage
+    }
+}
