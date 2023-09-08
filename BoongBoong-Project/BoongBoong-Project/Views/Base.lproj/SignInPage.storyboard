@@ -18,10 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boongBoongLogo" translatesAutoresizingMaskIntoConstraints="NO" id="22X-VB-KX5">
-                                <rect key="frame" x="116.66666666666669" y="109" width="160" height="160"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bblogo" translatesAutoresizingMaskIntoConstraints="NO" id="22X-VB-KX5">
+                                <rect key="frame" x="70" y="109" width="253" height="160"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="N1W-PV-irW"/>
                                     <constraint firstAttribute="height" constant="160" id="UHp-yY-mU8"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -107,7 +106,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pBf-V5-1Ag" secondAttribute="bottom" constant="25" id="At1-WT-ppW"/>
                             <constraint firstItem="22X-VB-KX5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="ZHm-j0-i6e"/>
                             <constraint firstItem="xS9-8O-0bp" firstAttribute="trailing" secondItem="da6-Ls-0b3" secondAttribute="trailing" constant="-5" id="ZW3-eO-jDc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="22X-VB-KX5" secondAttribute="trailing" constant="70" id="fPj-Io-l4u"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5cc-oN-3BK" secondAttribute="trailing" constant="70" id="fmD-tj-0ly"/>
+                            <constraint firstItem="22X-VB-KX5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="gad-YK-noq"/>
                             <constraint firstItem="5cc-oN-3BK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="jL9-FT-oPW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pBf-V5-1Ag" secondAttribute="trailing" constant="70" id="k8Q-Hy-P22"/>
                             <constraint firstItem="5cc-oN-3BK" firstAttribute="top" secondItem="22X-VB-KX5" secondAttribute="bottom" constant="50" id="n81-g5-XqN"/>
@@ -125,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="-2"/>
+            <point key="canvasLocation" x="139.69465648854961" y="-2.1126760563380285"/>
         </scene>
         <!--SignUpPage-->
         <scene sceneID="5Jh-Nw-64x">
@@ -139,7 +140,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="boongBoongLogo" width="79.5" height="70"/>
+        <image name="bblogo" width="337" height="92.5"/>
         <image name="eye.slash" catalog="system" width="128" height="84"/>
         <namedColor name="mainColor">
             <color red="0.56499999761581421" green="0.2669999897480011" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
