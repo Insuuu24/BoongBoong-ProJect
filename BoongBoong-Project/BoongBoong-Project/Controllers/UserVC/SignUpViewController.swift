@@ -133,7 +133,7 @@ class SignUpViewController: UIViewController {
     private func validateUserName(_ userName: String?) -> Bool {
         guard let userName = userName else { return false }
         
-        let regex = "^[가-힣ㄱ-ㅎㅏ-ㅣ]{2,5}$"
+        let regex = "^[가-힣]{2,5}$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
         let isUserNameValid = predicate.evaluate(with: userName)
         
