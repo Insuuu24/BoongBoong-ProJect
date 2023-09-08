@@ -22,11 +22,17 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     var timer: Timer?
     var remainingTimeInSeconds = 0
     
+    static var sharedInstance: MainPageViewController?
+    
     // MARK: - View Life Cycle
     
     // 뷰 컨트롤러가 메모리에 로드된 후 호출됩니다.
     override func viewDidLoad() {
         super.viewDidLoad()
+        // FIXME: 로그인 연결되고 나면 코드 삭제하기
+        UserDefaultsManager.shared.saveUser(dummyUsers[0])
+        
+        MainPageViewController.sharedInstance = self
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -38,13 +44,13 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         mapSearchBar.delegate = self
         mapSearchBar.placeholder = "위치 검색"
         homeMap.delegate = self
+        homeMap.showsUserLocation = true
         
-        // 지도를 탭했을 때의 제스처 인식기를 설정합니다.
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        homeMap.addGestureRecognizer(tapGesture)
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPressRecognizer.minimumPressDuration = 0.3
+        homeMap.addGestureRecognizer(longPressRecognizer)
         
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        homeMap.addGestureRecognizer(tapRecognizer)
+        addKickboardMarkersToMap()
     }
     
     override func viewWillLayoutSubviews() {
@@ -68,7 +74,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             addKickboardButton.isHidden = false
             returnKickboardButton.isHidden = true
         }
-        addKickboardMarkersToMap()
+        //addKickboardMarkersToMap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,12 +133,16 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             }
         }
         
-        if let selectedAnnotation = view.annotation {
-            mapView.removeAnnotation(selectedAnnotation)
-        }
+//        if let annotation = view.annotation as? CustomPointAnnotation {
+//            mapView.removeAnnotation(annotation)
+//        }
     }
     
     func addKickboardMarkersToMap() {
+        print("addKickboardMarkersToMap")
+        let existingAnnotations = homeMap.annotations.filter { $0 is KickboardAnnotation }
+        homeMap.removeAnnotations(existingAnnotations)
+        
         if let kickboards = UserDefaultsManager.shared.getRegisteredKickboards()?.filter({$0.isBeingUsed == false}) {
             print(kickboards.count)
             for kickboard in kickboards {
@@ -150,6 +160,10 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         
         let contentVC = UIStoryboard(name: "RentKickboardPage", bundle: nil).instantiateViewController(withIdentifier: "RentKickboard") as? RentKickboardViewController
         contentVC?.selectedKickboard = kickboard
+        if let userLocation = homeMap.userLocation.location {
+            let userPosition = Position(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+            contentVC?.userLocation = userPosition
+        }
         
         fpc.set(contentViewController: contentVC)
         fpc.changePanelStyle()
@@ -169,16 +183,15 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     
     // MARK: - Actions
     
-    // 지도 현위치 버른을 탭했을 때 호출될 액션입니다.
-    @IBAction func mainPageregionButtonTapped(_ sender: UIButton) {
-        if let userLocation = homeMap.userLocation.location {
-          let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 300, longitudinalMeters: 300)
-            homeMap.setRegion(region, animated: true)
-        }
-    }
-    
     // 킥보드 추가 버튼이 탭됐을 때 호출될 액션입니다.
     @IBAction func addKickboardButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func mainPageregionButtonTapped(_ sender: UIButton) {
+        if let userLocation = homeMap.userLocation.location {
+            let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 3000, longitudinalMeters: 3000)
+            homeMap.setRegion(region, animated: true)
+        }
     }
     
     // 킥보드 반환 버튼이 탭됐을 때 호출될 액션입니다.
@@ -240,7 +253,6 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     }
     
     // MARK: - Functions
-    
     // 사용자가 검색 바에 텍스트를 입력할 때마다 호출
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let searchRequest = MKLocalSearch.Request()
@@ -284,28 +296,46 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             mapView.setCenter(CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780), animated: true)
         }
     }
-
-
-    // 지도를 탭했을 때의 액션입니다.
-    @objc func handleTap(gesture: UITapGestureRecognizer) {
-        let locationInView = gesture.location(in: homeMap)
-        let tappedCoordinate = homeMap.convert(locationInView, toCoordinateFrom: homeMap)
-        
-        // 기본 주석만 제거합니다.
-        for annotation in homeMap.annotations {
-            if annotation is CustomPointAnnotation {
-                homeMap.removeAnnotation(annotation)
+    
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            let locationInView = gesture.location(in: homeMap)
+            let tappedCoordinate = homeMap.convert(locationInView, toCoordinateFrom: homeMap)
+            
+            // 이전의 모든 CustomPointAnnotation 제거
+            let customAnnotations = homeMap.annotations.filter { $0 is CustomPointAnnotation }
+            homeMap.removeAnnotations(customAnnotations)
+            
+            let annotation = CustomPointAnnotation()
+            annotation.isDefaultMarker = true
+            annotation.coordinate = tappedCoordinate
+            
+            // Reverse Geocoding을 사용하여 주소 가져오기
+            let location = CLLocation(latitude: tappedCoordinate.latitude, longitude: tappedCoordinate.longitude)
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+                if let error = error {
+                    print("Reverse Geocoding Error: \(error.localizedDescription)")
+                    return
+                }
+                
+                if let placemark = placemarks?.first {
+                    if let address = placemark.name {
+                        print("주소: \(address)")
+                        annotation.title = address
+                        //annotation.subtitle = address
+                        
+                        self.homeMap.addAnnotation(annotation)
+                        self.homeMap.selectAnnotation(annotation, animated: true)
+                        self.homeMap.setCenter(tappedCoordinate, animated: true)
+                        
+                        let regionRadius: CLLocationDistance = 300
+                        let region = MKCoordinateRegion(center: tappedCoordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+                        self.homeMap.setRegion(region, animated: true)
+                    }
+                }
             }
         }
-        
-        // 새로운 주석을 추가합니다.
-        let annotation = CustomPointAnnotation()
-        annotation.isDefaultMarker = true  // 이 주석은 기본 마커를 사용합니다.
-        annotation.coordinate = tappedCoordinate
-        homeMap.addAnnotation(annotation)
-        
-        // 지도의 중심을 새로운 주석의 위치로 이동시킵니다.
-        homeMap.setCenter(tappedCoordinate, animated: true)
     }
 
     func circularImageWithBorder(image: UIImage, targetSize: CGSize, borderWidth: CGFloat = 4.0, borderColor: UIColor = UIColor.purple) -> UIImage? {
@@ -323,6 +353,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         
         return resultImage
     }
+
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         // 사용자의 현재 위치에 대한 주석은 기본 뷰를 반환합니다.
@@ -358,14 +389,19 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         }
         
         if let makerImage = UIImage(named: "Maker") {
-            if let circularMakerImage = circularImageWithBorder(image: makerImage, targetSize: CGSize(width: 450, height: 300)) {
-                annotationView?.image = circularMakerImage
+            let imageSize = CGSize(width: 60, height: 60)
+            
+            if let scaledImage = makerImage.scaleAspectFit(toSize: imageSize) {
+                annotationView?.image = scaledImage
+                annotationView?.centerOffset = CGPoint(x: 0, y: -30)
             }
         }
 
         return annotationView
     }
 
+
+    
     // 현재 사용자의 킥보드 사용 상태에 따라 버튼의 타이틀을 업데이트합니다.
     func updateKickboardButtonTitle() {
         if let user = currentUsing, user.isUsingKickboard {
@@ -389,9 +425,8 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
      }
 }
 
-// MARK: - CLLocationManagerDelegate
-
 extension MainPageViewController: CLLocationManagerDelegate {
+    
     // 위치 업데이트 시 호출되는 메서드
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
@@ -422,4 +457,3 @@ class KickboardAnnotation: MKPointAnnotation {
 class CustomPointAnnotation: MKPointAnnotation {
     var isDefaultMarker: Bool = false
 }
-
