@@ -82,7 +82,7 @@ class UsageRecordViewController: UIViewController {
                                      buttonTitle: "지금 이용하기")
             
             emptyStateView.buttonAction = {
-                // 여기에 화면 전환 로직을 추가
+                self.dismiss(animated: true)
             }
         } else {
             emptyStateView.removeFromSuperview()
