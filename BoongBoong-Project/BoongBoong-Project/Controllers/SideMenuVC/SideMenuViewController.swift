@@ -25,12 +25,13 @@ class SideMenuViewController: UIViewController {
     ]
     
     var defaultHighlightedCell: Int = 0
+    let userInfo = UserDefaultsManager.shared.getUser()!
     
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupTableView()
         configureUI()
     }
@@ -50,17 +51,30 @@ class SideMenuViewController: UIViewController {
         userImageView.clipsToBounds = true
         userImageView.layer.borderColor = UIColor.systemGray4.cgColor
         userImageView.layer.borderWidth = 1
-        self.userImageView.image = UIImage(named: "boongBoongLogo.png")
+        userImageView.image = UIImage(data: userInfo.profileImage)
+        
+        userNameLabel.text = userInfo.name
     }
     
     // MARK: - Actions
     
     
     @IBAction func logOutButtonTapped(_ sender: UIButton) {
-        // 로그아웃 로직 구현
+        let alert = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
+            UserDefaultsManager.shared.saveLoggedInState(false)
+            let storyboard = UIStoryboard(name: "SignInPage", bundle: nil)
+            if let signInPageViewController = storyboard.instantiateViewController(withIdentifier: "SignInPage") as? SignInViewController {
+                self.view.window?.rootViewController = signInPageViewController
+            }
+        })
+        
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        
+        self.present(alert, animated: true, completion: nil)
     }
-    
-    
+   
 
 }
 

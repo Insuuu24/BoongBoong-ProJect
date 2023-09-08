@@ -21,7 +21,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DbV-IL-z9C">
                                 <rect key="frame" x="16" y="164" width="361" height="60"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="snd-OL-1Qo">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="snd-OL-1Qo">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="snd-OL-1Qo" secondAttribute="height" multiplier="1:1" id="bBN-yT-zRY"/>
@@ -78,7 +78,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boongboong-text-logo" translatesAutoresizingMaskIntoConstraints="NO" id="iIq-QP-GDw">
-                                <rect key="frame" x="71.666666666666742" y="59" width="250" height="80"/>
+                                <rect key="frame" x="71.666666666666686" y="59" width="250" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="1Nj-WN-VPU"/>
                                     <constraint firstAttribute="width" constant="250" id="bMo-6i-xbf"/>
