@@ -39,6 +39,7 @@
 		EBD1571F2AA5DE5C00FD0F43 /* MyInfoPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1571E2AA5DE5C00FD0F43 /* MyInfoPageViewController.swift */; };
 		EBD157232AA5E09200FD0F43 /* BoongBoongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD157222AA5E09200FD0F43 /* BoongBoongModel.swift */; };
 		EBD157262AA5E4EA00FD0F43 /* UsageRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD157252AA5E4EA00FD0F43 /* UsageRecordCell.swift */; };
+		EBF483732AAB05150049D9A0 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF483722AAB05150049D9A0 /* ChangePasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		EBD1571E2AA5DE5C00FD0F43 /* MyInfoPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoPageViewController.swift; sourceTree = "<group>"; };
 		EBD157222AA5E09200FD0F43 /* BoongBoongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoongBoongModel.swift; sourceTree = "<group>"; };
 		EBD157252AA5E4EA00FD0F43 /* UsageRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageRecordCell.swift; sourceTree = "<group>"; };
+		EBF483722AAB05150049D9A0 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				EBD157162AA5DBD900FD0F43 /* SideMenuViewController.swift */,
 				EBD157182AA5DC3E00FD0F43 /* UsageRecordViewController.swift */,
 				EBD1571A2AA5DC5C00FD0F43 /* MyBoongBoongViewController.swift */,
+				EBF483722AAB05150049D9A0 /* ChangePasswordViewController.swift */,
 			);
 			path = SideMenuVC;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				EB1151662AA6F8CA00FB875E /* SideMenuModel.swift in Sources */,
 				EBD1571F2AA5DE5C00FD0F43 /* MyInfoPageViewController.swift in Sources */,
 				EBD157192AA5DC3E00FD0F43 /* UsageRecordViewController.swift in Sources */,
+				EBF483732AAB05150049D9A0 /* ChangePasswordViewController.swift in Sources */,
 				EBCBE9242AA5F3FA00F93761 /* UserDefaultsManager.swift in Sources */,
 				EBD156E62AA5AC9D00FD0F43 /* AppDelegate.swift in Sources */,
 				EBD1571D2AA5DE4F00FD0F43 /* AddKickBoardViewController.swift in Sources */,

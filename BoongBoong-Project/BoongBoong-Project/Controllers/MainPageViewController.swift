@@ -275,7 +275,6 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         }
     }
 
-
     // 지도의 영역이 변경되면 호출됩니다.
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let center = mapView.centerCoordinate
