@@ -24,7 +24,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var alreadyHaveAccountButton: UIButton!
     var selectedProfileImageData: Data?
-    
+    let userDefaults = UserDefaultsManager.shared
+
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -58,16 +59,28 @@ class SignUpViewController: UIViewController {
         
         alreadyHaveAccountButton.setAttributedTitle(attributedTitle, for: .normal)
     }
-    
-    private func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        if let selectedURL = urls.first {
-            let imagePath = selectedURL.path
-            print("선택한 이미지 파일의 경로: \(imagePath)")
-        }
-    }
+ 
     
     private func validateUserEmail(_ email: String?) -> Bool {
         guard let email = email else { return false }
+        
+        // 이메일 중복 체크
+        if let users = UserDefaultsManager.shared.getUsers(),
+           users.keys.contains(where: { $0 == email }) {
+            userEmailValidationLabel.text = "이미 존재하는 이메일입니다."
+            userEmailValidationLabel.font = UIFont.systemFont(ofSize: 12)
+            userEmailValidationLabel.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
+            
+            let animation = CABasicAnimation(keyPath: "position")
+            animation.duration = 0.07
+            animation.repeatCount = 4
+            animation.autoreverses = true
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x - 10, y: userEmailTextField.center.y))
+            animation.toValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x + 10, y: userEmailTextField.center.y))
+            userEmailTextField.layer.add(animation, forKey: "position")
+            
+            return false
+        }
         
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
@@ -91,16 +104,15 @@ class SignUpViewController: UIViewController {
         
         return isEmailValid
     }
-    
     private func validatePassword(_ password: String?) -> Bool {
         guard let password = password else { return false }
         
-        let passwordRegex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{5,}"
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{5,15}"
         let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         let isPasswordValid = predicate.evaluate(with: password)
         
         if !isPasswordValid {
-            passwordVaildationLabel.text = "영어, 숫자, 특수문자를 포함하여 5자 이상 입력해주세요."
+            passwordVaildationLabel.text = "영어, 숫자, 특수문자를 포함하여 5자 ~ 15자 이상 입력해주세요."
             passwordVaildationLabel.font = UIFont.systemFont(ofSize: 10)
             passwordVaildationLabel.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
             
@@ -221,7 +233,6 @@ class SignUpViewController: UIViewController {
                 users[newUserID] = newUser
                 
                 UserDefaultsManager.shared.saveUsers(users)
-                UserDefaultsManager.shared.saveLoggedInState(true)
                 
                 print("\(newUser)")
                 

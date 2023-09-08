@@ -19,12 +19,21 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var dontHaveAccountButton: UIButton!
     
+    var changedPassword: String?
+    let userDefaults = UserDefaultsManager.shared
+
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
+        
+        let user = userDefaults.getUser()!
+        print("저장된 유저 데이터: \(user.password)")
+        let users = UserDefaultsManager.shared.getUsers()
+        print("저장된 유저 데이터: \(user.password)")
+
     }
     
     private func RUD() {
@@ -32,7 +41,6 @@ class SignInViewController: UIViewController {
             UserDefaults.standard.removePersistentDomain(forName: appDomain)
         }
     }
-    
     // MARK: - Helpers
     
     private func configureUI() {
@@ -77,25 +85,36 @@ class SignInViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func signInButtonTapped(_ sender: UIButton) {
-        guard let userEmail = userEmailTextField.text else {
-            showErrorAlert(title: "로그인 실패", message: "이메일을 입력해주세요.")
-            return
-        }
+        guard let userEmail = userEmailTextField.text, !userEmail.isEmpty else {
+               showErrorAlert(title: "로그인 실패", message: "이메일을 입력해주세요.")
+               return
+           }
+           
+           guard let userPassword = passwordTextField.text, !userPassword.isEmpty else {
+               showErrorAlert(title: "로그인 실패", message: "비밀번호를 입력해주세요.")
+               return
+           }
         
-        guard let userPassword = passwordTextField.text else {
-            showErrorAlert(title: "로그인 실패", message: "비밀번호를 입력해주세요.")
-            return
-        }
-        
-        if let users = UserDefaultsManager.shared.getUsers(), let _ = users.values.first(where: { $0.email == userEmail && $0.password == userPassword }) {
-            print("로그인 성공")
-            let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
-            if let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "MainPage") as? MainPageViewController {
-                self.changeRootViewController(mainPageViewController)
-            }
-        } else {
-            showErrorAlert(title: "로그인 실패", message: "이메일 또는 비밀번호가 일치하지 않거나, 등록된 사용자 정보가 없습니다.")
-        }
+        if let users = UserDefaultsManager.shared.getUsers(),
+                  let loggedInUser = users.values.first(where: { $0.email == userEmail }) {
+                   
+                   if let newPassword = changedPassword {
+                   }
+                   
+                   if loggedInUser.password == userPassword {
+                       print("로그인 성공")
+                       UserDefaultsManager.shared.saveUser(loggedInUser)
+                       let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
+                       if let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "MainPage") as? MainPageViewController {
+                           self.changeRootViewController(mainPageViewController)
+                       }
+                   } else {
+                       showErrorAlert(title: "로그인 실패", message: "비밀번호가 일치하지 않습니다.")
+                   }
+               } else {
+                   let users = UserDefaultsManager.shared.getUsers()
+                   showErrorAlert(title: "로그인 실패", message: "등록된 사용자가 아닙니다.")
+               }
     }
     
     private func changeRootViewController(_ viewControllerToPresent: UIViewController) {

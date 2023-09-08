@@ -42,6 +42,7 @@ let dummyUsers = [
 class UserDefaultsManager {
     // UserDefaults 키 정의
     private let userKey = "user"
+    private let usersKey = "users"
     private let isLoggedInKey = "isLoggedIn"
     private let registeredKickboardsKey = "registeredKickboards"
 
@@ -84,13 +85,13 @@ class UserDefaultsManager {
     // 모든 사용자 정보 저장하기
     func saveUsers(_ users: [String: User]) {
         if let encodedData = try? JSONEncoder().encode(users) {
-            userDefaults.set(encodedData, forKey: userKey)
+            userDefaults.set(encodedData, forKey: usersKey)
         }
     }
 
     // 모든 사용자 정보 가져오기
     func getUsers() -> [String: User]? {
-        if let userData = userDefaults.data(forKey: userKey),
+        if let userData = userDefaults.data(forKey: usersKey),
            let users = try? JSONDecoder().decode([String: User].self, from: userData) {
             return users
         }
@@ -105,6 +106,11 @@ class UserDefaultsManager {
     // 로그인 상태 가져오기
     func isLoggedIn() -> Bool {
         return userDefaults.bool(forKey: isLoggedInKey)
+    }
+    
+    // 현재 로그인한 사용자의 이메일 가져오기
+    func getUserLoggedInEmail() -> String? {
+        return userDefaults.string(forKey: "loggedInUserEmail")
     }
 
     // 등록된 킥보드 정보 저장

@@ -14,6 +14,7 @@ class ChangePasswordViewController: UIViewController {
     var cancelButtonHandler: (() -> Void)?
     var activeTextField: UITextField?
     var keyboardOffset: CGFloat = 0
+    let userDefaults = UserDefaultsManager.shared
 
     
     private let changePasswordLabel = UILabel()
@@ -135,23 +136,33 @@ class ChangePasswordViewController: UIViewController {
         if let newPassword = changePasswordTextField.text, validatePassword(newPassword) {
             // 사용자 정보를 가져옵니다.
             if var user = UserDefaultsManager.shared.getUser() {
-                // 비밀번호를 업데이트합니다.
-                user.password = newPassword
-                // 업데이트된 사용자 정보를 저장합니다.
-                UserDefaultsManager.shared.saveUser(user)
-                
-                // 키보드를 내립니다.
-                view.endEditing(true)
-                
-                // 비밀번호 변경 성공 메시지를 표시합니다.
-                showPasswordChangeSuccessMessage()
-                
-                if let changeButtonHandler = changeButtonHandler {
-                    changeButtonHandler()
+                if var users = UserDefaultsManager.shared.getUsers() {
+                    // 비밀번호를 업데이트합니다.
+                    user.password = newPassword
+                    // 업데이트된 사용자 정보를 저장합니다.
+                    UserDefaultsManager.shared.saveUser(user)
+
+                    // 키보드를 내립니다.
+                    view.endEditing(true)
+
+                    // 비밀번호 변경 성공 메시지를 표시합니다.
+                    showPasswordChangeSuccessMessage()
+
+                    // 사용자 정보를 다시 저장합니다.
+                    UserDefaultsManager.shared.saveUsers([user.email: user])
+
+                    print("로그인된 사용자 아이디: \(user.email), 변경된 비밀번호: \(user.password)")
+
+                    if let changeButtonHandler = changeButtonHandler {
+                        changeButtonHandler()
+                    }
                 }
             }
         }
     }
+
+    
+  
     
     func showPasswordChangeSuccessMessage() {
         let alertController = UIAlertController(title: "비밀번호 변경", message: "비밀번호가 성공적으로 변경되었습니다.", preferredStyle: .alert)
