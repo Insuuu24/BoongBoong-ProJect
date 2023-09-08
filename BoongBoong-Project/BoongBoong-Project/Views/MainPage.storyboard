@@ -23,6 +23,28 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ylH-Na-g3v">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="킥보드 등록 후 이용 가능합니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XN5-wk-Gcs">
+                                        <rect key="frame" x="90" y="200" width="213" height="30"/>
+                                        <color key="backgroundColor" red="0.7892005997474747" green="0.7892005997474747" blue="0.7892005997474747" alpha="0.70328021523178808" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="jcL-Jl-cgz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="XN5-wk-Gcs" secondAttribute="bottom" constant="622" id="Cqo-Pv-uDp"/>
+                                    <constraint firstItem="XN5-wk-Gcs" firstAttribute="top" secondItem="ylH-Na-g3v" secondAttribute="top" constant="200" id="GnT-Mo-SqX"/>
+                                    <constraint firstItem="XN5-wk-Gcs" firstAttribute="leading" secondItem="ylH-Na-g3v" secondAttribute="leading" constant="90" id="dZg-X5-F0m"/>
+                                    <constraint firstAttribute="trailing" secondItem="XN5-wk-Gcs" secondAttribute="trailing" constant="90" id="ttT-u7-gv2"/>
+                                </constraints>
+                            </view>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ylB-Lr-9o8">
                                 <rect key="frame" x="0.0" y="103" width="393" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -87,8 +109,11 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ylH-Na-g3v" secondAttribute="trailing" id="3og-A7-5tx"/>
+                            <constraint firstItem="ylH-Na-g3v" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="C6x-vE-x9a"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="61D-4K-FZZ" secondAttribute="trailing" constant="10" id="EgF-a1-B96"/>
                             <constraint firstItem="mtE-2c-3J6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="EhO-p9-Nca"/>
+                            <constraint firstItem="ylH-Na-g3v" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="GRB-of-T0C"/>
                             <constraint firstItem="ylB-Lr-9o8" firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" id="JNQ-TZ-KGn"/>
                             <constraint firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" id="OEU-gF-gNL"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mtE-2c-3J6" secondAttribute="trailing" constant="16" id="PLJ-QU-ijN"/>
@@ -97,6 +122,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="FH3-lJ-9Nu" secondAttribute="trailing" constant="16" id="btF-A7-mQz"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="fhx-sG-cmx" secondAttribute="bottom" constant="15" id="cvi-mV-6kZ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="mtE-2c-3J6" secondAttribute="bottom" constant="15" id="dSV-BX-JCy"/>
+                            <constraint firstAttribute="bottom" secondItem="ylH-Na-g3v" secondAttribute="bottom" id="g9q-gH-YTV"/>
                             <constraint firstAttribute="bottom" secondItem="0aC-h9-npE" secondAttribute="bottom" id="hCm-GC-MsF"/>
                             <constraint firstItem="0aC-h9-npE" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="hXP-1c-ea5"/>
                             <constraint firstItem="ylB-Lr-9o8" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="lPo-bZ-q1q"/>
@@ -109,9 +135,12 @@
                     <navigationItem key="navigationItem" id="RWG-YZ-giU"/>
                     <connections>
                         <outlet property="addKickboardButton" destination="fhx-sG-cmx" id="Ib9-lj-SJE"/>
+                        <outlet property="dimmedView" destination="ylH-Na-g3v" id="cHp-7B-aUY"/>
                         <outlet property="homeMap" destination="0aC-h9-npE" id="VoS-i0-hc8"/>
                         <outlet property="mapSearchBar" destination="ylB-Lr-9o8" id="obG-Sj-9YR"/>
+                        <outlet property="regionButton" destination="FH3-lJ-9Nu" id="6Q8-YT-VXF"/>
                         <outlet property="returnKickboardButton" destination="mtE-2c-3J6" id="YUK-y8-cei"/>
+                        <outlet property="showSideBarButton" destination="61D-4K-FZZ" id="KtT-RK-BRU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

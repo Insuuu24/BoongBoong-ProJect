@@ -18,6 +18,9 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     @IBOutlet weak var mapSearchBar: UISearchBar!
     @IBOutlet weak var addKickboardButton: UIButton!
     @IBOutlet weak var returnKickboardButton: UIButton!
+    @IBOutlet weak var regionButton: UIButton!
+    @IBOutlet weak var showSideBarButton: UIButton!
+    @IBOutlet weak var dimmedView: UIView!
     
     var timer: Timer?
     var remainingTimeInSeconds = 0
@@ -29,6 +32,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     // 뷰 컨트롤러가 메모리에 로드된 후 호출됩니다.
     override func viewDidLoad() {
         super.viewDidLoad()
+        dimmedView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         
         MainPageViewController.sharedInstance = self
         
@@ -56,6 +60,8 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         
         if (user?.registeredKickboard) != nil {
             addKickboardButton.isHidden = true
+            dimmedView.isHidden = true
+            homeMap.isUserInteractionEnabled = true
             
             if user?.isUsingKickboard == true {
                 if timer == nil {
@@ -71,6 +77,8 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         } else {
             addKickboardButton.isHidden = false
             returnKickboardButton.isHidden = true
+            dimmedView.isHidden = false
+            homeMap.isUserInteractionEnabled = false
         }
         //addKickboardMarkersToMap()
     }

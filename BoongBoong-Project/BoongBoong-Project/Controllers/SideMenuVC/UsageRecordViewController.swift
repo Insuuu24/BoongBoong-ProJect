@@ -94,7 +94,6 @@ class UsageRecordViewController: UIViewController {
 
 extension UsageRecordViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 임시로 0을 반환 -> 더미데이터 사용
         let count = UserDefaultsManager.shared.getUser()?.rideHistory.count
         updateViewForDataCount(count: count!)
         return count!
