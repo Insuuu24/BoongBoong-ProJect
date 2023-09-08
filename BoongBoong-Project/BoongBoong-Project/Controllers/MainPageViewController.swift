@@ -152,6 +152,10 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         
         let contentVC = UIStoryboard(name: "RentKickboardPage", bundle: nil).instantiateViewController(withIdentifier: "RentKickboard") as? RentKickboardViewController
         contentVC?.selectedKickboard = kickboard
+        if let userLocation = homeMap.userLocation.location {
+            let userPosition = Position(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+            contentVC?.userLocation = userPosition
+        }
         
         fpc.set(contentViewController: contentVC)
         fpc.changePanelStyle()

@@ -7,6 +7,7 @@
 
 import UIKit
 import FloatingPanel
+import CoreLocation
 
 class RentKickboardViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class RentKickboardViewController: UIViewController {
     @IBOutlet weak var rentButton: UIButton!
     
     var selectedKickboard: Kickboard?
+    var userLocation: Position?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,30 @@ class RentKickboardViewController: UIViewController {
         if let kickboard = selectedKickboard {
             kickboardImage.image = UIImage(data: kickboard.boongboongImage)
             kickboardName.text = kickboard.boongboongName
+            
+            // TODO: 내 위치 가져오기
+            let userLatitude = userLocation?.latitude
+            let userLongitude = userLocation?.longitude
+            let userLocation = CLLocation(latitude: userLatitude!, longitude: userLongitude!)
+            
+            let kickboardLocation = CLLocation(latitude: kickboard.latitude, longitude: kickboard.longitude)
+            let distanceInMeters = userLocation.distance(from: kickboardLocation)
+            let distanceInKilometers = distanceInMeters / 1000.0
+            kickboardDistance.text = String(format: "%.1f km", distanceInKilometers)
+            
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(kickboardLocation) { (placemarks, error) in
+                if let error = error {
+                    print("Reverse Geocoding Error: \(error.localizedDescription)")
+                    return
+                }
+                
+                if let placemark = placemarks?.first {
+                    if let address = placemark.name {
+                        self.kickboardRegion.text = address
+                    }
+                }
+            }
         }
     }
     
