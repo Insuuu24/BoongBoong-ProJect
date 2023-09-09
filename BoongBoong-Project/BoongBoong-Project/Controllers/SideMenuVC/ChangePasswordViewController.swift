@@ -131,19 +131,13 @@ class ChangePasswordViewController: UIViewController {
     }
 
     @objc func changeButtonTapped() {
-        // 텍스트 필드의 값을 가져옵니다.
         if let newPassword = changePasswordTextField.text, validatePassword(newPassword) {
-            // 사용자 정보를 가져옵니다.
             if var user = UserDefaultsManager.shared.getUser() {
-                // 비밀번호를 업데이트합니다.
                 user.password = newPassword
-                // 업데이트된 사용자 정보를 저장합니다.
                 UserDefaultsManager.shared.saveUser(user)
                 
-                // 키보드를 내립니다.
                 view.endEditing(true)
                 
-                // 비밀번호 변경 성공 메시지를 표시합니다.
                 showPasswordChangeSuccessMessage()
                 
                 if let changeButtonHandler = changeButtonHandler {
@@ -226,13 +220,10 @@ extension ChangePasswordViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
          if textField == changePasswordTextField {
-             // 현재 입력된 패스워드 텍스트
              let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
              
-             // 패스워드 유효성 검사
              let isPasswordValid = validatePassword(currentText)
              
-             // 유효성에 따라 스타일 변경
              updatePasswordTextFieldStyle(isValid: isPasswordValid)
              
              changeButton.isEnabled = isPasswordValid

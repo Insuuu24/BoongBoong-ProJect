@@ -61,22 +61,6 @@ class SignUpViewController: UIViewController {
     
     private func validateUserEmail(_ email: String?) -> Bool {
         guard let email = email else { return false }
-        
-        if let user = UserDefaultsManager.shared.getUser() {
-            userEmailValidationLabel.text = "이미 존재하는 이메일입니다."
-            userEmailValidationLabel.font = UIFont.systemFont(ofSize: 12)
-            userEmailValidationLabel.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
-            
-            let animation = CABasicAnimation(keyPath: "position")
-            animation.duration = 0.07
-            animation.repeatCount = 4
-            animation.autoreverses = true
-            animation.fromValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x - 10, y: userEmailTextField.center.y))
-            animation.toValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x + 10, y: userEmailTextField.center.y))
-            userEmailTextField.layer.add(animation, forKey: "position")
-            
-            return false
-        }
 
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
@@ -94,12 +78,28 @@ class SignUpViewController: UIViewController {
             animation.fromValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x - 10, y: userEmailTextField.center.y))
             animation.toValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x + 10, y: userEmailTextField.center.y))
             userEmailTextField.layer.add(animation, forKey: "position")
-        } else {
-            userEmailValidationLabel.text = ""
+            return false
         }
         
-        return isEmailValid
+        if let user = UserDefaultsManager.shared.getUser(),
+           user.email == email {
+            userEmailValidationLabel.text = "이미 존재하는 이메일입니다."
+            userEmailValidationLabel.font = UIFont.systemFont(ofSize: 12)
+            userEmailValidationLabel.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
+            
+            let animation = CABasicAnimation(keyPath: "position")
+            animation.duration = 0.07
+            animation.repeatCount = 4
+            animation.autoreverses = true
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x - 10, y: userEmailTextField.center.y))
+            animation.toValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x + 10, y: userEmailTextField.center.y))
+            userEmailTextField.layer.add(animation, forKey: "position")
+            return false
+
+        }
+        return true
     }
+    
     
     private func validatePassword(_ password: String?) -> Bool {
         guard let password = password else { return false }
@@ -223,7 +223,8 @@ class SignUpViewController: UIViewController {
         if let imageData = selectedProfileImageData {
             if let birthdate = dateFormatter.date(from: birthdateText) {
                 let newUser = User(email: userEmail, password: userPassword, name: userName, birthdate: birthdate, profileImage: imageData, isUsingKickboard: false, rideHistory: [])
-                        UserDefaultsManager.shared.saveUser(newUser)
+                UserDefaultsManager.shared.saveUser(newUser)
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }
