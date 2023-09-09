@@ -27,12 +27,6 @@ class SignInViewController: UIViewController {
         configureUI()
     }
     
-    private func RUD() {
-        if let appDomain = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: appDomain)
-        }
-    }
-    
     // MARK: - Helpers
     
     private func configureUI() {
@@ -87,17 +81,19 @@ class SignInViewController: UIViewController {
             return
         }
         
-        if let users = UserDefaultsManager.shared.getUsers(), let user = users.values.first(where: { $0.email == userEmail && $0.password == userPassword }) {
-            print("로그인 성공")
-            UserDefaultsManager.shared.saveUser(user)
-            let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
-            UserDefaultsManager.shared.saveUser(user)
-            UserDefaultsManager.shared.saveLoggedInState(true)
-            if let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "MainPage") as? MainPageViewController {
-                self.changeRootViewController(mainPageViewController)
+        if let savedUser = UserDefaultsManager.shared.getUser() {
+            if savedUser.email == userEmail && savedUser.password == userPassword {
+                
+                print("로그인 성공")
+                UserDefaultsManager.shared.saveUser(savedUser)
+                UserDefaultsManager.shared.saveLoggedInState(true)
+                let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
+                if let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "MainPage") as? MainPageViewController {
+                    self.changeRootViewController(mainPageViewController)
+                }
+            } else {
+                showErrorAlert(title: "로그인 실패", message: "이메일 또는 비밀번호가 일치하지 않거나, 등록된 사용자 정보가 없습니다.")
             }
-        } else {
-            showErrorAlert(title: "로그인 실패", message: "이메일 또는 비밀번호가 일치하지 않거나, 등록된 사용자 정보가 없습니다.")
         }
     }
     

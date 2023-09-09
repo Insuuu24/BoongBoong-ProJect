@@ -59,16 +59,25 @@ class SignUpViewController: UIViewController {
         alreadyHaveAccountButton.setAttributedTitle(attributedTitle, for: .normal)
     }
     
-    private func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        if let selectedURL = urls.first {
-            let imagePath = selectedURL.path
-            print("선택한 이미지 파일의 경로: \(imagePath)")
-        }
-    }
-    
     private func validateUserEmail(_ email: String?) -> Bool {
         guard let email = email else { return false }
         
+        if let user = UserDefaultsManager.shared.getUser() {
+            userEmailValidationLabel.text = "이미 존재하는 이메일입니다."
+            userEmailValidationLabel.font = UIFont.systemFont(ofSize: 12)
+            userEmailValidationLabel.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
+            
+            let animation = CABasicAnimation(keyPath: "position")
+            animation.duration = 0.07
+            animation.repeatCount = 4
+            animation.autoreverses = true
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x - 10, y: userEmailTextField.center.y))
+            animation.toValue = NSValue(cgPoint: CGPoint(x: userEmailTextField.center.x + 10, y: userEmailTextField.center.y))
+            userEmailTextField.layer.add(animation, forKey: "position")
+            
+            return false
+        }
+
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         let isEmailValid = predicate.evaluate(with: email)
@@ -121,7 +130,7 @@ class SignUpViewController: UIViewController {
     private func validateUserName(_ userName: String?) -> Bool {
         guard let userName = userName else { return false }
         
-        let regex = "^[가-힣ㄱ-ㅎㅏ-ㅣ]{2,5}$"
+        let regex = "^[가-힣]{2,5}$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
         let isUserNameValid = predicate.evaluate(with: userName)
         
@@ -214,24 +223,11 @@ class SignUpViewController: UIViewController {
         if let imageData = selectedProfileImageData {
             if let birthdate = dateFormatter.date(from: birthdateText) {
                 let newUser = User(email: userEmail, password: userPassword, name: userName, birthdate: birthdate, profileImage: imageData, isUsingKickboard: false, rideHistory: [])
-                
-                var users = UserDefaultsManager.shared.getUsers() ?? [:]
-                
-                let newUserID = UUID().uuidString
-                users[newUserID] = newUser
-                
-                UserDefaultsManager.shared.saveUsers(users)
-                //UserDefaultsManager.shared.saveLoggedInState(true)
-                
-                print("\(newUser)")
-                
-                self.dismiss(animated: true, completion: nil)
+                        UserDefaultsManager.shared.saveUser(newUser)
             }
-        } else {
-            print("회원가입이 실패하였습니다.")
         }
-
     }
+
     
     @IBAction func alreadyHaveAccountButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)

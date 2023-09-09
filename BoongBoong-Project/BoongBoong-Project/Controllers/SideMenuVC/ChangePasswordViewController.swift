@@ -97,8 +97,8 @@ class ChangePasswordViewController: UIViewController {
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         let topConstraintCancelButton = cancelButton.topAnchor.constraint(equalTo: passwordValidationText.bottomAnchor, constant: 10)
         let leadingConstraintCancelButton = cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25)
-        let widthConstraintCancelButton = cancelButton.widthAnchor.constraint(equalToConstant: 160)
-        let heightConstraintCancelButton = cancelButton.heightAnchor.constraint(equalToConstant: 44)
+        let widthConstraintCancelButton = cancelButton.widthAnchor.constraint(equalToConstant: 120)
+        let heightConstraintCancelButton = cancelButton.heightAnchor.constraint(equalToConstant: 39)
 
         NSLayoutConstraint.activate([topConstraintCancelButton, leadingConstraintCancelButton, widthConstraintCancelButton, heightConstraintCancelButton])
 
@@ -113,8 +113,8 @@ class ChangePasswordViewController: UIViewController {
         changeButton.isEnabled = false
         view.addSubview(changeButton)
         changeButton.translatesAutoresizingMaskIntoConstraints = false
-        let widthConstraintChangeButton = changeButton.widthAnchor.constraint(equalToConstant: 160)
-        let heightConstraintChangeButton = changeButton.heightAnchor.constraint(equalToConstant: 44)
+        let widthConstraintChangeButton = changeButton.widthAnchor.constraint(equalToConstant: 120)
+        let heightConstraintChangeButton = changeButton.heightAnchor.constraint(equalToConstant: 39)
         let trailingConstraintChangeButton = changeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
         let verticalSpacingConstraint = changeButton.topAnchor.constraint(equalTo: passwordValidationText.bottomAnchor, constant: 10)
         NSLayoutConstraint.activate([widthConstraintChangeButton, heightConstraintChangeButton, trailingConstraintChangeButton, verticalSpacingConstraint])
@@ -190,7 +190,7 @@ class ChangePasswordViewController: UIViewController {
 
         if !isPasswordValid {
             passwordValidationText.text = "영어, 숫자, 특수문자를 포함하여 5자 ~ 15자 입력해주세요."
-            passwordValidationText.font = UIFont.systemFont(ofSize: 13)
+            passwordValidationText.font = UIFont.boldSystemFont(ofSize: 10)
             passwordValidationText.textColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
             passwordValidationText.isHidden = false // 메시지를 표시합니다.
 

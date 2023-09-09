@@ -56,22 +56,6 @@ class UserDefaultsManager {
         return nil
     }
     
-    // 모든 사용자 정보 저장하기
-    func saveUsers(_ users: [String: User]) {
-        if let encodedData = try? JSONEncoder().encode(users) {
-            userDefaults.set(encodedData, forKey: usersKey)
-        }
-    }
-
-    // 모든 사용자 정보 가져오기
-    func getUsers() -> [String: User]? {
-        if let userData = userDefaults.data(forKey: usersKey),
-           let users = try? JSONDecoder().decode([String: User].self, from: userData) {
-            return users
-        }
-        return nil
-    }
-
     // 로그인 상태 저장
     func saveLoggedInState(_ isLoggedIn: Bool) {
         userDefaults.set(isLoggedIn, forKey: isLoggedInKey)
