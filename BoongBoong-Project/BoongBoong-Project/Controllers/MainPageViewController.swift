@@ -22,8 +22,11 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     @IBOutlet weak var showSideBarButton: UIButton!
     @IBOutlet weak var dimmedView: UIView!
     
+    @IBOutlet weak var showKickboadsButton: UIButton!
+    
     var timer: Timer?
     var remainingTimeInSeconds = 0
+    var isShowingKickboards = false
     
     static var sharedInstance: MainPageViewController?
     
@@ -52,6 +55,9 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         longPressRecognizer.minimumPressDuration = 0.3
         homeMap.addGestureRecognizer(longPressRecognizer)
         
+        showKickboadsButton.isHidden = true
+        isShowingKickboards = false
+        
         addKickboardMarkersToMap()
     }
     
@@ -68,17 +74,32 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
                     startTimer()
                     returnKickboardButton.isHidden = false
                 }
+                showKickboadsButton.isHidden = false
             } else {
                 timer?.invalidate()
                 timer = nil
                 returnKickboardButton.isHidden = true
+                showKickboadsButton.isHidden = true
+                isShowingKickboards = false
+                addKickboardMarkersToMap()
+                let existingAnnotations = homeMap.annotations.filter { $0 is NewMarkerAnnotation }
+                homeMap.removeAnnotations(existingAnnotations)
             }
             
         } else {
+            timer?.invalidate()
+            timer = nil
+            showKickboadsButton.isHidden = true
+            isShowingKickboards = false
+            
             addKickboardButton.isHidden = false
             returnKickboardButton.isHidden = true
             dimmedView.isHidden = false
             homeMap.isUserInteractionEnabled = false
+            
+            addKickboardMarkersToMap()
+            let existingAnnotations = homeMap.annotations.filter { $0 is NewMarkerAnnotation }
+            homeMap.removeAnnotations(existingAnnotations)
         }
         //addKickboardMarkersToMap()
     }
@@ -134,7 +155,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     // 지도의 마커를 탭했을 때 호출됩니다.
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let annotation = view.annotation as? KickboardAnnotation {
-            if let kickboard = getKickboardInfo(for: annotation) {
+            if let kickboard = getKickboardInfo(for: annotation), UserDefaultsManager.shared.getUser()?.isUsingKickboard == false {
                 configureFloatingPanel(for: kickboard)
             }
         }
@@ -155,6 +176,15 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
                 let annotation = KickboardAnnotation()
                 annotation.coordinate = CLLocationCoordinate2D(latitude: kickboard.latitude, longitude: kickboard.longitude)
                 annotation.kickboard = kickboard
+                homeMap.addAnnotation(annotation)
+            }
+        }
+        if let kickboards = UserDefaultsManager.shared.getRegisteredKickboards()?.filter({$0.isBeingUsed == true}) {
+            print(kickboards.count)
+            for kickboard in kickboards {
+                let annotation = NewMarkerAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: kickboard.latitude, longitude: kickboard.longitude)
+                annotation.rentedKickboard = kickboard
                 homeMap.addAnnotation(annotation)
             }
         }
@@ -189,6 +219,17 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     
     // MARK: - Actions
     
+    
+    @IBAction func showKickboardButtonTapped(_ sender: UIButton) {
+        isShowingKickboards.toggle()
+        if isShowingKickboards {
+            addKickboardMarkersToMap()
+        } else {
+            let existingAnnotations = homeMap.annotations.filter { $0 is KickboardAnnotation }
+            homeMap.removeAnnotations(existingAnnotations)
+        }
+    }
+    
     // 킥보드 추가 버튼이 탭됐을 때 호출될 액션입니다.
     @IBAction func addKickboardButtonTapped(_ sender: UIButton) {
     }
@@ -213,6 +254,11 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     // FIXME: 작동 안함,.....위치,,,안불러옴.....
     func performReturnKickboardAction() {
         let userDefaultsManager = UserDefaultsManager.shared
+        
+        if let userLocation = homeMap.userLocation.location {
+            let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 300, longitudinalMeters: 300)
+            homeMap.setRegion(region, animated: true)
+        }
         
         var (latitude, longitude) = (0.0, 0.0)
         if let userLocation = homeMap.userLocation.location {
@@ -357,12 +403,7 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         // 사용자의 현재 위치에 대한 주석은 기본 뷰를 반환합니다.
         if annotation is MKUserLocation {
             return nil
-        }
-        
-        
-        
-        // 사용자가 탭하여 추가한 주석을 처리
-        if annotation is CustomPointAnnotation {
+        } else if annotation is CustomPointAnnotation {
             let identifier = "pinAnnotation"
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
             
@@ -375,29 +416,52 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
             }
             
             return annotationView
-        }
-        
-        // 기본 마커 외의 마커들을 처리
-        let identifier = "customAnnotation"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        
-        if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView?.canShowCallout = true
-        } else {
-            annotationView?.annotation = annotation
-        }
-        
-        if let makerImage = UIImage(named: "Maker") {
-            let imageSize = CGSize(width: 60, height: 60)
+        } else if annotation is KickboardAnnotation {
             
-            if let scaledImage = makerImage.scaleAspectFit(toSize: imageSize) {
-                annotationView?.image = scaledImage
-                annotationView?.centerOffset = CGPoint(x: 0, y: -30)
+            // 기본 마커 외의 마커들을 처리
+            let identifier = "customAnnotation"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            
+            if annotationView == nil {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView?.canShowCallout = true
+            } else {
+                annotationView?.annotation = annotation
             }
+            
+            if let makerImage = UIImage(named: "Maker") {
+                let imageSize = CGSize(width: 60, height: 60)
+                
+                if let scaledImage = makerImage.scaleAspectFit(toSize: imageSize) {
+                    annotationView?.image = scaledImage
+                    annotationView?.centerOffset = CGPoint(x: 0, y: -30)
+                }
+            }
+            
+            return annotationView
+        } else if annotation is NewMarkerAnnotation {
+            let identifier = "customAnnotation"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            
+            if annotationView == nil {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView?.canShowCallout = true
+            } else {
+                annotationView?.annotation = annotation
+            }
+            
+            if let makerImage = UIImage(named: "MyMarker") {
+                let imageSize = CGSize(width: 60, height: 60)
+                
+                if let scaledImage = makerImage.scaleAspectFit(toSize: imageSize) {
+                    annotationView?.image = scaledImage
+                    annotationView?.centerOffset = CGPoint(x: 0, y: -30)
+                }
+            }
+            
+            return annotationView
         }
-
-        return annotationView
+        return nil
     }
 
 
@@ -435,7 +499,6 @@ extension MainPageViewController: CLLocationManagerDelegate {
             
             let region = MKCoordinateRegion(center: center, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
             homeMap.setRegion(region, animated: true)  // 수정된 부분
-            manager.stopUpdatingLocation()
         }
     }
     
@@ -456,4 +519,8 @@ class KickboardAnnotation: MKPointAnnotation {
 
 class CustomPointAnnotation: MKPointAnnotation {
     var isDefaultMarker: Bool = false
+}
+
+class NewMarkerAnnotation: MKPointAnnotation {
+    var rentedKickboard: Kickboard?
 }

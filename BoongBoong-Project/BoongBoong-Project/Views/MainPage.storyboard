@@ -92,6 +92,20 @@
                                     <segue destination="Lq0-EM-gI5" kind="presentation" id="9MU-54-mN4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uhz-ur-cNd">
+                                <rect key="frame" x="349" y="655" width="26" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="26" id="Wl8-tf-kHN"/>
+                                    <constraint firstAttribute="width" secondItem="Uhz-ur-cNd" secondAttribute="height" multiplier="1:1" id="vcI-iH-0Gz"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button">
+                                    <backgroundConfiguration key="background" image="kickboard"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="showKickboardButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="PWe-Sk-JLX"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FH3-lJ-9Nu">
                                 <rect key="frame" x="347" y="693" width="30" height="30"/>
                                 <constraints>
@@ -116,6 +130,7 @@
                             <constraint firstItem="ylH-Na-g3v" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="GRB-of-T0C"/>
                             <constraint firstItem="ylB-Lr-9o8" firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" id="JNQ-TZ-KGn"/>
                             <constraint firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" id="OEU-gF-gNL"/>
+                            <constraint firstItem="FH3-lJ-9Nu" firstAttribute="top" secondItem="Uhz-ur-cNd" secondAttribute="bottom" constant="12" id="Ovs-MQ-xcf"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mtE-2c-3J6" secondAttribute="trailing" constant="16" id="PLJ-QU-ijN"/>
                             <constraint firstItem="mtE-2c-3J6" firstAttribute="top" secondItem="FH3-lJ-9Nu" secondAttribute="bottom" constant="40" id="QSS-lm-yGw"/>
                             <constraint firstItem="0aC-h9-npE" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="b4A-fs-rC4"/>
@@ -123,6 +138,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="fhx-sG-cmx" secondAttribute="bottom" constant="15" id="cvi-mV-6kZ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="mtE-2c-3J6" secondAttribute="bottom" constant="15" id="dSV-BX-JCy"/>
                             <constraint firstAttribute="bottom" secondItem="ylH-Na-g3v" secondAttribute="bottom" id="g9q-gH-YTV"/>
+                            <constraint firstItem="Uhz-ur-cNd" firstAttribute="centerX" secondItem="FH3-lJ-9Nu" secondAttribute="centerX" id="gg0-2K-HxB"/>
                             <constraint firstAttribute="bottom" secondItem="0aC-h9-npE" secondAttribute="bottom" id="hCm-GC-MsF"/>
                             <constraint firstItem="0aC-h9-npE" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="hXP-1c-ea5"/>
                             <constraint firstItem="ylB-Lr-9o8" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="lPo-bZ-q1q"/>
@@ -140,6 +156,7 @@
                         <outlet property="mapSearchBar" destination="ylB-Lr-9o8" id="obG-Sj-9YR"/>
                         <outlet property="regionButton" destination="FH3-lJ-9Nu" id="6Q8-YT-VXF"/>
                         <outlet property="returnKickboardButton" destination="mtE-2c-3J6" id="YUK-y8-cei"/>
+                        <outlet property="showKickboadsButton" destination="Uhz-ur-cNd" id="kel-dy-Mcu"/>
                         <outlet property="showSideBarButton" destination="61D-4K-FZZ" id="KtT-RK-BRU"/>
                     </connections>
                 </viewController>
@@ -206,6 +223,7 @@
     </scenes>
     <resources>
         <image name="dot.circle.viewfinder" catalog="system" width="128" height="115"/>
+        <image name="kickboard" width="80.5" height="76.5"/>
         <image name="line.3.horizontal" catalog="system" width="128" height="65"/>
         <namedColor name="mainColor">
             <color red="0.56499999761581421" green="0.2669999897480011" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

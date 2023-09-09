@@ -89,6 +89,7 @@ class SignInViewController: UIViewController {
         
         if let users = UserDefaultsManager.shared.getUsers(), let user = users.values.first(where: { $0.email == userEmail && $0.password == userPassword }) {
             print("로그인 성공")
+            UserDefaultsManager.shared.saveUser(user)
             let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
             UserDefaultsManager.shared.saveUser(user)
             UserDefaultsManager.shared.saveLoggedInState(true)
