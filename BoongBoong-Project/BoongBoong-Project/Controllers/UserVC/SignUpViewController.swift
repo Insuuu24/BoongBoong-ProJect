@@ -179,7 +179,7 @@ class SignUpViewController: UIViewController {
         datePicker.addTarget(self, action: #selector(dateChange), for: .valueChanged)
         
         birthDateTextField.inputView = datePicker
-        birthDateTextField.placeholder = "날짜를 선택해주세요"
+        birthDateTextField.placeholder = "생년월일을 입력해주세요"
     }
     
     private func dateFormat(date: Date) -> String {
