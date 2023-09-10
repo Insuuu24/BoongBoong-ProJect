@@ -12,6 +12,8 @@ import MapKit
 
 final class RentKickboardViewController: UIViewController {
     
+    // MARK: - Properties
+    
     @IBOutlet weak var kickboardImage: UIImageView!
     @IBOutlet weak var kickboardName: UILabel!
     @IBOutlet weak var kickboardDistance: UILabel!
@@ -20,6 +22,8 @@ final class RentKickboardViewController: UIViewController {
     
     var selectedKickboard: Kickboard?
     var userLocation: Position?
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +57,8 @@ final class RentKickboardViewController: UIViewController {
             }
         }
     }
+    
+    // MARK: - Actions
     
     @IBAction func rentButtonTapped(_ sender: UIButton) {
         
@@ -102,7 +108,6 @@ final class RentKickboardViewController: UIViewController {
                 // 대여 기록 추가
                 userDefaultsManager.updateRideHistory(with: RideHistory(boongboongName: boongboongName!, startTime: startTime, endTime: endTime, startPosition: startPosition, endPosition: endPosition))
 
-
                 // 3. 해당 킥보드의 isBeingUsed를 true로 변경
                 if let selectedKickboard = self.selectedKickboard, var kickboards = userDefaultsManager.getRegisteredKickboards() {
                     if let index = kickboards.firstIndex(where: { $0.id == selectedKickboard.id }) {
@@ -144,19 +149,14 @@ final class RentKickboardViewController: UIViewController {
     
     @objc func handleTitleTap(_ gesture: UITapGestureRecognizer) {
         if gesture.state == .ended {
-            // title 영역을 터치했을 때 대화 상자를 닫습니다.
             dismiss(animated: true, completion: nil)
         }
     }
     
 }
 
-//extension RentKickboardViewController: FloatingPanelControllerDelegate {
-//    // Floating Panel의 상태가 변경될 때 호출됩니다.
-//    func floatingPanelDidChangeState(_ fpc: FloatingPanelController) {
-//        // 상태에 따른 동작을 수행할 수 있습니다.
-//    }
-//}
+
+// MARK: - FloatingPanelController
 
 extension FloatingPanelController {
     func changePanelStyle() {

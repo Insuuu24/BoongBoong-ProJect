@@ -42,6 +42,9 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
         
         mapSearchBar.delegate = self
         mapSearchBar.placeholder = "위치 검색"
+        mapSearchBar.showsCancelButton = false
+        UISearchBar.appearance().setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        
         homeMap.delegate = self
         homeMap.showsUserLocation = true
         
@@ -51,7 +54,6 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
         
         showKickboadsButton.isHidden = true
         isShowingKickboards = false
-        
         addKickboardMarkersToMap()
     }
     
@@ -95,7 +97,6 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
             let existingAnnotations = homeMap.annotations.filter { $0 is NewMarkerAnnotation }
             homeMap.removeAnnotations(existingAnnotations)
         }
-        //addKickboardMarkersToMap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,7 +110,7 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
     }
     
     // MARK: - Timer
-        
+    
     func startTimer() {
         if let history = UserDefaultsManager.shared.getUser()?.rideHistory.last {
             self.remainingTimeInSeconds = Int(history.endTime.timeIntervalSince(history.startTime))
@@ -122,7 +123,7 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
             
             if self.remainingTimeInSeconds > 0 {
                 self.remainingTimeInSeconds -= 1
-
+                
                 DispatchQueue.main.async {
                     let minutes = self.remainingTimeInSeconds / 60
                     let seconds = self.remainingTimeInSeconds % 60
@@ -145,17 +146,13 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
     }
     
     // MARK: - Bottom Sheet
-    // 지도의 마커를 탭했을 때 호출됩니다.
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let annotation = view.annotation as? KickboardAnnotation {
             if let kickboard = getKickboardInfo(for: annotation), UserDefaultsManager.shared.getUser()?.isUsingKickboard == false {
                 configureFloatingPanel(for: kickboard)
             }
         }
-        
-//        if let annotation = view.annotation as? CustomPointAnnotation {
-//            mapView.removeAnnotation(annotation)
-//        }
     }
     
     func addKickboardMarkersToMap() {
@@ -258,7 +255,7 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
             latitude = userLocation.coordinate.latitude
             longitude = userLocation.coordinate.longitude
         }
-
+        
         DispatchQueue.main.async {
             print(latitude, longitude, 1)
         }
@@ -279,14 +276,14 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
             }
         }
         returnKickboardButton.isHidden = true
- 
+        
         // FIXME: 작동 왜 안함..?
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = "알림"
         notificationContent.body = "킥보드 반납이 완료되었습니다"
-
+        
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
-
+        
         let request = UNNotificationRequest(identifier: "returnKickboardNotification", content: notificationContent, trigger: trigger)
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
@@ -298,7 +295,7 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
     }
     
     // MARK: - Functions
-
+    
     // 지도의 영역이 변경되면 호출됩니다.
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let center = mapView.centerCoordinate
@@ -306,7 +303,7 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
         let southKoreaMinLat: CLLocationDegrees = 33.004115
         let southKoreaMaxLon: CLLocationDegrees = 131.872699
         let southKoreaMinLon: CLLocationDegrees = 124.586300
-            
+        
         // 지도가 한국의 영역을 벗어나면 중심 좌표를 서울로 되돌립니다.
         if center.latitude > southKoreaMaxLat || center.latitude < southKoreaMinLat || center.longitude > southKoreaMaxLon || center.longitude < southKoreaMinLon {
             mapView.setCenter(CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780), animated: true)
@@ -339,7 +336,6 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
                     if let address = placemark.name {
                         print("주소: \(address)")
                         annotation.title = address
-                        //annotation.subtitle = address
                         
                         self.homeMap.addAnnotation(annotation)
                         self.homeMap.selectAnnotation(annotation, animated: true)
@@ -353,7 +349,7 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-
+    
     func circularImageWithBorder(image: UIImage, targetSize: CGSize, borderWidth: CGFloat = 4.0, borderColor: UIColor = UIColor.purple) -> UIImage? {
         let diameter = min(targetSize.width, targetSize.height)
         
@@ -369,10 +365,9 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
         
         return resultImage
     }
-
-
+    
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        // 사용자의 현재 위치에 대한 주석은 기본 뷰를 반환합니다.
         if annotation is MKUserLocation {
             return nil
         } else if annotation is CustomPointAnnotation {
@@ -435,8 +430,8 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
         }
         return nil
     }
-
-
+    
+    
     
     // 현재 사용자의 킥보드 사용 상태에 따라 버튼의 타이틀을 업데이트합니다.
     func updateKickboardButtonTitle() {
@@ -446,19 +441,19 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
     }
     
     func setAuthAlertAction() {
-         let authAlertController : UIAlertController
-         
-         authAlertController = UIAlertController(title: "위치 사용 권한이 필요합니다.", message: "위치 권한을 허용해야만 앱을 사용하실 수 있습니다.", preferredStyle: .alert)
-         
-         let getAuthAction : UIAlertAction
-         getAuthAction = UIAlertAction(title: "설정", style: .default, handler: { (UIAlertAction) in
-             if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                 UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
-             }
-         })
-         authAlertController.addAction(getAuthAction)
-         self.present(authAlertController, animated: true, completion: nil)
-     }
+        let authAlertController : UIAlertController
+        
+        authAlertController = UIAlertController(title: "위치 사용 권한이 필요합니다.", message: "위치 권한을 허용해야만 앱을 사용하실 수 있습니다.", preferredStyle: .alert)
+        
+        let getAuthAction : UIAlertAction
+        getAuthAction = UIAlertAction(title: "설정", style: .default, handler: { (UIAlertAction) in
+            if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+            }
+        })
+        authAlertController.addAction(getAuthAction)
+        self.present(authAlertController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -476,10 +471,10 @@ extension MainPageViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
-        case .restricted, .denied:
-            setAuthAlertAction()
-        default:
-            break
+            case .restricted, .denied:
+                setAuthAlertAction()
+            default:
+                break
         }
     }
 }

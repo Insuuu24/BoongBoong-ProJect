@@ -84,57 +84,42 @@ final class ChangePasswordViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnView))
         view.addGestureRecognizer(tapGesture)
         
-        let changePasswordLabelWidth = view.frame.width * 0.8
-        changePasswordLabel.frame = CGRect(x: (view.frame.width - changePasswordLabelWidth) / 2, y: 0, width: changePasswordLabelWidth, height: 44)
-        
         view.addSubviews(changePasswordLabel, changePasswordTextField, passwordValidationText, cancelButton, changeButton)
-        let centerXConstraint = changePasswordLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        let topConstraint = changePasswordLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20)
-        NSLayoutConstraint.activate([centerXConstraint, topConstraint])
         
+        changePasswordLabel.snp.makeConstraints {
+            $0.width.equalTo(view.frame.width * 0.8)
+            $0.height.equalTo(44)
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().offset(20)
+        }
         
+        changePasswordTextField.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(16)
+            $0.right.equalToSuperview().offset(-16)
+            $0.height.equalTo(40)
+            $0.top.equalTo(changePasswordLabel.snp.bottom).offset(15)
+        }
         
-        changePasswordTextField.frame = CGRect(x: 10, y: (changePasswordLabel.frame.maxY) + 5, width: (view.frame.width) - 20, height: 44)
+        passwordValidationText.snp.makeConstraints {
+            $0.width.equalTo(changePasswordTextField)
+            $0.height.equalTo(20)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(changePasswordTextField.snp.bottom).offset(5)
+        }
         
+        cancelButton.snp.makeConstraints {
+            $0.width.equalTo(130)
+            $0.height.equalTo(40)
+            $0.leading.equalToSuperview().offset(25)
+            $0.top.equalTo(passwordValidationText.snp.bottom).offset(5)
+        }
         
-        let centerXConstraintTextField = changePasswordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        let topConstraintTextField = changePasswordTextField.topAnchor.constraint(equalTo: changePasswordLabel.bottomAnchor, constant: 15)
-        let widthConstraintTextField = changePasswordTextField.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20)
-        let heightConstraintTextField = changePasswordTextField.heightAnchor.constraint(equalToConstant: 35)
-        NSLayoutConstraint.activate([centerXConstraintTextField, topConstraintTextField, heightConstraintTextField, widthConstraintTextField])
-        
-        
-        passwordValidationText.frame = CGRect(x: 10, y: changePasswordTextField.frame.maxY + 5, width: view.frame.width, height: 30)
-        
-        let topConstraintPasswordValidationText = passwordValidationText.topAnchor.constraint(equalTo: changePasswordTextField.bottomAnchor, constant: 5)
-        let centerXConstraintPasswordValidationText = passwordValidationText.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        let widthConstraintPasswordValidationText = passwordValidationText.widthAnchor.constraint(equalTo: changePasswordTextField.widthAnchor)
-        let heightConstraintPasswordValidationText = passwordValidationText.heightAnchor.constraint(equalToConstant: 30)
-        NSLayoutConstraint.activate([topConstraintPasswordValidationText, centerXConstraintPasswordValidationText, widthConstraintPasswordValidationText, heightConstraintPasswordValidationText])
-        
-        
-        
-        
-        cancelButton.frame = CGRect(x: 25, y: changePasswordTextField.frame.maxY + 40, width: 160, height: 44)
-        
-        let topConstraintCancelButton = cancelButton.topAnchor.constraint(equalTo: passwordValidationText.bottomAnchor, constant: 10)
-        let leadingConstraintCancelButton = cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25)
-        let widthConstraintCancelButton = cancelButton.widthAnchor.constraint(equalToConstant: 160)
-        let heightConstraintCancelButton = cancelButton.heightAnchor.constraint(equalToConstant: 44)
-        
-        NSLayoutConstraint.activate([topConstraintCancelButton, leadingConstraintCancelButton, widthConstraintCancelButton, heightConstraintCancelButton])
-        
-        
-        changeButton.frame = CGRect(x: 210, y: changePasswordTextField.frame.maxY + 40, width: 160, height: 44)
-        
-        let widthConstraintChangeButton = changeButton.widthAnchor.constraint(equalToConstant: 160)
-        let heightConstraintChangeButton = changeButton.heightAnchor.constraint(equalToConstant: 44)
-        let trailingConstraintChangeButton = changeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
-        let verticalSpacingConstraint = changeButton.topAnchor.constraint(equalTo: passwordValidationText.bottomAnchor, constant: 10)
-        NSLayoutConstraint.activate([widthConstraintChangeButton, heightConstraintChangeButton, trailingConstraintChangeButton, verticalSpacingConstraint])
-        
-        
-        
+        changeButton.snp.makeConstraints {
+            $0.width.equalTo(130)
+            $0.height.equalTo(40)
+            $0.trailing.equalToSuperview().offset(-25)
+            $0.top.equalTo(passwordValidationText.snp.bottom).offset(5)
+        }
     }
     
     private func validatePassword(_ password: String?) -> Bool {
@@ -162,7 +147,7 @@ final class ChangePasswordViewController: UIViewController {
             passwordValidationText.layer.add(animation, forKey: "position")
             changeButton.backgroundColor = UIColor(red: 0.88, green: 0.76, blue: 1.00, alpha: 1.00)
         } else {
-            passwordValidationText.isHidden = true // 유효성 검사가 통과하면 메시지를 숨깁니다.
+            passwordValidationText.isHidden = true
             passwordValidationText.text = ""
             changeButton.backgroundColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
             changePasswordTextField.layer.borderColor = UIColor(named: "green")?.cgColor
@@ -180,7 +165,6 @@ final class ChangePasswordViewController: UIViewController {
     
     
     // MARK: - Actions
-    
     
     @objc func cancelButtonTapped() {
         if let cancelButtonHandler = cancelButtonHandler {

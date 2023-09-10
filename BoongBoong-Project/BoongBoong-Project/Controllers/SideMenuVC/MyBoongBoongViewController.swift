@@ -91,7 +91,6 @@ final class MyBoongBoongViewController: UIViewController {
         }
     }
     
-    
     @objc func editBarButtonTapped(_ sender: UIBarButtonItem) {
         editButton.isHidden = false
         kickboardName.isEnabled = true

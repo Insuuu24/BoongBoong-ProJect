@@ -50,7 +50,7 @@ class NoDataView: UIView {
     // MARK: - Helpers
     
     private func configureUI() {
-        addSubviews(titleLabel,subtitleLabel, actionButton)
+        addSubviews(titleLabel, subtitleLabel, actionButton)
         
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()

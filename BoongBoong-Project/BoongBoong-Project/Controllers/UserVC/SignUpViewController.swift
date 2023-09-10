@@ -23,6 +23,7 @@ final class SignUpViewController: UIViewController {
     @IBOutlet weak var birthDateValidationLabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var alreadyHaveAccountButton: UIButton!
+    
     var selectedProfileImageData: Data?
     
     // MARK: - View Life Cycle
@@ -221,7 +222,6 @@ final class SignUpViewController: UIViewController {
                 users[newUserID] = newUser
                 
                 UserDefaultsManager.shared.saveUsers(users)
-                //UserDefaultsManager.shared.saveLoggedInState(true)
                 
                 print("\(newUser)")
                 
@@ -230,7 +230,7 @@ final class SignUpViewController: UIViewController {
         } else {
             print("회원가입이 실패하였습니다.")
         }
-
+        
     }
     
     @IBAction func alreadyHaveAccountButtonTapped(_ sender: UIButton) {
@@ -253,7 +253,7 @@ final class SignUpViewController: UIViewController {
     
     @objc private func handleTextInputChange() {
         let isFormValid = userEmailTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false && userNameTextField.text?.isEmpty == false && birthDateTextField.text?.isEmpty == false && selectedProfileImageData != nil
-
+        
         if isFormValid {
             signUpButton.isEnabled = true
             signUpButton.backgroundColor = UIColor(named: "mainColor")
@@ -262,7 +262,7 @@ final class SignUpViewController: UIViewController {
             signUpButton.backgroundColor = UIColor(named: "subColor")
         }
     }
-
+    
     @objc func dateChange(_ sender: UIDatePicker) {
         birthDateTextField.text = dateFormat(date: sender.date)
         birthDateTextField.resignFirstResponder()

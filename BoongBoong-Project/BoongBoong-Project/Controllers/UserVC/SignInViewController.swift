@@ -31,20 +31,19 @@ final class SignInViewController: UIViewController {
     
     private func configureUI() {
         passwordTextField.isSecureTextEntry = true
-     
+        
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
-
+        
         signInButton.isEnabled = false
+        signInButton.layer.cornerRadius = 5
         
         userEmailTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         
-        signInButton.layer.cornerRadius = 5
-        
         let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-
+        
         attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor(named: "mainColor") ?? UIColor.systemBlue]))
-
+        
         dontHaveAccountButton.setAttributedTitle(attributedTitle, for: .normal)
     }
     
@@ -58,7 +57,7 @@ final class SignInViewController: UIViewController {
         signInButton.isEnabled = false
         signInButton.backgroundColor = .lightGray
     }
-
+    
     private func showErrorAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -122,7 +121,6 @@ final class SignInViewController: UIViewController {
         signInButton.backgroundColor = isFormValid ? UIColor(named: "mainColor") : UIColor(named: "subColor")
     }
 }
-    
 
 // MARK: - UITextFieldDelegate
 

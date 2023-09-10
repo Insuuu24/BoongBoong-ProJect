@@ -8,7 +8,7 @@
 import UIKit
 
 final class SideMenuViewController: UIViewController {
-
+    
     // MARK: - Properties
     
     @IBOutlet weak var boongBoongLabel: UILabel!
@@ -20,8 +20,8 @@ final class SideMenuViewController: UIViewController {
     @IBOutlet weak var logOutButton: UIButton!
     
     private var menu: [SideMenuModel] = [
-    SideMenuModel(icon: UIImage(systemName: "list.clipboard")!, title: "이용 기록"),
-    SideMenuModel(icon: UIImage(systemName: "scooter")!, title: "내 붕붕이")
+        SideMenuModel(icon: UIImage(systemName: "list.clipboard")!, title: "이용 기록"),
+        SideMenuModel(icon: UIImage(systemName: "scooter")!, title: "내 붕붕이")
     ]
     
     var defaultHighlightedCell: Int = 0
@@ -35,18 +35,20 @@ final class SideMenuViewController: UIViewController {
         setupTableView()
         configureUI()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     // MARK: - Helpers
     
-    func setupTableView() {
-        menuTableView.register(SideMenuCell.self, forCellReuseIdentifier: "SideMenuCell")
-        menuTableView.delegate = self
-        menuTableView.dataSource = self
-        self.menuTableView.separatorStyle = .none
-        self.menuTableView.rowHeight = 50
-    }
-
-    func configureUI() {
+    private func configureUI() {
         userImageView.layer.cornerRadius = 30
         userImageView.clipsToBounds = true
         userImageView.layer.borderColor = UIColor.systemGray4.cgColor
@@ -54,6 +56,14 @@ final class SideMenuViewController: UIViewController {
         userImageView.image = UIImage(data: userInfo.profileImage)
         
         userNameLabel.text = userInfo.name
+    }
+    
+    private func setupTableView() {
+        menuTableView.register(SideMenuCell.self, forCellReuseIdentifier: "SideMenuCell")
+        menuTableView.delegate = self
+        menuTableView.dataSource = self
+        self.menuTableView.separatorStyle = .none
+        self.menuTableView.rowHeight = 50
     }
     
     // MARK: - Actions
@@ -73,8 +83,6 @@ final class SideMenuViewController: UIViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
-   
-
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -82,13 +90,13 @@ final class SideMenuViewController: UIViewController {
 extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case 0:
-            let usageRecordVC = UsageRecordViewController()
-            self.navigationController?.pushViewController(usageRecordVC, animated: true)
-        case 1:
-            performSegue(withIdentifier: "myBoongBoongVC", sender: self)
-        default:
-            break
+            case 0:
+                let usageRecordVC = UsageRecordViewController()
+                self.navigationController?.pushViewController(usageRecordVC, animated: true)
+            case 1:
+                performSegue(withIdentifier: "myBoongBoongVC", sender: self)
+            default:
+                break
         }
     }
     

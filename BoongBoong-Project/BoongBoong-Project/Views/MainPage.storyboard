@@ -46,7 +46,7 @@
                                 </constraints>
                             </view>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ylB-Lr-9o8">
-                                <rect key="frame" x="0.0" y="103" width="393" height="56"/>
+                                <rect key="frame" x="10" y="103" width="373" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="b23-E9-bEo"/>
@@ -87,6 +87,11 @@
                                 <state key="normal" title="킥보드 등록하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="addKickboardButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HTY-Pj-Xck"/>
                                     <segue destination="Lq0-EM-gI5" kind="presentation" id="9MU-54-mN4"/>
@@ -124,11 +129,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ylH-Na-g3v" secondAttribute="trailing" id="3og-A7-5tx"/>
+                            <constraint firstItem="ylB-Lr-9o8" firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" constant="-10" id="5XH-il-OLL"/>
                             <constraint firstItem="ylH-Na-g3v" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="C6x-vE-x9a"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="61D-4K-FZZ" secondAttribute="trailing" constant="10" id="EgF-a1-B96"/>
                             <constraint firstItem="mtE-2c-3J6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="EhO-p9-Nca"/>
                             <constraint firstItem="ylH-Na-g3v" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="GRB-of-T0C"/>
-                            <constraint firstItem="ylB-Lr-9o8" firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" id="JNQ-TZ-KGn"/>
                             <constraint firstAttribute="trailing" secondItem="0aC-h9-npE" secondAttribute="trailing" id="OEU-gF-gNL"/>
                             <constraint firstItem="FH3-lJ-9Nu" firstAttribute="top" secondItem="Uhz-ur-cNd" secondAttribute="bottom" constant="12" id="Ovs-MQ-xcf"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mtE-2c-3J6" secondAttribute="trailing" constant="16" id="PLJ-QU-ijN"/>
@@ -145,7 +150,7 @@
                             <constraint firstItem="61D-4K-FZZ" firstAttribute="centerY" secondItem="ylB-Lr-9o8" secondAttribute="centerY" id="lWC-IM-zca"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fhx-sG-cmx" secondAttribute="trailing" constant="16" id="lvM-zj-hRc"/>
                             <constraint firstItem="fhx-sG-cmx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="r3l-yl-PoT"/>
-                            <constraint firstItem="ylB-Lr-9o8" firstAttribute="leading" secondItem="0aC-h9-npE" secondAttribute="leading" id="z2S-4V-dB2"/>
+                            <constraint firstItem="ylB-Lr-9o8" firstAttribute="leading" secondItem="0aC-h9-npE" secondAttribute="leading" constant="10" id="z2S-4V-dB2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RWG-YZ-giU"/>

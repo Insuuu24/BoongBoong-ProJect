@@ -17,20 +17,10 @@ extension UIView {
     }
 }
 
-extension UIStackView {
-    func addArrangedSubviews(_ views: UIView...) {
-        for view in views {
-            addArrangedSubview(view)
-        }
-    }
-}
-
 extension UIImageView {
     var circleImage: Bool {
         set {
             if newValue {
-                //self.layer.borderColor = UIColor.lightGray.cgColor
-                //self.layer.borderWidth = 0.5
                 self.layer.cornerRadius = 0.5 * self.bounds.size.width
                 self.clipsToBounds = true
             } else {
@@ -110,24 +100,6 @@ extension UIButton {
         }
         set {
             self.layer.cornerRadius = newValue
-        }
-    }
-}
-
-extension Int {
-    func formatNumber() -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 1
-        
-        if self >= 1000 && self < 1000000 {
-            formatter.positiveSuffix = "K"
-            return formatter.string(from: NSNumber(value: Double(self) / 1000)) ?? "\(self)"
-        } else if self >= 1000000 {
-            formatter.positiveSuffix = "M"
-            return formatter.string(from: NSNumber(value: Double(self) / 1000000)) ?? "\(self)"
-        } else {
-            return "\(self)"
         }
     }
 }

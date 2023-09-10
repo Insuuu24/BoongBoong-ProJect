@@ -11,6 +11,8 @@ final class MyInfoPageViewController: UIViewController {
     
     // MARK: - Properties
     
+    let userDefaults = UserDefaultsManager.shared
+    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var changeImageButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
@@ -20,9 +22,7 @@ final class MyInfoPageViewController: UIViewController {
     @IBOutlet weak var doneEditButton: UIButton!
     @IBOutlet weak var changePasswordButton: UIButton!
     
-    let userDefaults = UserDefaultsManager.shared
     var selectedImage: UIImage?
-    
     var isNameChanged = false
     var isImageChanged = false
     
@@ -81,6 +81,16 @@ final class MyInfoPageViewController: UIViewController {
         
     }
     
+    fileprivate func updateDoneEditButton() {
+        if isNameChanged || isImageChanged {
+            doneEditButton.isEnabled = true
+            doneEditButton.backgroundColor = UIColor(named: "mainColor")
+        } else {
+            doneEditButton.isEnabled = false
+            doneEditButton.backgroundColor = UIColor(named: "subColor")
+        }
+    }
+    
     // MARK: - IBAction
     
     @IBAction func changeImageButtonTapped(_ sender: UIButton) {
@@ -117,17 +127,6 @@ final class MyInfoPageViewController: UIViewController {
         updateDoneEditButton()
     }
     
-    fileprivate func updateDoneEditButton() {
-        if isNameChanged || isImageChanged {
-            doneEditButton.isEnabled = true
-            doneEditButton.backgroundColor = UIColor(named: "mainColor")
-        } else {
-            doneEditButton.isEnabled = false
-            doneEditButton.backgroundColor = UIColor(named: "subColor")
-        }
-    }
-    
-    // TODO: 비밀번호 변경 기능 구현
     @IBAction func changePasswordButtonTapped(_ sender: UIButton) {
         let changePasswordVC = ChangePasswordViewController()
 

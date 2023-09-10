@@ -98,13 +98,15 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVv-5l-Old">
-                                <rect key="frame" x="154" y="768" width="85" height="29"/>
+                                <rect key="frame" x="154" y="773" width="85" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="85" id="ifZ-VH-6qs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="비밀번호 변경"/>
+                                <state key="normal" title="비밀번호 변경">
+                                    <color key="titleColor" name="mainColor"/>
+                                </state>
                                 <connections>
                                     <action selector="changePasswordButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="kGk-Fm-LgD"/>
                                 </connections>
@@ -147,7 +149,7 @@
                             <constraint firstItem="oH0-8X-AsH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="2WE-qo-ss8"/>
                             <constraint firstItem="dN9-Zi-4TP" firstAttribute="leading" secondItem="oH0-8X-AsH" secondAttribute="leading" id="4eH-50-dQq"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ben-0t-h3y" secondAttribute="trailing" constant="16" id="Cu0-9u-HKe"/>
-                            <constraint firstItem="BVv-5l-Old" firstAttribute="top" secondItem="geg-vy-zSq" secondAttribute="bottom" id="HVM-ZK-Qz6"/>
+                            <constraint firstItem="BVv-5l-Old" firstAttribute="top" secondItem="geg-vy-zSq" secondAttribute="bottom" constant="5" id="HVM-ZK-Qz6"/>
                             <constraint firstItem="vp2-nC-TXK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Hzc-vx-6AI"/>
                             <constraint firstItem="BVv-5l-Old" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="K9p-lP-8on"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="oH0-8X-AsH" secondAttribute="trailing" constant="16" id="O5T-TS-lgq"/>
@@ -167,7 +169,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="geg-vy-zSq" secondAttribute="trailing" constant="16" id="tFb-ka-G9c"/>
                             <constraint firstItem="1Kh-zc-KqD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="uAG-Kx-xf9"/>
                             <constraint firstItem="F72-GU-WLR" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="60" id="uQp-3K-Nx8"/>
-                            <constraint firstItem="BVv-5l-Old" firstAttribute="top" secondItem="ben-0t-h3y" secondAttribute="bottom" id="x9W-7n-vl1"/>
+                            <constraint firstItem="BVv-5l-Old" firstAttribute="top" secondItem="ben-0t-h3y" secondAttribute="bottom" constant="5" id="x9W-7n-vl1"/>
                             <constraint firstItem="vp2-nC-TXK" firstAttribute="top" secondItem="oH0-8X-AsH" secondAttribute="bottom" constant="15" id="y2h-hr-kw4"/>
                             <constraint firstItem="RGP-2T-I3c" firstAttribute="top" secondItem="vp2-nC-TXK" secondAttribute="top" id="yeR-ty-xx2"/>
                             <constraint firstItem="ben-0t-h3y" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="zjb-8e-3FC"/>

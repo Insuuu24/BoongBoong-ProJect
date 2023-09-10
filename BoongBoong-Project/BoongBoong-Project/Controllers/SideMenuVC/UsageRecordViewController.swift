@@ -107,6 +107,5 @@ extension UsageRecordViewController: UITableViewDelegate, UITableViewDataSource 
         
         return cell
     }
-    
 }
     
