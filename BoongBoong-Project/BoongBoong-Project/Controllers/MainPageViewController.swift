@@ -18,7 +18,6 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var regionButton: UIButton!
     @IBOutlet weak var showSideBarButton: UIButton!
     @IBOutlet weak var dimmedView: UIView!
-    
     @IBOutlet weak var showKickboadsButton: UIButton!
     
     var timer: Timer?
@@ -43,7 +42,6 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
         mapSearchBar.delegate = self
         mapSearchBar.placeholder = "위치 검색"
         mapSearchBar.showsCancelButton = false
-        UISearchBar.appearance().setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         
         homeMap.delegate = self
         homeMap.showsUserLocation = true
@@ -182,7 +180,6 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
     
     func configureFloatingPanel(for kickboard: Kickboard) {
         fpc = FloatingPanelController()
-        //fpc.delegate = self
         
         let contentVC = UIStoryboard(name: "RentKickboardPage", bundle: nil).instantiateViewController(withIdentifier: "RentKickboard") as? RentKickboardViewController
         contentVC?.selectedKickboard = kickboard
@@ -208,7 +205,6 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
     }
     
     // MARK: - Actions
-    
     
     @IBAction func showKickboardButtonTapped(_ sender: UIButton) {
         isShowingKickboards.toggle()
@@ -296,7 +292,6 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: - Functions
     
-    // 지도의 영역이 변경되면 호출됩니다.
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let center = mapView.centerCoordinate
         let southKoreaMaxLat: CLLocationDegrees = 38.634000
@@ -365,7 +360,6 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
         
         return resultImage
     }
-    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
@@ -484,21 +478,24 @@ extension MainPageViewController: CLLocationManagerDelegate {
 
 extension MainPageViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let searchRequest = MKLocalSearch.Request()
-        searchRequest.naturalLanguageQuery = searchText
-        // 검색 범위를 서울특별시로 제한
-        searchRequest.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780), latitudinalMeters: 20000, longitudinalMeters: 20000)
-        
-        let activeSearch = MKLocalSearch(request: searchRequest)
-        
-        activeSearch.start { (response, error) in
-            if response == nil {
-                print("Error")
-            } else {
-                if let latitude = response?.boundingRegion.center.latitude,
-                   let longitude = response?.boundingRegion.center.longitude {
-                    let coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), latitudinalMeters: 5000, longitudinalMeters: 5000)
-                    self.homeMap.setRegion(coordinateRegion, animated: true)
+        if let location = locations[searchText] {
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: 3000, longitudinalMeters: 3000)
+            homeMap.setRegion(region, animated: true)
+        } else {
+            let searchRequest = MKLocalSearch.Request()
+            searchRequest.naturalLanguageQuery = searchText
+            searchRequest.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780), latitudinalMeters: 20000, longitudinalMeters: 20000)
+            
+            let activeSearch = MKLocalSearch(request: searchRequest)
+            activeSearch.start { (response, error) in
+                if response == nil {
+                    print("Error")
+                } else {
+                    if let latitude = response?.boundingRegion.center.latitude,
+                       let longitude = response?.boundingRegion.center.longitude {
+                        let coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), latitudinalMeters: 5000, longitudinalMeters: 5000)
+                        self.homeMap.setRegion(coordinateRegion, animated: true)
+                    }
                 }
             }
         }

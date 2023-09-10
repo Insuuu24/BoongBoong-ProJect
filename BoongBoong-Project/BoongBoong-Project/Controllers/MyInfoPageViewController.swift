@@ -78,7 +78,6 @@ final class MyInfoPageViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
     }
     
     fileprivate func updateDoneEditButton() {

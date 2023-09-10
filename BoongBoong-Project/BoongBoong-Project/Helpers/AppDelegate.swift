@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // 앱 초기화 작업을 수행할 때 여기에서 더미데이터 추가 등의 작업을 수행합니다.
+        // Override point for customization after application launch.
         
         // "첫 실행" 여부를 확인하고 더미데이터를 추가합니다.
         if !isAppAlreadyLaunchedOnce() {
@@ -43,8 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             kickboards.append(Kickboard(
                 id: UUID(), registerDate: Date(), boongboongImage: (UIImage(named: "defaultKickboardImage")?.pngData()!)!,
                 boongboongName: "BoongBoong \(index + 1)",
-                latitude: location.latitude,
-                longitude: location.longitude,
+                latitude: location.value.latitude,
+                longitude: location.value.longitude,
                 isBeingUsed: false
             ))
         }

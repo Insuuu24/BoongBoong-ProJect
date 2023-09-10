@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class UserDefaultsManager {
     // UserDefaults 키 정의
@@ -128,82 +129,32 @@ class UserDefaultsManager {
         userDefaults.removeObject(forKey: isLoggedInKey)
         userDefaults.removeObject(forKey: registeredKickboardsKey)
     }
-    
 }
 
-let locations: [(latitude: Double, longitude: Double)] = [
-    // 강동구 위치
-    (37.52928, 127.12390),
-    
-    // 송파구 위치
-    (37.51475, 127.10650),
-    
-    // 강남구 위치
-    (37.51796, 127.04736),
-    
-    // 서초구 위치
-    (37.48295, 127.03215),
-    
-    // 관악구 위치
-    (37.47743, 126.95189),
-    
-    // 동작구 위치
-    (37.51213, 126.94039),
-    
-    // 금천구 위치
-    (37.45683, 126.89603),
-    
-    // 구로구 위치
-    (37.49488, 126.88888),
-    
-    // 영등포구 위치
-    (37.52624, 126.89588),
-    
-    // 양천구 위치
-    (37.51689, 126.86726),
-    
-    // 강서구 위치
-    (37.56755, 126.81823),
-    
-    // 광진구 위치
-    (37.53820, 127.08429),
-    
-    // 중랑구 위치
-    (37.60628, 127.09429),
-    
-    // 노원구 위치
-    (37.65275, 127.05855),
-    
-    // 도봉구 위치
-    (37.66894, 127.04859),
-    
-    // 강북구 위치
-    (37.62544, 127.02851),
-    
-    // 성북구 위치
-    (37.58924, 127.01819),
-    
-    // 동대문구 위치
-    (37.57443, 127.04049),
-    
-    // 성동구 위치
-    (37.56444, 127.03821),
-    
-    // 중구 위치
-    (37.55946, 127.00664),
-    
-    // 용산구 위치
-    (37.53277, 126.98993),
-    
-    // 종로구 위치
-    (37.57276, 126.97817),
-    
-    // 서대문구 위치
-    (37.57892, 126.93681),
-    
-    // 마포구 위치
-    (37.56601, 126.90334),
-    
-    // 은평구 위치
-    (37.60212, 126.92998)
+let locations: [String: CLLocationCoordinate2D] = [
+    "강동구": CLLocationCoordinate2D(latitude: 37.52928, longitude: 127.12390),
+    "송파구": CLLocationCoordinate2D(latitude: 37.51475, longitude: 127.10650),
+    "강남구": CLLocationCoordinate2D(latitude: 37.51796, longitude: 127.04736),
+    "서초구": CLLocationCoordinate2D(latitude: 37.48295, longitude: 127.03215),
+    "관악구": CLLocationCoordinate2D(latitude: 37.47743, longitude: 126.95189),
+    "동작구": CLLocationCoordinate2D(latitude: 37.51213, longitude: 126.94039),
+    "금천구": CLLocationCoordinate2D(latitude: 37.45683, longitude: 126.89603),
+    "구로구": CLLocationCoordinate2D(latitude: 37.49488, longitude: 126.88888),
+    "영등포구": CLLocationCoordinate2D(latitude: 37.52624, longitude: 126.89588),
+    "양천구": CLLocationCoordinate2D(latitude: 37.51689, longitude: 126.86726),
+    "강서구": CLLocationCoordinate2D(latitude: 37.56755, longitude: 126.81823),
+    "광진구": CLLocationCoordinate2D(latitude: 37.53820, longitude: 127.08429),
+    "중랑구": CLLocationCoordinate2D(latitude: 37.60628, longitude: 127.09429),
+    "노원구": CLLocationCoordinate2D(latitude: 37.65275, longitude: 127.05855),
+    "도봉구": CLLocationCoordinate2D(latitude: 37.66894, longitude: 127.04859),
+    "강북구": CLLocationCoordinate2D(latitude: 37.62544, longitude: 127.02851),
+    "성북구": CLLocationCoordinate2D(latitude: 37.58924, longitude: 127.01819),
+    "동대문구": CLLocationCoordinate2D(latitude: 37.57443, longitude: 127.04049),
+    "성동구": CLLocationCoordinate2D(latitude: 37.56444, longitude: 127.03821),
+    "중구": CLLocationCoordinate2D(latitude: 37.55946, longitude: 127.00664),
+    "용산구": CLLocationCoordinate2D(latitude: 37.53277, longitude: 126.98993),
+    "종로구": CLLocationCoordinate2D(latitude: 37.57276, longitude: 126.97817),
+    "서대문구": CLLocationCoordinate2D(latitude: 37.57892, longitude: 126.93681),
+    "마포구": CLLocationCoordinate2D(latitude: 37.56601, longitude: 126.90334),
+    "은평구": CLLocationCoordinate2D(latitude: 37.60212, longitude: 126.92998)
 ]
