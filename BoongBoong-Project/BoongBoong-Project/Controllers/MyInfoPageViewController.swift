@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+final class MyInfoPageViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -171,8 +171,11 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
         }
     }
     
-    // MARK: - ImagePicker
-    
+}
+
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+
+extension MyInfoPageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         
@@ -192,6 +195,5 @@ class MyInfoPageViewController: UIViewController, UIImagePickerControllerDelegat
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
     
 }

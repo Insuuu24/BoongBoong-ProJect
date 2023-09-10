@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-class SignInViewController: UIViewController {
+final class SignInViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -27,12 +27,6 @@ class SignInViewController: UIViewController {
         configureUI()
     }
     
-    private func RUD() {
-        if let appDomain = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: appDomain)
-        }
-    }
-    
     // MARK: - Helpers
     
     private func configureUI() {
@@ -41,7 +35,6 @@ class SignInViewController: UIViewController {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
 
         signInButton.isEnabled = false
-        signInButton.backgroundColor = UIColor(red: 0.88, green: 0.76, blue: 1.00, alpha: 1.00)
         
         userEmailTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
@@ -53,8 +46,6 @@ class SignInViewController: UIViewController {
         attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor(named: "mainColor") ?? UIColor.systemBlue]))
 
         dontHaveAccountButton.setAttributedTitle(attributedTitle, for: .normal)
-        
-        
     }
     
     private func resetInputFields() {
@@ -72,6 +63,15 @@ class SignInViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func changeRootViewController(_ viewControllerToPresent: UIViewController) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                window.rootViewController = viewControllerToPresent
+            }, completion: nil)
+        }
     }
     
     // MARK: - Actions
@@ -101,16 +101,6 @@ class SignInViewController: UIViewController {
         }
     }
     
-    private func changeRootViewController(_ viewControllerToPresent: UIViewController) {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first {
-            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
-                window.rootViewController = viewControllerToPresent
-            }, completion: nil)
-        }
-    }
-
-    
     @IBAction func showPasswordButtonTapped(_ sender: UIButton) {
         if passwordTextField.isSecureTextEntry {
             passwordTextField.isSecureTextEntry = false
@@ -136,7 +126,6 @@ class SignInViewController: UIViewController {
 
 // MARK: - UITextFieldDelegate
 
-// TODO: username 입력완료 시 password로 위임하기
 extension SignInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

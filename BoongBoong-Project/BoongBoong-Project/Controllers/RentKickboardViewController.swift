@@ -10,7 +10,7 @@ import FloatingPanel
 import CoreLocation
 import MapKit
 
-class RentKickboardViewController: UIViewController {
+final class RentKickboardViewController: UIViewController {
     
     @IBOutlet weak var kickboardImage: UIImageView!
     @IBOutlet weak var kickboardName: UILabel!

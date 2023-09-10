@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class AddKickBoardViewController: UIViewController {
+final class AddKickBoardViewController: UIViewController {
     
     @IBOutlet weak var kickboardImageButton: UIImageView!
     @IBOutlet weak var kickboardName: UITextField!
@@ -82,6 +82,7 @@ class AddKickBoardViewController: UIViewController {
         if var user = userDefaultsManager.getUser() {
             user.registeredKickboard = newKickboard
             userDefaultsManager.saveUser(user)
+            
             print(newKickboard)
         }
         

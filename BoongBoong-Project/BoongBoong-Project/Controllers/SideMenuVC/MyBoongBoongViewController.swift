@@ -9,7 +9,9 @@ import UIKit
 import Then
 import MapKit
 
-class MyBoongBoongViewController: UIViewController {
+final class MyBoongBoongViewController: UIViewController {
+    
+    // MARK: - Properties
     
     @IBOutlet weak var kickboardImage: UIImageView!
     @IBOutlet weak var kickboardName: UITextField!
@@ -19,12 +21,16 @@ class MyBoongBoongViewController: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     var editBarButton: UIBarButtonItem!
     
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNav()
-        setupUI()
+        configureUI()
         kickboardMap.showsUserLocation = true
     }
+    
+    // MARK: - Helpers
     
     private func configureNav() {
         navigationItem.title = "My Boong Boong"
@@ -32,7 +38,7 @@ class MyBoongBoongViewController: UIViewController {
         editBarButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(editBarButtonTapped))
         navigationItem.rightBarButtonItem = editBarButton
         navigationItem.largeTitleDisplayMode = .never
-
+        
         let appearance = UINavigationBarAppearance().then {
             $0.configureWithOpaqueBackground()
             $0.titleTextAttributes = [.foregroundColor: UIColor.label]
@@ -47,7 +53,7 @@ class MyBoongBoongViewController: UIViewController {
         
     }
     
-    func setupUI() {
+    private func configureUI() {
         if let kickboard = UserDefaultsManager.shared.getUser()?.registeredKickboard {
             kickboardImage.image = UIImage(data: kickboard.boongboongImage)
             kickboardImage.circleImage = true
@@ -75,6 +81,8 @@ class MyBoongBoongViewController: UIViewController {
             editButton.isHidden = true
         }
     }
+    
+    // MARK: - Actions
     
     @IBAction func regionButtonTapped(_ sender: UIButton) {
         if let userLocation = kickboardMap.userLocation.location {

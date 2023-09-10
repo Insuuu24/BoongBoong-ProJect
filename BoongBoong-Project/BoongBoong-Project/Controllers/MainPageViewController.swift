@@ -3,17 +3,14 @@ import MapKit
 import CoreLocation
 import FloatingPanel
 
-// MainPageViewController 클래스는 메인 화면에 대한 ViewController입니다.
-class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegate {
+class MainPageViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: - Properties
     
-    // 현재 사용 중인 사용자 정보를 저장하기 위한 변수입니다.
     var currentUsing: User?
     let locationManager = CLLocationManager()
     var fpc: FloatingPanelController!
     
-    // Interface Builder에 있는 UI 요소에 대한 참조입니다.
     @IBOutlet weak var homeMap: MKMapView!
     @IBOutlet weak var mapSearchBar: UISearchBar!
     @IBOutlet weak var addKickboardButton: UIButton!
@@ -32,7 +29,6 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     
     // MARK: - View Life Cycle
     
-    // 뷰 컨트롤러가 메모리에 로드된 후 호출됩니다.
     override func viewDidLoad() {
         super.viewDidLoad()
         dimmedView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -41,11 +37,9 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        // 검색 바와 지도의 델리게이트 설정입니다.
         mapSearchBar.delegate = self
         mapSearchBar.placeholder = "위치 검색"
         homeMap.delegate = self
@@ -109,7 +103,6 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    // 뷰가 화면에서 사라지기 직전에 호출됩니다.
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -305,27 +298,6 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
     }
     
     // MARK: - Functions
-    // 사용자가 검색 바에 텍스트를 입력할 때마다 호출
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let searchRequest = MKLocalSearch.Request()
-        searchRequest.naturalLanguageQuery = searchText
-        // 검색 범위를 서울특별시로 제한
-        searchRequest.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780), latitudinalMeters: 20000, longitudinalMeters: 20000)
-        
-        let activeSearch = MKLocalSearch(request: searchRequest)
-        
-        activeSearch.start { (response, error) in
-            if response == nil {
-                print("Error")
-            } else {
-                if let latitude = response?.boundingRegion.center.latitude,
-                   let longitude = response?.boundingRegion.center.longitude {
-                    let coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), latitudinalMeters: 5000, longitudinalMeters: 5000)
-                    self.homeMap.setRegion(coordinateRegion, animated: true)
-                }
-            }
-        }
-    }
 
     // 지도의 영역이 변경되면 호출됩니다.
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -489,16 +461,16 @@ class MainPageViewController: UIViewController, UISearchBarDelegate, MKMapViewDe
      }
 }
 
+// MARK: - CLLocationManagerDelegate
+
 extension MainPageViewController: CLLocationManagerDelegate {
-    
-    // 위치 업데이트 시 호출되는 메서드
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             let regionRadius: CLLocationDistance = 10000 // 10000m
             
             let region = MKCoordinateRegion(center: center, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-            homeMap.setRegion(region, animated: true)  // 수정된 부분
+            homeMap.setRegion(region, animated: true)
         }
     }
     
@@ -511,6 +483,36 @@ extension MainPageViewController: CLLocationManagerDelegate {
         }
     }
 }
+
+
+// MARK: - UISearchBarDelegate
+
+extension MainPageViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let searchRequest = MKLocalSearch.Request()
+        searchRequest.naturalLanguageQuery = searchText
+        // 검색 범위를 서울특별시로 제한
+        searchRequest.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780), latitudinalMeters: 20000, longitudinalMeters: 20000)
+        
+        let activeSearch = MKLocalSearch(request: searchRequest)
+        
+        activeSearch.start { (response, error) in
+            if response == nil {
+                print("Error")
+            } else {
+                if let latitude = response?.boundingRegion.center.latitude,
+                   let longitude = response?.boundingRegion.center.longitude {
+                    let coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), latitudinalMeters: 5000, longitudinalMeters: 5000)
+                    self.homeMap.setRegion(coordinateRegion, animated: true)
+                }
+            }
+        }
+    }
+}
+
+
+
+
 
 // 킥보드 마커를 위한 커스텀 어노테이션
 class KickboardAnnotation: MKPointAnnotation {

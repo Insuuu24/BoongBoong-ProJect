@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SideMenuViewController: UIViewController {
+final class SideMenuViewController: UIViewController {
 
     // MARK: - Properties
     
@@ -57,7 +57,6 @@ class SideMenuViewController: UIViewController {
     }
     
     // MARK: - Actions
-    
     
     @IBAction func logOutButtonTapped(_ sender: UIButton) {
         let alert = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)

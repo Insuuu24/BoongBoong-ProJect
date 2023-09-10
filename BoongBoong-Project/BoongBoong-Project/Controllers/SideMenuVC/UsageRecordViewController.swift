@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-class UsageRecordViewController: UIViewController {
+final class UsageRecordViewController: UIViewController {
     
     // MARK: - Properties
     
