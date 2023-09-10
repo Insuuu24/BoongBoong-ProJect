@@ -35,7 +35,7 @@ final class SignInViewController: UIViewController {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapOnView)))
         
         signInButton.isEnabled = false
-        signInButton.layer.cornerRadius = 5
+        signInButton.layer.cornerRadius = 10
         
         userEmailTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)

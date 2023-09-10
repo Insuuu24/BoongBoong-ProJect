@@ -28,6 +28,8 @@ final class MyBoongBoongViewController: UIViewController {
         configureNav()
         configureUI()
         kickboardMap.showsUserLocation = true
+        
+        
     }
     
     // MARK: - Helpers

@@ -35,6 +35,8 @@ final class AddKickBoardViewController: UIViewController {
         locationManager.startUpdatingLocation()
         
         kickboardMapView.showsUserLocation = true
+        
+        registerButton.layer.cornerRadius = 10.0
     }
     
     // TODO: 위치 권한 허용 안함 선택했을 시 다시 요청
@@ -71,10 +73,9 @@ final class AddKickBoardViewController: UIViewController {
         
         print(newKickboard)
         
-        if var user = userDefaultsManager.getUser() {
+        if var user = userDefaultsManager.getUser(){
             user.registeredKickboard = newKickboard
             userDefaultsManager.saveUser(user)
-            
             print(newKickboard)
         }
         

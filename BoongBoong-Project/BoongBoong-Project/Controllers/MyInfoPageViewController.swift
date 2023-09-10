@@ -58,6 +58,16 @@ final class MyInfoPageViewController: UIViewController {
         birthdateTextField.isEnabled = false
         
         doneEditButton.isHidden = true
+        
+        changePasswordButton.backgroundColor = UIColor(named: "mainColor")
+        changePasswordButton.setTitleColor(.white, for: .normal)
+        changePasswordButton.titleLabel?.textAlignment = .center
+        changePasswordButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        changePasswordButton.cornerRadius = 10
+//        changePasswordButton.frame.size = CGSize(width: 360, height: 40)
+
+        editButton.cornerRadius = 10
+        doneEditButton.cornerRadius = 10
     }
     
     // MARK: - Helpers

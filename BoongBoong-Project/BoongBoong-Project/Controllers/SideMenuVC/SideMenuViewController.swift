@@ -55,6 +55,10 @@ final class SideMenuViewController: UIViewController {
         userImageView.layer.borderWidth = 1
         userImageView.image = UIImage(data: userInfo.profileImage)
         
+        logOutButton.backgroundColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
+        logOutButton.setTitle("     로그아웃     ", for: .normal)
+        logOutButton.setTitleColor(.white, for: .normal)
+        logOutButton.cornerRadius = 10
         userNameLabel.text = userInfo.name
     }
     

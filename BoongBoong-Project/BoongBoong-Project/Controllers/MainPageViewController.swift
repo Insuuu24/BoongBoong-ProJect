@@ -19,6 +19,7 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var showSideBarButton: UIButton!
     @IBOutlet weak var dimmedView: UIView!
     @IBOutlet weak var showKickboadsButton: UIButton!
+    @IBOutlet weak var plzAddKickboadLabel: UILabel!
     
     var timer: Timer?
     var remainingTimeInSeconds = 0
@@ -42,6 +43,14 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
         mapSearchBar.delegate = self
         mapSearchBar.placeholder = "위치 검색"
         mapSearchBar.showsCancelButton = false
+        
+//        plzAddKickboadLabel.backgroundColor = UIColor(red: 0.56, green: 0.27, blue: 0.96, alpha: 1.00)
+//        plzAddKickboadLabel.textColor = .white
+//        plzAddKickboadLabel.layer.cornerRadius = 10
+//        plzAddKickboadLabel.layer.masksToBounds = true
+        
+        returnKickboardButton.layer.cornerRadius = 10
+        regionButton.layer.cornerRadius = 10
         
         homeMap.delegate = self
         homeMap.showsUserLocation = true
@@ -261,6 +270,7 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
             user.isUsingKickboard = false
             user.rideHistory[user.rideHistory.count-1].endPosition = Position(latitude: latitude, longitude: longitude)
             userDefaultsManager.saveUser(user)
+
         }
         
         // 2. 해당 킥보드의 isBeingUsed를 false로 변경

@@ -32,6 +32,8 @@ final class RentKickboardViewController: UIViewController {
             kickboardImage.image = UIImage(data: kickboard.boongboongImage)
             kickboardName.text = kickboard.boongboongName
             
+            rentButton.layer.cornerRadius = 10
+            
             // TODO: 내 위치 가져오기
             let userLatitude = userLocation?.latitude
             let userLongitude = userLocation?.longitude
