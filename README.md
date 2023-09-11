@@ -27,31 +27,23 @@
 
 ## 4️⃣  Ground Rule
 
-| 제목                | URL                                                                              |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-|Git Convention|https://insu2405.notion.site/Git-Convention-13a0faa747454f7788845e8cae85be0c?pvs=4|
+| 제목 | URL |
+| --- | --- |
+| Git Convention |https://insu2405.notion.site/Git-Convention-13a0faa747454f7788845e8cae85be0c?pvs=4|
 |Wire Frame|https://www.figma.com/file/d7alsxtdcJwvvzZr7ohOTj/%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%BA%A0%ED%94%84-2%EC%A1%B0?type=design&mode=design|
 
 <br>
 
 ## 5️⃣ 주요 화면
-### **<런치 스크린>**
+
+### 런치 스크린
 <img src="https://github.com/Insuuu24/BoongBoong-Project/assets/117909631/1dfa6053-189f-4ea5-b2a8-d58751a918ee" width="200"/>
 
-### 로그인 페이지
-
-
-
-
-### 회원가입 페이지
-
-
-
-
-
-
+### 로그인 페이지 & 회원가입 페이지
+<img src="https://github.com/Insuuu24/BoongBoong-Project/assets/117909631/c7701902-699d-47a1-b1cb-8cd59daa37fb" width="200"/>
 
 ### 메인 페이지
+<img src="https://github.com/Insuuu24/BoongBoong-Project/assets/117909631/d83ace2f-8e48-40f3-8677-3ca53abfdc75" width="200"/>
 
 
 
@@ -59,16 +51,10 @@
 
 
 ### 붕붕이 추가 페이지
-
-
-
-
-
+<img src="https://github.com/Insuuu24/BoongBoong-Project/assets/117909631/77863550-1546-4fea-a276-11551ec6aa63" width="200"/>
 
 ### 사이드 메뉴 페이지
-
-
-
+<img src="https://github.com/Insuuu24/BoongBoong-Project/assets/117909631/9f7bb305-c8e3-4369-9e14-9bf1d3a41d21" width="200"/>
 
 
 
