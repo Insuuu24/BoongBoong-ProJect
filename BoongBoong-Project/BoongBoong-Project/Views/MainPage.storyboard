@@ -26,7 +26,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ylH-Na-g3v">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="킥보드 등록 후 이용 가능합니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XN5-wk-Gcs">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="붕붕이 등록 후 이용 가능합니다" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XN5-wk-Gcs">
                                         <rect key="frame" x="90" y="200" width="213" height="30"/>
                                         <color key="backgroundColor" red="0.7892005997474747" green="0.7892005997474747" blue="0.7892005997474747" alpha="0.70328021523178808" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -84,7 +84,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="킥보드 등록하기">
+                                <state key="normal" title="붕붕이 등록하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>

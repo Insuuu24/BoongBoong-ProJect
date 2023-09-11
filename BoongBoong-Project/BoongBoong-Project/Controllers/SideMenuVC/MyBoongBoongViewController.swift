@@ -121,12 +121,8 @@ final class MyBoongBoongViewController: UIViewController {
         if let newName = kickboardName.text,
            let newImage = kickboardImage.image,
            let kickboardID = UserDefaultsManager.shared.getUser()?.registeredKickboard?.id {
-            print(UserDefaultsManager.shared.getRegisteredKickboards())
             UserDefaultsManager.shared.updateKickboardInfo(kickboardID: kickboardID, newName: newName, newImage: newImage)
-            print(UserDefaultsManager.shared.getRegisteredKickboards())
             DispatchQueue.main.async {
-                print(UserDefaultsManager.shared.getRegisteredKickboards())
-                print(UserDefaultsManager.shared.getUser()?.registeredKickboard?.boongboongName)
                 MainPageViewController.sharedInstance?.addKickboardMarkersToMap()
             }
         }

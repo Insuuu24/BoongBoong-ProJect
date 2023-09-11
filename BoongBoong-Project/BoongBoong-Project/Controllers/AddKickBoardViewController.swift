@@ -37,7 +37,6 @@ final class AddKickBoardViewController: UIViewController {
         kickboardMapView.showsUserLocation = true
     }
     
-    // TODO: 위치 권한 허용 안함 선택했을 시 다시 요청
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -85,12 +84,7 @@ final class AddKickBoardViewController: UIViewController {
         } else {
             let registeredKickboards = [newKickboard]
             userDefaultsManager.saveRegisteredKickboards(registeredKickboards)
-        }
-        
-        print(userDefaultsManager.getUser()?.registeredKickboard)
-        print(userDefaultsManager.getRegisteredKickboards()?.last)
-        print(userDefaultsManager.getRegisteredKickboards())
-        
+        }        
         MainPageViewController.sharedInstance?.addKickboardMarkersToMap()
         dismiss(animated: true)
     }

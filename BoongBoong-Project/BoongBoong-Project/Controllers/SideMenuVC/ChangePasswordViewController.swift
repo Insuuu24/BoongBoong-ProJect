@@ -9,7 +9,6 @@ import UIKit
 import Then
 import SnapKit
 
-
 final class ChangePasswordViewController: UIViewController {
     
     // MARK: - Properties
@@ -161,8 +160,6 @@ final class ChangePasswordViewController: UIViewController {
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
     }
-    
-    
     
     // MARK: - Actions
     

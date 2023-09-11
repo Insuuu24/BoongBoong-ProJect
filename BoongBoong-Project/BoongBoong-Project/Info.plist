@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationUsageDescription</key>
+	<string>위치 정보를 사용하여 현재 위치 주변의 킥보드를 검색합니다.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>위치 정보를 사용하여 현재 위치 주변의 킥보드를 검색합니다.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>위치 정보를 사용하여 현재 위치 주변의 킥보드를 검색합니다.</string>
 	<key>UIUserInterfaceStyle</key>

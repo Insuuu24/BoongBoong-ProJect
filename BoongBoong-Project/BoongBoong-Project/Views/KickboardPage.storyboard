@@ -164,14 +164,14 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="킥보드 등록하기">
+                                <state key="normal" title="붕붕이 등록하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="registerButtonTapped:" destination="dkq-gi-rqE" eventType="touchUpInside" id="YCm-fY-xMS"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="킥보드 등록하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUP-oY-154">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="붕붕이 등록하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUP-oY-154">
                                 <rect key="frame" x="146" y="15.000000000000002" width="115" height="21.666666666666671"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <nil key="textColor"/>
@@ -330,6 +330,11 @@
                                 <state key="normal" title="내 붕붕이 삭제하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="deleteKickboardButtonTapped:" destination="5RB-dc-Mdv" eventType="touchUpInside" id="5oh-TF-r37"/>
                                 </connections>
@@ -345,6 +350,11 @@
                                 <state key="normal" title="내 붕붕이 정보 수정하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="editButtonTapped:" destination="5RB-dc-Mdv" eventType="touchUpInside" id="ZdE-Q8-6Jn"/>
                                 </connections>

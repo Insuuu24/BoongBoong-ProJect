@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 // MARK: - View
 
@@ -118,5 +119,16 @@ extension UIImage {
         UIGraphicsEndImageContext()
 
         return scaledImage
+    }
+}
+
+extension MKCoordinateRegion {
+    func contains(coordinate: CLLocationCoordinate2D) -> Bool {
+        let latMin = center.latitude - (span.latitudeDelta / 2.0)
+        let latMax = center.latitude + (span.latitudeDelta / 2.0)
+        let lonMin = center.longitude - (span.longitudeDelta / 2.0)
+        let lonMax = center.longitude + (span.longitudeDelta / 2.0)
+        
+        return coordinate.latitude >= latMin && coordinate.latitude <= latMax && coordinate.longitude >= lonMin && coordinate.longitude <= lonMax
     }
 }

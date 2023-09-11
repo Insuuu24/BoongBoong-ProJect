@@ -3,7 +3,7 @@ import MapKit
 import CoreLocation
 import FloatingPanel
 
-class MainPageViewController: UIViewController, MKMapViewDelegate {
+class MainPageViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -23,6 +23,8 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
     var timer: Timer?
     var remainingTimeInSeconds = 0
     var isShowingKickboards = false
+    let southKoreaBounds = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.558191, longitude: 127.940856), latitudinalMeters: 1000000, longitudinalMeters: 1000000)
+    let jongnoGuCoordinate = CLLocationCoordinate2D(latitude: 37.57276, longitude: 126.97817)
     
     static var sharedInstance: MainPageViewController?
     
@@ -145,21 +147,10 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: - Bottom Sheet
     
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let annotation = view.annotation as? KickboardAnnotation {
-            if let kickboard = getKickboardInfo(for: annotation), UserDefaultsManager.shared.getUser()?.isUsingKickboard == false {
-                configureFloatingPanel(for: kickboard)
-            }
-        }
-    }
-    
     func addKickboardMarkersToMap() {
-        print("addKickboardMarkersToMap")
         let existingAnnotations = homeMap.annotations.filter { $0 is KickboardAnnotation }
         homeMap.removeAnnotations(existingAnnotations)
-        
         if let kickboards = UserDefaultsManager.shared.getRegisteredKickboards()?.filter({$0.isBeingUsed == false}) {
-            print(kickboards.count)
             for kickboard in kickboards {
                 let annotation = KickboardAnnotation()
                 annotation.coordinate = CLLocationCoordinate2D(latitude: kickboard.latitude, longitude: kickboard.longitude)
@@ -168,7 +159,6 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
             }
         }
         if let kickboards = UserDefaultsManager.shared.getRegisteredKickboards()?.filter({$0.isBeingUsed == true}) {
-            print(kickboards.count)
             for kickboard in kickboards {
                 let annotation = NewMarkerAnnotation()
                 annotation.coordinate = CLLocationCoordinate2D(latitude: kickboard.latitude, longitude: kickboard.longitude)
@@ -290,21 +280,6 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    // MARK: - Functions
-    
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        let center = mapView.centerCoordinate
-        let southKoreaMaxLat: CLLocationDegrees = 38.634000
-        let southKoreaMinLat: CLLocationDegrees = 33.004115
-        let southKoreaMaxLon: CLLocationDegrees = 131.872699
-        let southKoreaMinLon: CLLocationDegrees = 124.586300
-        
-        // 지도가 한국의 영역을 벗어나면 중심 좌표를 서울로 되돌립니다.
-        if center.latitude > southKoreaMaxLat || center.latitude < southKoreaMinLat || center.longitude > southKoreaMaxLon || center.longitude < southKoreaMinLon {
-            mapView.setCenter(CLLocationCoordinate2D(latitude: 37.5665, longitude: 126.9780), animated: true)
-        }
-    }
-    
     @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
             let locationInView = gesture.location(in: homeMap)
@@ -345,6 +320,8 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    // MARK: - Helpers
+    
     func circularImageWithBorder(image: UIImage, targetSize: CGSize, borderWidth: CGFloat = 4.0, borderColor: UIColor = UIColor.purple) -> UIImage? {
         let diameter = min(targetSize.width, targetSize.height)
         
@@ -359,6 +336,47 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
         UIGraphicsEndImageContext()
         
         return resultImage
+    }
+    
+    
+    // 현재 사용자의 킥보드 사용 상태에 따라 버튼의 타이틀을 업데이트합니다.
+    func updateKickboardButtonTitle() {
+        if let user = currentUsing, user.isUsingKickboard {
+            addKickboardButton.setTitle("탑승 중", for: .normal)
+        }
+    }
+    
+    func setAuthAlertAction() {
+        let authAlertController : UIAlertController
+        
+        authAlertController = UIAlertController(title: "위치 사용 권한이 필요합니다.", message: "위치 권한을 허용해야만 앱을 사용하실 수 있습니다.", preferredStyle: .alert)
+        
+        let getAuthAction : UIAlertAction
+        getAuthAction = UIAlertAction(title: "설정", style: .default, handler: { (UIAlertAction) in
+            if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+            }
+        })
+        authAlertController.addAction(getAuthAction)
+        self.present(authAlertController, animated: true, completion: nil)
+    }
+}
+
+// MARK: - MKMapViewDelegate
+
+extension MainPageViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotation = view.annotation as? KickboardAnnotation {
+            if let kickboard = getKickboardInfo(for: annotation), UserDefaultsManager.shared.getUser()?.isUsingKickboard == false {
+                configureFloatingPanel(for: kickboard)
+            }
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        if !southKoreaBounds.contains(coordinate: mapView.centerCoordinate) {
+            mapView.setCenter(jongnoGuCoordinate, animated: true)
+        }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -425,29 +443,6 @@ class MainPageViewController: UIViewController, MKMapViewDelegate {
         return nil
     }
     
-    
-    
-    // 현재 사용자의 킥보드 사용 상태에 따라 버튼의 타이틀을 업데이트합니다.
-    func updateKickboardButtonTitle() {
-        if let user = currentUsing, user.isUsingKickboard {
-            addKickboardButton.setTitle("탑승 중", for: .normal)
-        }
-    }
-    
-    func setAuthAlertAction() {
-        let authAlertController : UIAlertController
-        
-        authAlertController = UIAlertController(title: "위치 사용 권한이 필요합니다.", message: "위치 권한을 허용해야만 앱을 사용하실 수 있습니다.", preferredStyle: .alert)
-        
-        let getAuthAction : UIAlertAction
-        getAuthAction = UIAlertAction(title: "설정", style: .default, handler: { (UIAlertAction) in
-            if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
-            }
-        })
-        authAlertController.addAction(getAuthAction)
-        self.present(authAlertController, animated: true, completion: nil)
-    }
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -503,8 +498,7 @@ extension MainPageViewController: UISearchBarDelegate {
 }
 
 
-
-
+// MARK: - Class
 
 // 킥보드 마커를 위한 커스텀 어노테이션
 class KickboardAnnotation: MKPointAnnotation {
