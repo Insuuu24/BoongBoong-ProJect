@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Rent Kickboard View Controller-->
+        <scene sceneID="8HU-VR-lap">
+            <objects>
+                <viewController storyboardIdentifier="RentKickboard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CEi-1l-l8I" customClass="RentKickboardViewController" customModule="BoongBoong_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jdb-2U-ew2">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="298"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Maker" translatesAutoresizingMaskIntoConstraints="NO" id="pXy-rT-CLy">
+                                <rect key="frame" x="16" y="35" width="130" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="pXy-rT-CLy" secondAttribute="height" multiplier="1:1" id="198-ZR-YSl"/>
+                                    <constraint firstAttribute="width" constant="130" id="W34-Fk-cX4"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8X-Px-cPa">
+                                <rect key="frame" x="16" y="204.33333333333334" width="361" height="40"/>
+                                <color key="backgroundColor" red="0.5176470876" green="0.2823529541" blue="0.92549020049999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="NLu-yX-s7P"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="대여하기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="rentButtonTapped:" destination="CEi-1l-l8I" eventType="touchUpInside" id="DPv-Yh-JxS"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="붕붕이 닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILS-v2-4IJ">
+                                <rect key="frame" x="160" y="37" width="217" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="6SL-Tf-bxV"/>
+                                    <constraint firstAttribute="width" constant="217" id="LIn-LP-Fyc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9rV-Vn-GEl">
+                                <rect key="frame" x="160" y="80" width="219" height="78"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hPL-sw-wKJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="219" height="35"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="붕붕이와의 거리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijb-Uh-Z0k">
+                                                <rect key="frame" x="0.0" y="0.0" width="219" height="15.666666666666666"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="580m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVy-bS-zDx">
+                                                <rect key="frame" x="0.0" y="15.66666666666667" width="219" height="19.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mfc-be-MrG">
+                                        <rect key="frame" x="0.0" y="43" width="219" height="35"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="붕붕이 현위치 주소" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcg-w4-yNU">
+                                                <rect key="frame" x="0.0" y="0.0" width="219" height="15.666666666666666"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서울특별시 어쩌구" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMJ-2b-Cnw">
+                                                <rect key="frame" x="0.0" y="15.666666666666655" width="219" height="19.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vrA-73-RdK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ILS-v2-4IJ" firstAttribute="leading" secondItem="pXy-rT-CLy" secondAttribute="trailing" constant="14" id="5cG-cn-mGR"/>
+                            <constraint firstItem="pXy-rT-CLy" firstAttribute="top" secondItem="Jdb-2U-ew2" secondAttribute="top" constant="35" id="CnM-me-IUY"/>
+                            <constraint firstItem="ILS-v2-4IJ" firstAttribute="top" secondItem="Jdb-2U-ew2" secondAttribute="top" constant="37" id="F3G-hy-Yfx"/>
+                            <constraint firstItem="vrA-73-RdK" firstAttribute="trailing" secondItem="k8X-Px-cPa" secondAttribute="trailing" constant="16" id="GTL-rk-tSv"/>
+                            <constraint firstItem="pXy-rT-CLy" firstAttribute="leading" secondItem="vrA-73-RdK" secondAttribute="leading" constant="16" id="RCo-Hx-FYL"/>
+                            <constraint firstItem="k8X-Px-cPa" firstAttribute="leading" secondItem="vrA-73-RdK" secondAttribute="leading" constant="16" id="jS5-Fd-xvO"/>
+                            <constraint firstItem="vrA-73-RdK" firstAttribute="bottom" secondItem="k8X-Px-cPa" secondAttribute="bottom" constant="20" id="mTB-Qi-ZsG"/>
+                            <constraint firstItem="9rV-Vn-GEl" firstAttribute="top" secondItem="ILS-v2-4IJ" secondAttribute="bottom" constant="5" id="qFg-Ir-Zm2"/>
+                            <constraint firstItem="vrA-73-RdK" firstAttribute="trailing" secondItem="9rV-Vn-GEl" secondAttribute="trailing" constant="14" id="wuv-IX-Nxg"/>
+                            <constraint firstItem="9rV-Vn-GEl" firstAttribute="leading" secondItem="pXy-rT-CLy" secondAttribute="trailing" constant="14" id="wyO-cZ-HKK"/>
+                            <constraint firstItem="vrA-73-RdK" firstAttribute="trailing" secondItem="ILS-v2-4IJ" secondAttribute="trailing" constant="16" id="z7K-mb-ZPh"/>
+                        </constraints>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="393" height="298.19999999999999"/>
+                    <size key="freeformSize" width="393" height="298.19999999999999"/>
+                    <connections>
+                        <outlet property="kickboardDistance" destination="NVy-bS-zDx" id="WKX-ui-SqF"/>
+                        <outlet property="kickboardImage" destination="pXy-rT-CLy" id="tiW-jx-zxh"/>
+                        <outlet property="kickboardName" destination="ILS-v2-4IJ" id="WMb-sU-IiT"/>
+                        <outlet property="kickboardRegion" destination="gMJ-2b-Cnw" id="AhR-DU-34u"/>
+                        <outlet property="rentButton" destination="k8X-Px-cPa" id="xRq-Eq-Lda"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Av6-g8-43W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1029.7709923664122" y="-9.5070422535211279"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Maker" width="147" height="145"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
